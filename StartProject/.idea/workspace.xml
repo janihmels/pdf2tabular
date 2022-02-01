@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="689f75fc-25fa-4df3-b4c6-a18eafe09c2a" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/try.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/24d7ad18b5054c039d165c480012e6a6.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/415226af1f924b3c9edf7902c21447f0.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/77b061f764b74a91a7571086e2a880cc.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/bde93b1987224cee8834c7896370a4f2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/c201b1814dfc4596aa662f0b11325132.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/cd9695d8ec674f849bee0044cac0510a.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/ce968a2e3dee4386b39d8ad63feacc6e.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/e0c513d537324ffd931a38ecf47b16d1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/e4c3fb69c309401ead13c1f0c948bf86.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/CMG/e75b7f9527ab490a8b2aecaf5895b83a.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2016/Wyplata_STOART_2701 2016-02-16.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2016/Wyplata_STOART_2701 2016-05-06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2016/Wyplata_STOART_2701 2016-07-04.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2016/Wyplata_STOART_2701 2016-07-20.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2016/Wyplata_STOART_2701 2016-09-06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2016/Wyplata_STOART_2701 2016-12-14.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2016/Wyplata_STOART_2701 2016-12-19.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2017/Wyplata_STOART_2701 2017-03-06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2017/Wyplata_STOART_2701 2017-06-01.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2017/Wyplata_STOART_2701 2017-09-07.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2017/Wyplata_STOART_2701 2017-12-07.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2018/Wyplata_STOART_2701 2018-03-08.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2018/Wyplata_STOART_2701 2018-06-21.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2018/Wyplata_STOART_2701 2018-09-13.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2018/Wyplata_STOART_2701 2018-12-12.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2019/Wyplata_STOART_2701 2019-03-14.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2019/Wyplata_STOART_2701 2019-06-11.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2019/Wyplata_STOART_2701 2019-09-04.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2019/Wyplata_STOART_2701 2019-12-05.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2020/Wyplata_STOART_2701 2020-03-06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2020/Wyplata_STOART_2701 2020-06-15.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2020/Wyplata_STOART_2701 2020-09-11.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2020/Wyplata_STOART_2701 2020-12-09.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2021/Wyplata_STOART_2701 2021-03-09.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2021/Wyplata_STOART_2701 2021-06-15.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/STOART/2021/Wyplata_STOART_2701.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - 06.08.2005.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - 2 METRY POD ULICAMI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - 2 POKOJE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - 7 PRZEBUDZENIE LUC JAK RAMBO WRACA Z HISTORYCZNEJ MISJI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - 8 PRZEBUDZENIE ILUZJI ŁĄKA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - 9 PRZEBUDZENIE MIASTO HARMONI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - A PROPOTOSTÓW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - A WIĘC WOJNA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - BAŚŃ O ROZSTANIU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - BITWA NA SŁOWA - OKRĄGŁE ZWYCIĘSTWO.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - CHOĆ PALI DUŻO STUDENT TO NIE LEXUS.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - CO Z TĄ POLSKĄ - SOVIET MENTAL KISIEL.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - CZEKOLADA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - D.DYKOWANEANI D..pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - DEMAKIJAŻ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - DO ROBOTY JUŻ BEZ IQ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - DRUGI SUCHAR - JAK ZAŁOŻYĆ RODZINĘ Z KALORYFEREM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - DZIĘKI EKSTREMENTOM SINIC.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - ELEKTRONEURONOWA PRZYJAŹŃ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - EMPATII REFLEKCJE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - EPOPEJA CODZIENNOŚCI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - EVEREST HIPOKRYZJI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - FOTOSYNTEZA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - FRUŃ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - GADAJĄCE MORDY 1968-1970.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - HAPPY END AND UP HAPPY HANDS.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - IJOIJO.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - INTRO - SZTAMPOLAND.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - INTRO DO INTRA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - INTRO.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - INTRORO Z CIĄGNIĘTA MOJAJAŹŃ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - JADĘ DALEJ AUTOSTRADY NICZYM POŁĄCZ KROPKI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - JAK PRZEGADAĆ CISZĘ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - JAKBY ZERWAŁ SIĘ FILM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - JÓZEK O INNY ASPEKT.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KAPITAN ŻYCIOWA GLEBA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KIEDY NIE BĘDZIE LEKKO.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KILKADZIESIĄT MORDERSTW DO WOLNOŚCI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KLINIKA PSYCHOROMANA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KOD RELACJI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KOMPROMISY.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KOSMICZNA LAGUNA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KOSMOSTUMOSTÓW - GENEZA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KTO JEST OSTATNI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - KURTYNOMATURA W GÓRĘ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - LECI PTASZEK ŚWIADOMOŚCI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - LECI SONDA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - LOOPEDOOM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - LUC JAK DZIADEK W KIOSKU - CAŁE ŻYCIE W RUCHU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - LUKSFERY SEDNO.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - MIŁOŚĆ ROBOTÓW # 1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - MORAŁ - INSTRUKCJA OBSŁUGI ŻYCIA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - NA AUDYTYWNEJ FALI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - NAJLEPSZE PRZEDE MNĄ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - NEUROFOTORECEPTOREPLOTYKA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - NIBYMINIPOCIESZNE PSYCHOMATERIONETY A.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - NIENASYCENIE - KANAŁ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - NORMALZUSCHLAG.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - NUDA POWIETRZE STOI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - O EMPATII POSPOLITYM RUSZENIU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - O KARUZELI ŻYCIA I PUSZYSTYM SOSIE SZUSÓW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - O PÓŁOBROCIE CZAKA CZYLI O PRZYCZYNIE PĘDU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - O TYM CO NALEŻY SOBIE MÓWIĆ GDY JEST CIĘŻKO.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - O WITU O IZOLOFOTELIKU I O ŚLEPYM ŚLEDZIU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - ODA DO MŁODOŚCI 2013.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - ODMIENIAJĄ SIĘ PRZEZ NIBYPRZYPADKI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - ODMÓŻDŻANIE ADYPINOWE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - OPOWIEŚCI ŻOŁĄDKOWE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - OTUCHA DUCHA STUMOSTÓW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PAMIĘTNIK NIEZLICZONYCH ZBRODNI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PIERWSZE PRZEBUDZENIE - MIASTO STUMOSTÓW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PIERWSZY SUCHAR - CZYTAM PORADNIK MAGAZYNIERA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PIĘĆDZIESIĄT TYSIĘCY MORDERSTW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - POBUDKA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - POLANIE NA POLANIE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - POLOWANIE TRWA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - POMIĘDZY WSZYSTKIM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PONAD ŚRÓDMIEŚCIEM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PORWANO LUDZI Z MIASTA STUMOSTÓW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - POSIADAM WSZYSTKO CO NIE CHCĘ I CHCĘ NAWET REGULATOR CZASU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - POWIETRZE STOI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - POŻAR W BURDELU MOJEGO ŻYCIA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PRANIE MÓZGU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PROSZĘ O ZUPEŁNĄ CISZĘ NA WIDOWNI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PRZEBUDZENIE - DIGITOWOKALAFONIA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PRZEBUDZENIE BOGA 1978.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PRZED HOMOXYMORONOMATURĄ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PRZEDMIOT LIRYCZNY.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PRZYBYCIE Z NOWYM WIEKIEM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PRĄD RZĄDZI MIASTEM BO POSIADA KONTAKTY.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PUENTA - POPKULTURA JAK ŻART STRASBURGERA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PUKAGASTROFAZY GODZINA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - PYRRUSOWA KLĘSKA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - RADIOWA PIOSENKA O NICZYM (2).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - RADIOWA PIOSENKA O NICZYM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - RADOSNA KATASTROFA 1948.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - RAP NOBODY.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - REGENERACJA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - REKLAMA GÓWNO I ŚMIECI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - REMONT NA ARTERIACH MEGO ŻYCIA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - REŻIM PANA CYKACZA KAŻDEGO RÓWNO MIERZY.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - RYMOLIRYKTANDO 2012.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - SAMOMASUJĄCE ULICE CHCĄ ZIELENI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - SEN TYMENTY W MAGAZYNIE WSPOMNIEŃ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - SESJA NIE PROCESJA - SESJA POCZEKA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - SINGLI SABAT.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - SKRZYNIA BIEGÓW IKARUSA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - STAN HAELUCYNOGENNY.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - STUDIUM ZAGUBIONYCH DUSZ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - SZEŚĆ MILIONÓW MORDERSTW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - SĄ TAKIE CHWILE, DO KTÓRYCH WYKUPIŁBYM BILET.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TADEUSZ.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TELENOWELOVE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TO JA SEN.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TRIBUTE TO LECH WAŁĘSA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TRIBUTE TO STEFAN STARZYŃSKI.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TRZECI SUCHAR-DZIAŁKOWANIE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TYLE BYŁO ZMYŁEK.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - TYŚ JEST TEŻ INSTRUMENTEM MYŚL WIĘC.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - UMIEM INTERNET.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - UPOKORZENI - HEMOGLOBINA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - UTOPII BIEGUNY.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - W CYFRACH SYSTEMU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - W KAŁAMAŻU FAŁSZU.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - W ZWIĄZKU Z TYM.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - WHAT IS MUSIC.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - WIRUS HOMO SAPIENS.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - WIZERUNEK FIRMY PRL.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - WROMETAMORFOZA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - WYPRAŁEM W PRALCE WŁASNY MÓZG.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - ZAPADŁA CISZA.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/NotNow/ZAIKS/Zaiks - Song - ZONG ALA GOLIATOWY BĄK.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201602B_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201603B_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016041_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201604B_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201604D_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016071_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016101_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201611D_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016121_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016122_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201612B_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201612C_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201701E_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017041_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201705B_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017071_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017072_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201708A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017101_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201711A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017121_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017122_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201803A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018041_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201805C_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201806A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018071_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018101_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018121_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018122_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_201902A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019071_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019101_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019121_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019122_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202002A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020041_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020071_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202008A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020101_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202011A_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020121_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020122_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021041_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021041_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021071_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021071_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021101_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021101_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021121_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021121_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021122_052_089780_26722.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021122_052_089780_282405.PDF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2019/Q1 2019 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2019/Q2 2019 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2019/Q3 2019 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2019/Q4 2019 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2020/Q1 2020 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2020/Q2 2020 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2020/Q3 2020 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2020/Q4 2020 Wixen Music 006245 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2021/Q1 2021 Wixen Royalty Stmt - LW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2021/Q2 2021 Wixen Royalty Stmt - LW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006245/Statements/2021/Q3 2021 Wixen Royalty Stmt - LW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006246/Statements/2018/Wixen Music 006246 Qtr1 2018 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006246/Statements/2018/Wixen Music 006246 Qtr2 2018 Stmt.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006246/Statements/2018/Wixen Music 006246 Qtr3 2018 Stmt - LW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/Wixen/006246/Statements/2018/Wixen Music 006246 Qtr4 2018 Stmt - LW.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/findformat.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="RunManager" selected="Python.firstformat">
+    <configuration name="findformat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/findformat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="firstformat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/firstformat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="try" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/try.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.firstformat" />
+        <item itemvalue="Python.try" />
+        <item itemvalue="Python.findformat" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>

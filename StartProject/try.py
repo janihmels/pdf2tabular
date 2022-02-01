@@ -1,3 +1,9 @@
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from io import StringIO
+import re
 
 def pdf_To_text(path, pages):
     rsrcmgr = PDFResourceManager()
@@ -17,6 +23,10 @@ def pdf_To_text(path, pages):
     return text
 
 
-pdf_text = pdf_To_text("data.pdf", pages=[1])
+CMG = "exemple/CMG/24d7ad18b5054c039d165c480012e6a6.pdf"
+PRS = "exemple/PRS/2016/Essex David_070172307_201602B_052_089780_26722.PDF"
+Wixen = "exemple/Wixen/006245/Statements/2019/Q1 2019 Wixen Music 006245 Stmt.pdf"
+
+pdf_text = pdf_To_text(CMG, pages=[0])
 
 print(pdf_text)
