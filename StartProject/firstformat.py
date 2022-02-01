@@ -28,10 +28,14 @@ def pdf_To_text(path, pages):
 
 def CheckPdf(text):
     textSplited = text.split("\n")
+    PRS = re.findall("Distribution \d\d\d\d\w+", text)
     if len(text) > 96 and text[:96] == "Publishing Summary Statement\nWriter ID\nAccount Name\nVendor ID\nStatement Date\nStatement Frequency":
         return "CMG"
-    elif len(textSplited) > 7 and re.findall("Distribution \d\d\d\d\w+", textSplited[7]) != []:
-        return "PRS"
+    elif PRS:
+        return "PRS "+PRS[0][13:]
+    elif len(textSplited) > 0 and textSplited[0][:20] == "WIXENMUSICPUBLISHING" or len(textSplited) > 2 and textSplited[2][2:7] == "Wixen":
+        return "Wixen "
+
     else:
         return "None"
 
@@ -45,6 +49,11 @@ for root, dirs, files in os.walk(path):
         publisher = pathFile.split("\\")[1]
         if publisher != "NotNow":
             pdf_text = pdf_To_text(pathFile, pages=[0])
-            print(CheckPdf(pdf_text), publisher,pathFile)
+            res = CheckPdf(pdf_text)
+            if res == "None":
+                pdf_text = pdf_To_text(pathFile, pages=[2])
+                res = CheckPdf(pdf_text)
+            print(res, publisher,pathFile)
+
 
 
