@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="689f75fc-25fa-4df3-b4c6-a18eafe09c2a" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/try.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/project2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201602B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201602B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201603B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201603B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016041_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016041_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201604B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201604B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201604D_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201604D_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016071_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016071_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016101_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016101_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201611D_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201611D_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016121_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016121_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016122_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_2016122_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201612B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201612B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201612C_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2016/Essex David_070172307_201612C_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201701E_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201701E_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017041_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017041_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201705B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201705B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017071_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017071_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017072_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017072_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201708A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201708A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201711A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_201711A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2017/Essex David_070172307_2017122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201803A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201803A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018041_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018041_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201805C_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201805C_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201806A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_201806A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2018/Essex David_00070172307_2018122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_201902A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_201902A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2019/Essex David_00070172307_2019122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202002A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202002A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020041_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020041_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202008A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202008A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202011A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_202011A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2020/Essex David_00070172307_2020122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021041_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021041_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021041_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021041_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021071_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021071_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021101_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021101_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021121_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021121_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021122_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021122_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exemples/PRS/2021/Essex David_00070172307_2021122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/findformat.py" beforeDir="false" afterPath="$PROJECT_DIR$/findformat.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="24VYdeiyuYvn3qYgVRv546nK5WE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.findformat">
+    <configuration name="findformat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/findformat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="try" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/try.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.findformat" />
+        <item itemvalue="Python.try" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="689f75fc-25fa-4df3-b4c6-a18eafe09c2a" name="Changes" comment="" />
+      <created>1643717311589</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643717311589</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+</project>
