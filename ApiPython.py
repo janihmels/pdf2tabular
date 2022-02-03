@@ -7,13 +7,13 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/getpdf', methods=['POST'])
+@app.route('/pdfPublisher', methods=['POST'])
 @cross_origin()
-def test__():
+def PdfPublisher():
     pdflist = []
-    filename = request.args.get('filename')
-    filepath = request.args.get('path')
-    fullfile = filepath+"/"+filename
+    filename = request.form.get('filename')
+    filepath = request.form.get('path')
+    fullfile = str(filepath)+"/"+str(filename)
     pdf_text = firstformat.pdf_To_text(fullfile, pages=[0])
     res = firstformat.CheckPdf(pdf_text, fullfile, pdflist)
     if res == "Try 3":
@@ -21,11 +21,6 @@ def test__():
         res = firstformat.CheckPdf(pdf_text, fullfile, pdflist)
     return jsonify({"result: ":res})
 
-
-@app.route('/test', methods=['POST'])
-@cross_origin()
-def test2__():
-    return jsonify({"result: ":""})
 
 if __name__ == "__main__":
     app.run(port=5100)
