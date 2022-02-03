@@ -138,20 +138,25 @@ class PRSParser:
 
         blocks = []
 
-        curr_block_start_idx = 1
+        curr_block_is_open = False  # tells us if we've started a new block but didn't end it
 
         for i in range(1, len(page_df)):
 
             if (type(page_df['Your Share %'][i]) == str) and (page_df['Your Share %'][i][-1] == '%'):
                 # we are starting a new block
                 curr_block_start_idx = i
+                curr_block_is_open = True
 
             if page_df['Your Share %'][i] == 'Sub Total':
                 # we are ending a block
                 blocks.append(page_df.iloc[curr_block_start_idx: i])
+                curr_block_is_open = False
 
-        if len(blocks) == 0:
-            blocks.append(page_df.iloc[curr_block_start_idx: len(page_df)-2])
+        if curr_block_is_open:
+            # cutting of the last line (which contains only the page number),
+            # creating the block and adding it to the list
+
+            blocks.append(page_df.iloc[curr_block_start_idx: len(page_df)-1])
 
         return blocks
 
@@ -166,10 +171,22 @@ class PRSParser:
         :return: the block at the desired format (as a pandas.df).
         """
 
-        result = pd.DataFrame(columns=['Song Name', 'Work No', 'Usage and Territory', 'IP1', 'IP2', 'Royalty'])
+        result = pd.DataFrame(columns=['Work Title',
+                                       'Work No',
+                                       'Usage and Territory',
+                                       'IP1',
+                                       'IP2',
+                                       'IP3',
+                                       'Period',
+                                       'IP4',
+                                       'Production',
+                                       'Your Share %',
+                                       'Performances',
+                                       'Royalty'])
 
         block = block.reset_index()
-        song_name = block['Work Title'][0]
+        work_title = block['Work Title'][0]
+        your_share_percent = block['Your Share %'][0]
 
         if are_separated1:
             # 'Work No' and 'Usage and Territory' are -- separated --
@@ -178,8 +195,8 @@ class PRSParser:
                 # 'IP1' and 'IP2' are -- separated --
                 ip1 = block['IP1'][0]
                 ip2 = block['IP2'][0]
-                self.extracted_names.add(ip1)
-                self.extracted_names.add(ip2)
+                self.add_name(ip1)
+                self.add_name(ip2)
             else:
                 # 'IP1' and 'IP2' are -- united --
                 ip1, ip2 = self.extract_ips(block['IP1 IP2'][0])
@@ -189,8 +206,8 @@ class PRSParser:
             if are_separated2:
                 ip1 = block['IP1'][0]
                 ip2 = block['IP2'][0]
-                self.extracted_names.add(ip1)
-                self.extracted_names.add(ip2)
+                self.add_name(ip1)
+                self.add_name(ip2)
             else:
                 # 'IP1' and 'IP2' are -- united --
                 ip1, ip2 = self.extract_ips(block['IP1 IP2'][0])
@@ -212,23 +229,31 @@ class PRSParser:
 
             if 'Unnamed: 7' in block.columns:
                 royalty = block['Unnamed: 7'][i]
+                production = block['Unnamed: 6'][i]
             else:
                 if 'Unnamed: 6' in block.columns:
                     royalty = block['Unnamed: 6'][i]
+                    production = block['Unnamed: 5'][i]
                 else:
                     royalty = block['Unnamed: 5'][i]
+                    production = block['Unnamed: 4'][i]
+
+            performances = block['Your Share %'][i]
 
             period = block['IP3'][i]
 
-            line = pd.DataFrame({'Song Name': [song_name],
+            line = pd.DataFrame({'Work Title': [work_title],
                                  'Work No': [work_no],
                                  'Usage and Territory': [usage_and_territory],
-                                 'IP1': ip1,
-                                 'IP2': ip2,
-                                 'IP3': ip3,
-                                 'IP4': ip4,
-                                 'Period': period,
-                                 'Royalty': royalty})
+                                 'IP1': [ip1],
+                                 'IP2': [ip2],
+                                 'IP3': [ip3],
+                                 'Period': [period],
+                                 'IP4': [ip4],
+                                 'Production': [production],
+                                 'Your Share %': [your_share_percent],
+                                 'Performances': [performances],
+                                 'Royalty': [royalty]})
 
             # TODO - extract more desired attributes
 
@@ -246,22 +271,53 @@ class PRSParser:
                  Raises a ParsingError if couldn't extract the names from the string.
         """
 
+        maximum_min_overlap = -1
+        ip1, ip2 = None, None
+
+        curr_extracted_names = set()
+
         for name in self.extracted_names:
             if ips.find(name) != -1:
                 # the name was found at the ip's string
+
                 splitting_idx = ips.find(name)
 
                 if splitting_idx > 0:
-                    ip1, ip2 = ips[:splitting_idx-1], ips[splitting_idx:]
+                    extracted_ip1, extracted_ip2 = ips[:splitting_idx-1], ips[splitting_idx:]
                 else:
-                    ip1, ip2 = ips[:len(name)], ips[len(name) + 1:]
+                    extracted_ip1, extracted_ip2 = ips[:len(name)], ips[len(name) + 1:]
 
-                self.extracted_names.add(ip1)
-                self.extracted_names.add(ip2)
+                curr_extracted_names.add(ip1)
+                curr_extracted_names.add(ip2)
 
-                return ip1, ip2
+                if min(len(extracted_ip1), len(extracted_ip2)) > maximum_min_overlap:
+                    ip1, ip2 = extracted_ip1, extracted_ip2
+                    maximum_min_overlap = min(len(ip1), len(ip2))
+
+        if not (ip1 is None):
+            self.add_name(ip1)
+            self.add_name(ip2)
+
+            return ip1, ip2
+
+        # else: we didn't found an overlapping and couldn't extract the ip's from the united string
 
         raise ParsingError("Couldn't separate between ip1 and ip2")
+
+    def add_name(self, name):
+
+        """
+
+        :param name: a name to append to our list of names we've extracted from the file so far.
+        :return: nothing. adds the name with some permutations (as they may appear at the file) to our list
+                 of known names.
+        """
+
+        self.extracted_names.add(name)
+
+        if len(name.split()) == 2:
+            # it may be a family name
+            self.extracted_names.add(' '.join(list(reversed(name.split()))))
 
 
 class ParsingError(Exception):
