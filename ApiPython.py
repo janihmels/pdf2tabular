@@ -11,12 +11,14 @@ app.config["DEBUG"] = True
 @cross_origin()
 def test__():
     pdflist = []
-    filepath = request.args.get('url')
-    pdf_text = firstformat.pdf_To_text(filepath, pages=[0])
-    res = firstformat.CheckPdf(pdf_text, filepath, pdflist)
+    filename = request.args.get('filename')
+    filepath = request.args.get('path')
+    fullfile = filepath+"/"+filename
+    pdf_text = firstformat.pdf_To_text(fullfile, pages=[0])
+    res = firstformat.CheckPdf(pdf_text, fullfile, pdflist)
     if res == "Try 3":
-        pdf_text = firstformat.pdf_To_text(filepath, pages=[2])
-        res = firstformat.CheckPdf(pdf_text, filepath, pdflist)
+        pdf_text = firstformat.pdf_To_text(fullfile, pages=[2])
+        res = firstformat.CheckPdf(pdf_text, fullfile, pdflist)
     return jsonify({"result: ":res})
 
 
