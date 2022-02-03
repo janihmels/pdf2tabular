@@ -22,6 +22,11 @@ def test__():
     return jsonify({"result: ":res})
 
 
+@app.route('/test', methods=['POST'])
+@cross_origin()
+def test2__():
+    return jsonify({"result: ":""})
+
 if __name__ == "__main__":
     app.run(port=5100)
 
