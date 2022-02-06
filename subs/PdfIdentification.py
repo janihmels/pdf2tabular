@@ -1,11 +1,5 @@
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.converter import TextConverter
-from pdfminer.layout import LAParams
-from pdfminer.pdfpage import PDFPage
-from io import StringIO
 import re
 import os
-from Pdf_To_Text import pdf_to_text
 
 
 def CheckPdf(text, location, pdfList):

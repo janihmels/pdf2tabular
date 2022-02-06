@@ -1,3 +1,10 @@
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from io import StringIO
+
+
 def pdf_To_text(path, pages):
     rsrcmgr = PDFResourceManager()
     retstr = StringIO()
