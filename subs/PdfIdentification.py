@@ -5,28 +5,10 @@ from pdfminer.pdfpage import PDFPage
 from io import StringIO
 import re
 import os
+from Pdf_To_Text import pdf_to_text
 
 
-def pdf_To_text(path, pages):
-    rsrcmgr = PDFResourceManager()
-    retstr = StringIO()
-
-    laparams = LAParams(all_texts=True, detect_vertical=True, line_overlap=0.5, char_margin=2000.0, line_margin=0.5,
-                        word_margin=2, boxes_flow=1)
-    device = TextConverter(rsrcmgr, retstr, laparams=laparams)
-    fp = open(path, 'rb')
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    for page in PDFPage.get_pages(fp, set(pages), maxpages=0, password="", caching=True, check_extractable=True):
-        interpreter.process_page(page)
-
-    text = retstr.getvalue()
-    fp.close()
-    device.close()
-    retstr.close()
-    return text
-
-
-def CheckPdf(text, location,pdfList):
+def CheckPdf(text, location, pdfList):
     if ord(text[0]) == 12 or ord(text[0]) == 32:  ############################# Specific cases pay attention!!!!!
         return "Try 3"
 
@@ -97,6 +79,7 @@ class Pdf:
     def __str__(self):
         return "\n------" + "\nName: " + self.name + "\nLocation: " + self.location + "\nDict: " + str(
             self.recDict) + "\n------\n"
+
 
 '''
 pdflist = []
