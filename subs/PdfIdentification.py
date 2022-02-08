@@ -1,6 +1,6 @@
 import re
 import os
-
+from subs.Pdf_To_Text import pdf_To_text
 
 def CheckPdf(text, location, pdfList):
     if ord(text[0]) == 12 or ord(text[0]) == 32:  ############################# Specific cases pay attention!!!!!
@@ -60,6 +60,18 @@ def CheckPdf(text, location, pdfList):
 
     return "None"
 
+
+def PdfIdentifier(fullfile):
+    try:
+        pdflist = []
+        pdf_text = pdf_To_text(fullfile, pages=[0])
+        res = CheckPdf(pdf_text, fullfile, pdflist)
+        if res == "Try 3":
+            pdf_text = pdf_To_text(fullfile, pages=[2])
+            res = CheckPdf(pdf_text, fullfile, pdflist)
+        return res
+    except FileNotFoundError:
+        return "Error File Not Found!"
 
 class Pdf:
     def __init__(self, name, location):

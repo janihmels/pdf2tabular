@@ -1,6 +1,9 @@
-from subs.PdfIdentification import  CheckPdf
+from subs.PdfIdentification import CheckPdf, PdfIdentifier
 from subs.Pdf_To_Text import pdf_To_text
 from subs.PdfAdult import *
+from subs.WixenParser import WixenParser
+from subs.PRSParser import PRSParser
+from subs.CMGParser import CMGParser
 
 import flask
 from flask import request, jsonify
@@ -46,6 +49,36 @@ def PdfAudit():
         return jsonify(pdfAudit(fullfile,format,page))
     except FileNotFoundError:
         return jsonify({"result: ": "Error File Not Found"})
+
+
+@app.route('/pdfParse', methods=['POST'])
+@cross_origin()
+def PdfParse():
+    src_filename = request.form.get('src_filename')
+    src_filepath = request.form.get('src_filepath')
+
+    dst_filename = request.form.get('dst_filename')
+    dst_filepath = request.form.get('dst_filepath')
+
+    src_fullfile = str(src_filepath) + '/' + str(src_filename)
+    dst_fullfile = str(dst_filepath) + '/' + str(dst_filename)
+
+    pdf_type = PdfIdentifier(src_fullfile)
+
+    if pdf_type == "PRS":
+        parser = PRSParser(pdf_filepath=src_fullfile)
+    elif pdf_type == "Wixen":
+        parser = WixenParser(pdf_filepath=src_fullfile)
+    elif pdf_type == "CMG":
+        parser = CMGParser(pdf_filepath=src_fullfile)
+    else:
+        # format wasn't found:
+        return jsonify({"result: ": "Error File Not Found"})
+
+    parser.parse()
+    parser.save_result(dst_fullfile)
+
+    return jsonify({"result": "Success"})
 
 
 if __name__ == "__main__":
