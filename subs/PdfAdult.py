@@ -125,23 +125,64 @@ class Formats:
 
             return self.alldict
         except (ValueError, IndexError):
-            return {"result": "SoundExchange version not supported"}
+            return {"result": "SoundExchange version are in the current Statements but is changed"}
 
     def BMG(self,pdf_text):
-        try:
+        #try:
             text = pdf_text.split("\n")
             if text[0].startswith("BMG Rights Management (UK) Ltd."):
                 details = re.findall("Date: \d{2}\/\d{2}\/\d{4}\n\nIn Account with : \(\d+\)",pdf_text)[0]
-                distribution_date1 = details[6:]
+                distribution_date1 = details[6:16]
                 distribution_date2 = "Year("+distribution_date1[-4:]+"), Month("+distribution_date1[3:5]+"), "+"Day("+distribution_date1[:2]+")"
-                payee_account_number = details[36:]
+                payee_account_number = details[37:-1]
                 statement_period = text[text.index("Date: "+distribution_date1)+4][17:]
-                original_currency = text[text.index("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬")+1][-3]
-                royalty = text[pdf_text.index("¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦")-2]
-            elif text[0].startswith("Summary Statement"):
-                pass
-            else:
-                return{"result": "BMG version not supported "}
+                original_currency = text[text.index("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬")+1][-3:]
+                royalty = float(re.findall("  \d+.\d+ ",re.findall("ROYLTS Royalties for period ending .+ \d+.\d+ ",pdf_text)[0])[0])
+                self.alldict["distribution_date1"] = distribution_date1
+                self.alldict["distribution_date2"] = distribution_date2
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["original_currency"] = original_currency
+                self.alldict["royalty"] = royalty
+                return self.alldict
 
-        except (ValueError, IndexError):
-            return {"result": "SoundExchange version not supported"}
+            elif text[0].startswith("Summary Statement"):
+                statement_period = text[0][18:]
+                index = pdf_text.index("Royalty Balance")
+                if pdf_text[index+15] == "\n":
+                    original_currency = text[text.index("Royalty Balance")+2][0]
+                else:
+                    original_currency = pdf_text[index+15]
+                royalty = text[text.index("Royalties ")+1][:-1].replace(",","")
+                if royalty == "":
+                    royalty = text[text.index("Royalties ") + 2][:-1].replace(",", "")
+                royalty = float(royalty)
+                details = pdf_text.rindex("Payee: ")+8
+                payee_account_number = pdf_text[details:details+pdf_text[details:].index(")")]
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["original_currency"] = original_currency
+                self.alldict["royalty"] = royalty
+                return self.alldict
+            elif "SUMMARY STATEMENTBMG Rights Management (UK) Ltd." in pdf_text and pdf_text.startswith("Page "):
+
+                index = pdf_text.index("Payee   :")
+                payee_account_number = pdf_text[index:pdf_text[index:].index(")")+index].replace(" ","")[7:]
+
+                statement_period = re.findall("\n\w+ \d{4} to \w+ \d{4}\n",pdf_text)[0][1:-1].replace(" "," ")
+
+                index = pdf_text.index("Amounts in ")
+                original_currency = pdf_text[index:index+pdf_text[index:].index("\n")][-3:]
+                royalty = float(re.findall("\d+.\d+\.\d+",re.findall("ROYLTS Royalties for period ending .+\n",pdf_text)[0])[0].replace(",",""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["original_currency"] = original_currency
+                self.alldict["royalty"] = royalty
+                return self.alldict
+            else:
+                return{"result": "BMG version not supported"}
+
+        #except (ValueError, IndexError):
+        #    return {"result": "BMG version are in the current Statements but is changed"}
