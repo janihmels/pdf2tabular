@@ -1,6 +1,6 @@
 import subs.PdfIdentification
 from subs.Pdf_To_Text import pdf_To_text
-from subs.PdfAdult import pdfAdultBMI
+from subs.PdfAdult import *
 
 import flask
 from flask import request, jsonify
@@ -28,18 +28,24 @@ def PdfPublisher():
         return jsonify({"result: ": "Error File Not Found"})
 
 
-@app.route('/pdfAdult', methods=['POST'])
+@app.route('/pdfAudit', methods=['POST'])
 @cross_origin()
-def PdfAdult():
+def PdfAudit():
     try:
         filename = request.form.get('filename')
         filepath = request.form.get('path')
+        format = request.form.get('format')
+        page = request.form.get('page')
         fullfile = str(filepath) + "/" + str(filename)
-        pdf_text = pdf_To_text(fullfile, pages=[0])
-        return jsonify(pdfAdultBMI(pdf_text))
+
+        if page is None:
+            page = 0
+        else:
+            page = int(page)
+
+        return jsonify(pdfAudit(fullfile,format,page))
     except FileNotFoundError:
         return jsonify({"result: ": "Error File Not Found"})
-
 
 
 if __name__ == "__main__":
