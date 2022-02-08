@@ -12,25 +12,6 @@ from flask_cors import cross_origin
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-
-@app.route('/pdfIdentification', methods=['POST'])
-@cross_origin()
-def PdfPublisher():
-    try:
-        pdflist = []
-        filename = request.form.get('filename')
-        filepath = request.form.get('path')
-        fullfile = str(filepath) + "/" + str(filename)
-        pdf_text = pdf_To_text(fullfile, pages=[0])
-        res = CheckPdf(pdf_text, fullfile, pdflist)
-        if res == "Try 3":
-            pdf_text = pdf_To_text(fullfile, pages=[2])
-            res = CheckPdf(pdf_text, fullfile, pdflist)
-        return jsonify({"result: ": res})
-    except FileNotFoundError:
-        return jsonify({"result: ": "Error File Not Found!"})
-
-
 @app.route('/pdfAudit', methods=['POST'])
 @cross_origin()
 def PdfAudit():

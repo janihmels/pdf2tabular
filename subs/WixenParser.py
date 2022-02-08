@@ -1,7 +1,7 @@
-
 import tabula
 import pandas as pd
 import PyPDF2
+
 
 class WixenParser:
 
@@ -57,7 +57,8 @@ class WixenParser:
 
                     page = page.iloc[5:].reset_index(drop=True).rename(columns={original_name: new_name for
                                                                                 original_name, new_name in
-                                                                        zip(page.columns, parsing_page_column_names)})
+                                                                                zip(page.columns,
+                                                                                    parsing_page_column_names)})
 
                     self.pages_to_parse.append(page)
 
@@ -185,56 +186,56 @@ class WixenParser:
 
                     # updating metadata
                     if header_cnt >= 1:
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-1]
+                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 1]
                     if header_cnt >= 2:
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i-2] + \
-                                      page_df['Unnamed: 1'].fillna('')[i-2] + \
-                                      page_df['Unnamed: 2'].fillna('')[i-2]
+                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
+                                      page_df['Unnamed: 1'].fillna('')[i - 2] + \
+                                      page_df['Unnamed: 2'].fillna('')[i - 2]
                     if header_cnt >= 3:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i-3] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-3] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-3]
+                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 3] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 3] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 3]
 
                     if header_cnt == 4:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i-4] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-4] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-4]
+                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 4] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 4] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 4]
 
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i-3] + \
-                                      page_df['Unnamed: 1'].fillna('')[i-3] + \
-                                      page_df['Unnamed: 2'].fillna('')[i-3]
+                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 3] + \
+                                      page_df['Unnamed: 1'].fillna('')[i - 3] + \
+                                      page_df['Unnamed: 2'].fillna('')[i - 3]
 
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-1]
+                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 1]
 
                     if header_cnt == 5:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i-5] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-5] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-5]
+                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 5] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 5] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 5]
 
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i-2] + \
-                                      page_df['Unnamed: 1'].fillna('')[i-2] + \
-                                      page_df['Unnamed: 2'].fillna('')[i-2]
+                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
+                                      page_df['Unnamed: 1'].fillna('')[i - 2] + \
+                                      page_df['Unnamed: 2'].fillna('')[i - 2]
 
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-1]
+                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 1]
 
                     if header_cnt >= 6:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i-3] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-3] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-3]
+                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 3] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 3] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 3]
 
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i-2] + \
-                                      page_df['Unnamed: 1'].fillna('')[i-2] + \
-                                      page_df['Unnamed: 2'].fillna('')[i-2]
+                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
+                                      page_df['Unnamed: 1'].fillna('')[i - 2] + \
+                                      page_df['Unnamed: 2'].fillna('')[i - 2]
 
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i-1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i-1]
+                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                         page_df['Unnamed: 2'].fillna('')[i - 1]
 
                     # declaring a new starting of a block
                     curr_block_start_idx = i
@@ -317,7 +318,6 @@ class WixenParser:
 class Block:
 
     def __init__(self, block_df, song_name, artist, territory):
-
         self.df = block_df
 
         self.song_name = song_name
