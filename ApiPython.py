@@ -78,7 +78,7 @@ def PdfParse():
     parser.parse()
     parser.save_result(dst_fullfile)
 
-    return jsonify({"result": "Success"})
+    return jsonify({"result": "file successfully extracted to {0}".format(dst_fullfile)})
 
 
 if __name__ == "__main__":

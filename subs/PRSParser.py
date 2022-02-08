@@ -86,7 +86,8 @@ class PRSParser:
         for df in dfs:
             details = {'Member Name': df['Work Detail'].iloc[0].split(':')[1].strip(),
                        'CAE Number': df['Work Detail'].iloc[1].split(':')[1].strip(),
-                       'Distribution Number': df['Work Detail'].iloc[2].split(':')[1].strip().split()[0]}
+                       'Distribution Number': df['Work Detail'].iloc[2].split(':')[1].strip().split()[0],
+                       'Distribution Period Month': df['Work Detail'].iloc[2].split(':')[1].strip().split()[1].strip()[1:-1]}
 
             self.work_details[page_number] = details
             page_number += 1
@@ -272,7 +273,8 @@ class PRSParser:
                                        'Amount (performance revenue)',
                                        'Member Name',
                                        'CAE Number',
-                                       'Distribution (posted)'])
+                                       'Distribution (posted)',
+                                       'Distribution Period Month'])
 
         block = block.reset_index()
         work_title = block['Work Title'][0]
