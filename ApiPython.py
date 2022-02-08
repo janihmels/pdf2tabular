@@ -1,4 +1,4 @@
-import subs.PdfIdentification
+from subs.PdfIdentification import  CheckPdf
 from subs.Pdf_To_Text import pdf_To_text
 from subs.PdfAdult import *
 
@@ -19,10 +19,10 @@ def PdfPublisher():
         filepath = request.form.get('path')
         fullfile = str(filepath) + "/" + str(filename)
         pdf_text = pdf_To_text(fullfile, pages=[0])
-        res = PdfIdentification.CheckPdf(pdf_text, fullfile, pdflist)
+        res = CheckPdf(pdf_text, fullfile, pdflist)
         if res == "Try 3":
             pdf_text = pdf_To_text(fullfile, pages=[2])
-            res = PdfIdentification.CheckPdf(pdf_text, fullfile, pdflist)
+            res = CheckPdf(pdf_text, fullfile, pdflist)
         return jsonify({"result: ": res})
     except FileNotFoundError:
         return jsonify({"result: ": "Error File Not Found"})

@@ -126,3 +126,22 @@ class Formats:
             return self.alldict
         except (ValueError, IndexError):
             return {"result": "SoundExchange version not supported"}
+
+    def BMG(self,pdf_text):
+        try:
+            text = pdf_text.split("\n")
+            if text[0].startswith("BMG Rights Management (UK) Ltd."):
+                details = re.findall("Date: \d{2}\/\d{2}\/\d{4}\n\nIn Account with : \(\d+\)",pdf_text)[0]
+                distribution_date1 = details[6:]
+                distribution_date2 = "Year("+distribution_date1[-4:]+"), Month("+distribution_date1[3:5]+"), "+"Day("+distribution_date1[:2]+")"
+                payee_account_number = details[36:]
+                statement_period = text[text.index("Date: "+distribution_date1)+4][17:]
+                original_currency = text[text.index("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬")+1][-3]
+                royalty = text[pdf_text.index("¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦")-2]
+            elif text[0].startswith("Summary Statement"):
+                pass
+            else:
+                return{"result": "BMG version not supported "}
+
+        except (ValueError, IndexError):
+            return {"result": "SoundExchange version not supported"}
