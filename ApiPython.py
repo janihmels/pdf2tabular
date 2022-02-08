@@ -25,7 +25,7 @@ def PdfPublisher():
             res = CheckPdf(pdf_text, fullfile, pdflist)
         return jsonify({"result: ": res})
     except FileNotFoundError:
-        return jsonify({"result: ": "Error File Not Found"})
+        return jsonify({"result: ": "Error File Not Found!"})
 
 
 @app.route('/pdfAudit', methods=['POST'])
