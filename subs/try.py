@@ -9,5 +9,5 @@ for root, dirs, files in os.walk(path):
         if file[-4:].lower() == ".pdf":
 
             pathFile = os.path.join(root, file)
-            audit = pdfAudit(pathFile, "Koda",0)
+            audit = pdfAudit(pathFile, "KODA",0)
             print(audit)
