@@ -118,10 +118,10 @@ class Formats:
         try:
             text = pdf_text.split("\n")
 
-            pdf_text = "\n"+pdf_text
+            pdf_text = "\n" + pdf_text
             if "Featured Artist\nDigital Performance Royalty Statement" in pdf_text and "SoundExchange is a non-profit performance rights organization" in pdf_text:
                 detailsIndex = pdf_text.index("Featured Artist")
-                statement_period = pdf_text[pdf_text[:detailsIndex].rindex("\n"):detailsIndex-1].split("\n ")[-1]
+                statement_period = pdf_text[pdf_text[:detailsIndex].rindex("\n"):detailsIndex - 1].split("\n ")[-1]
                 idIndex = pdf_text.index("SoundExchange  Payee ID")
                 payee_id = pdf_text[idIndex + 23:pdf_text[idIndex:].index("\n") + idIndex]
 
@@ -143,7 +143,7 @@ class Formats:
                 Payee_ID = details[10:]
                 if text[text.index(details) + 2] == "CURRENT PAYMENT:":
                     details = text[text.index(details) + 4].split(" ")
-                    royalty = float(details[0][1:].replace(",",""))
+                    royalty = float(details[0][1:].replace(",", ""))
                     statement_period = details[1] + " " + details[3]
                     distribution_date = " ".join(details[1:])
                 else:
@@ -389,6 +389,36 @@ class Formats:
 
         except (ValueError, IndexError):
             return {"result": "WarnerChappell version are in the current Statements but is changed"}
+
+    def KODA(self, pdf_text):
+        try:
+            if not pdf_text.startswith("My Koda \nMy Koda Account Export,"):
+                return {"result": "KODA version not supported"}
+
+            text = pdf_text.split("\n")
+
+            statement_period = text[1].split(",")[-1][1:-1].replace(" ", " ")
+
+            details = text[3]
+            payee_account_number = details.split(" ")[0]
+
+            details = text.index(self.findSplitedLine(pdf_text, "Date Description Payments"))
+            original_currency = text[details][text[details].index("(") + 1:text[details].index(")")]
+            royalty = []
+            distribution_date = re.findall("\d+\/\d+\/\d{4}", pdf_text)
+            royalty = re.findall(" \d+\.\d+\n", pdf_text)
+            for i in range(len(royalty)):
+                royalty[i] = royalty[i][1:-1]
+
+            self.alldict["statement_period"] = statement_period
+            self.alldict["original_currency"] = original_currency
+            self.alldict["payee_account_number"] = payee_account_number
+            self.alldict["distribution_date"] = distribution_date
+            self.alldict["royalty"] = royalty  # problem with royalty
+
+            return self.alldict
+        except (ValueError, IndexError):
+            return {"result": "Koda version are in the current Statements but is changed"}
 
     def findSplitedLine(self, source, text):
         detailsIndex = source.index(text)

@@ -12,7 +12,7 @@ def pdf_To_text(path, pages, isLastpage=False):
     rsrcmgr = PDFResourceManager()
     retstr = StringIO()
 
-    laparams = LAParams(all_texts=True, detect_vertical=True, line_overlap=0.5, char_margin=2000.0, line_margin=0.5,
+    laparams = LAParams(all_texts=True, detect_vertical=True, line_overlap=0.5, char_margin=4000.0, line_margin=0.5,
                         word_margin=2, boxes_flow=1)
     device = TextConverter(rsrcmgr, retstr, laparams=laparams)
     fp = open(path, 'rb')
