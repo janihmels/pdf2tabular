@@ -4,6 +4,7 @@ import re
 import tabula
 import math
 
+
 def pdfAudit(pathFile, format, page):
     pdf_text = pdf_To_text(pathFile, [page], format == "KOBALT")
     dicts = Formats(pathFile)
@@ -402,13 +403,13 @@ class Formats:
                 original_currency = text[details][text[details].index("(") + 1:text[details].index(")")]
                 royalty = []
                 statement_period = []
-                for i in range(details+2,len(text)-2):
+                for i in range(details + 2, len(text) - 2):
                     details = text[i].split(" ")[0]
                     statement_period.append(details[:4])
                     royal = details[4:]
                     if isV1 == "År Indtjening Koda":
-                        royal = royal.replace(".","").replace(",",".")
-                    royalty.append(float(royal.replace(",","")))
+                        royal = royal.replace(".", "").replace(",", ".")
+                    royalty.append(float(royal.replace(",", "")))
 
                 self.alldict["statement_period"] = statement_period
                 self.alldict["original_currency"] = original_currency
@@ -418,7 +419,7 @@ class Formats:
 
                 statement_period = text[1].split(",")[-1][1:-1].replace(" ", " ")
 
-                payee_account_number = re.findall("\n\d{7} ",pdf_text)[0][1:-1]
+                payee_account_number = re.findall("\n\d{7} ", pdf_text)[0][1:-1]
 
                 details = text.index(self.findSplitedLine(pdf_text, "Date Description Payments"))
                 original_currency = text[details][text[details].index("(") + 1:text[details].index(")")]
@@ -427,7 +428,7 @@ class Formats:
 
                 df = tabula.read_pdf(self.pathFile, pages=1, area=(0, 410, 800, 539))
                 for royal in df[0]["Payments (DKK)"]:
-                    royal = float(str(royal).replace("\xad",""))
+                    royal = float(str(royal).replace("\xad", ""))
                     if not math.isnan(royal):
                         royalty.append(royal)
 
@@ -441,22 +442,22 @@ class Formats:
             else:
                 return {"result": "Koda version not supported"}
 
-        except SystemExit:
+        except (ValueError, IndexError):
             return {"result": "Koda version are in the current Statements but is changed"}
 
 
-    def AMRA(self,pdf_text):
+    def AMRA(self, pdf_text):
         try:
             text = pdf_text.split("\n")
 
             if pdf_text.startswith("AMRA") and "Collection Period:" in pdf_text:
-                details = text.index(self.findSplitedLine(pdf_text,"Collection Period:"))
+                details = text.index(self.findSplitedLine(pdf_text, "Collection Period:"))
                 statement_period = text[details][18:]
-                original_currency = text[details+2][10:]
-                payee_contract_id = text[details+4][15:]
+                original_currency = text[details + 2][10:]
+                payee_contract_id = text[details + 4][15:]
 
                 pdf_text = pdf_To_text(self.pathFile, [0], True)
-                royalty = float(self.rfindSplitedLine(pdf_text,"Grand Total").split(" ")[-1].replace(",",""))
+                royalty = float(self.rfindSplitedLine(pdf_text, "Grand Total").split(" ")[-1].replace(",", ""))
 
                 self.alldict["statement_period"] = statement_period
                 self.alldict["original_currency"] = original_currency
@@ -464,23 +465,27 @@ class Formats:
                 self.alldict["royalty"] = royalty  # problem with royalty
 
                 return self.alldict
-            elif "AMRA" in text[0] and re.search("Email: \w+@amra.com",pdf_text):
-                distribution_date = re.findall("(\d+(|[a-z]{2}) [a-zA-z]+ \d{4})",pdf_text)[0][0]
+            elif "AMRA" in text[0] and re.search("Email: \w+@amra.com", pdf_text):
+                distribution_date = re.findall("(\d+(|[a-z]{2}) [a-zA-z]+ \d{4})", pdf_text)[0][0]
                 pdf_text = pdf_To_text(self.pathFile, [2])
                 text = pdf_text.split("\n")
-                details = text[text.index("Agreement Id Counterparty Agreement Description Currency Closing BalanceBalance Action")+2].split(" ")
+                details = text[text.index(
+                    "Agreement Id Counterparty Agreement Description Currency Closing BalanceBalance Action") + 2].split(
+                    " ")
                 payee_account_number = details[0]
                 original_currency = details[3]
                 try:
                     pdf_text = pdf_To_text(self.pathFile, [3])
-                    statement_period = self.findSplitedLine(pdf_text,"Collection From:")[16:] + " To "+self.findSplitedLine(pdf_text,"Collection To:")[15:]
+                    statement_period = self.findSplitedLine(pdf_text, "Collection From:")[
+                                       16:] + " To " + self.findSplitedLine(pdf_text, "Collection To:")[15:]
                 except ValueError:
                     pdf_text = pdf_To_text(self.pathFile, [4])
-                    statement_period = self.findSplitedLine(pdf_text,"Statement From:")[15:] + " To "+self.findSplitedLine(pdf_text,"Statement To:")[14:]
-                    royalty = float(self.rfindSplitedLine(pdf_text,"Grand Total").split(" ")[-1])
+                    statement_period = self.findSplitedLine(pdf_text, "Statement From:")[
+                                       15:] + " To " + self.findSplitedLine(pdf_text, "Statement To:")[14:]
+                    royalty = float(self.rfindSplitedLine(pdf_text, "Grand Total").split(" ")[-1])
                 else:
                     pdf_text = pdf_To_text(self.pathFile, [4])
-                    royalty = float(self.rfindSplitedLine(pdf_text,"Totals").split(" ")[-1])
+                    royalty = float(self.rfindSplitedLine(pdf_text, "Totals").split(" ")[-1])
 
                 self.alldict["statement_period"] = statement_period
                 self.alldict["original_currency"] = original_currency
@@ -489,27 +494,84 @@ class Formats:
                 self.alldict["distribution_date"] = distribution_date
 
                 return self.alldict
-            elif "Total" in pdf_text and "AMRA" in pdf_text and  "Collection Period" in pdf_text:
-                details = text.index(self.findSplitedLine(pdf_text,"Collection Period:"))
+            elif "Total" in pdf_text and "AMRA" in pdf_text and "Collection Period" in pdf_text:
+                details = text.index(self.findSplitedLine(pdf_text, "Collection Period:"))
                 statement_period = text[details][18:]
-                original_currency = text[details+2][10:]
-                payee_contract_id = text[details+4][15:]
+                original_currency = text[details + 2][10:]
+                payee_contract_id = text[details + 4][15:]
 
                 pdf_text = pdf_To_text(self.pathFile, [0], True)
-                royalty = float(self.rfindSplitedLine(pdf_text,"Total").split(" ")[-1].replace(",",""))
+                royalty = float(self.rfindSplitedLine(pdf_text, "Total").split(" ")[-1].replace(",", ""))
 
                 self.alldict["statement_period"] = statement_period
                 self.alldict["original_currency"] = original_currency
                 self.alldict["payee_contract_id"] = payee_contract_id
-                self.alldict["royalty"] = royalty  # problem with royalty
+                self.alldict["royalty"] = royalty
 
                 return self.alldict
             else:
                 return {"result": "ARMA version not supported"}
 
-        except SystemExit:
-            return {"result": "ARMA version are in the current Statements but is changed"}
+        except (ValueError, IndexError):
+                return {"result": "ARMA version are in the current Statements but is changed"}
 
+
+    def MCPS(self, pdf_text):
+        try:
+            if pdf_text.startswith("Notice of Payment") and "MCPS" in pdf_text:
+                text = pdf_text.split("\n")
+                payee_account_number = text[2][:text[2].index("CAE Number:")]
+                statement_period = text[3][2:-1]
+
+                original_currency = text[10][2:]
+                royalty = float(text[11].replace(",", ""))
+
+                self.alldict["statement_period"] = statement_period
+                self.alldict["original_currency"] = original_currency
+                self.alldict["payee_contract_id"] = payee_account_number
+                self.alldict["royalty"] = royalty
+                return self.alldict
+            else:
+                return {"result": "MCPS version not supported"}
+        except (ValueError, IndexError):
+                return {"result": "MCPS version are in the current Statements but is changed"}
+
+    def HOWE(self,pdf_text):
+        try:
+            if pdf_text.startswith("New Royalty List\n\nHowe Sound Music Publishing, LLC"):
+                statement_period = self.findSplitedLine(pdf_text,"Collection Period:")[18   :]
+                original_currency = self.findSplitedLine(pdf_text,"Currency: ")[10:]
+                payee_account_number = self.findSplitedLine(pdf_text,"Agreement Id: ")[14:]
+                pdf_text = pdf_To_text(self.pathFile, [0], True)
+                royalty = float(self.rfindSplitedLine(pdf_text,"Grand Total ")[11:].replace(",",""))
+
+                self.alldict["statement_period"] = statement_period
+                self.alldict["original_currency"] = original_currency
+                self.alldict["payee_contract_id"] = payee_account_number
+                self.alldict["royalty"] = royalty
+                return self.alldict
+
+            else:
+                return {"result": "HOWE version not supported"}
+        except (ValueError, IndexError):
+                return {"result": "HOWE version are in the current Statements but is changed"}
+
+    def CURVE(self,pdf_text):
+        try:
+            text = pdf_text.split("\n")
+            if "DISTRIBUTION STATEMENT" in pdf_text and pdf_text.startswith("Beatroot"):
+                statement_period = " ".join(text[text.index(self.findSplitedLine(pdf_text,"DISTRIBUTION STATEMENT"))+2].split(" ")[:-2])
+                royalties = float(self.findSplitedLine(pdf_text,"TOTAL INCOME ")[14:].replace(",",""))
+                original_currency = self.rfindSplitedLine(pdf_text,"All amounts are in ")[19:]
+
+                self.alldict["original_currency"] = original_currency
+                self.alldict["royalties"] = royalties
+                self.alldict["statement_period"] = statement_period
+                return self.alldict
+            else:
+                return {"result": "CURVE version not supported"}
+        except (ValueError, IndexError):
+                return {"result": "CURVE version are in the current Statements but is changed"}
 
     def findSplitedLine(self, source, text):
         detailsIndex = source.index(text)
