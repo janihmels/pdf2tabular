@@ -27,9 +27,12 @@ def PdfAudit():
         else:
             page = int(page)
 
+        if format is None:
+            return jsonify({"result" : "Error Parameters"})
+
         return jsonify(pdfAudit(fullfile,format,page))
     except FileNotFoundError:
-        return jsonify({"result: ": "Error File Not Found"})
+        return jsonify({"result" : "Error File Not Found"})
 
 
 @app.route('/pdfParse', methods=['POST'])
@@ -54,12 +57,12 @@ def PdfParse():
         parser = CMGParser(pdf_filepath=src_fullfile)
     else:
         # format wasn't found:
-        return jsonify({"result: ": "Error File Not Found"})
+        return jsonify({"result" : "Error File Not Found"})
 
     parser.parse()
     parser.save_result(dst_fullfile)
 
-    return jsonify({"result": "file successfully extracted to {0}".format(dst_fullfile)})
+    return jsonify({"result" : "file successfully extracted to {0}".format(dst_fullfile)})
 
 
 if __name__ == "__main__":

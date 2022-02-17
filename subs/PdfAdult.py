@@ -1,4 +1,4 @@
-from subs.Pdf_To_Text import pdf_To_text
+from subs.Pdf_To_Text import *
 import os
 import re
 import tabula
@@ -6,6 +6,8 @@ import math
 
 
 def pdfAudit(pathFile, format, page):
+    if format.upper() == "PEERMUSIC":
+        page = 1
     pdf_text = pdf_To_text(pathFile, [page], format == "KOBALT")
     dicts = Formats(pathFile)
     return getattr(dicts, format.upper())(pdf_text)
@@ -368,13 +370,17 @@ class Formats:
                         self.alldict["company"] = "WB Music Corp."
                     elif "WC Music Corp." in pdf_text or "WC MUSIC CORP." in pdf_text:
                         self.alldict["company"] = "WC Music Corp."
+                    elif "MUSICALLSTARS PUBLISHING" in pdf_text:
+                        self.alldict["company"] = "MUSICALLSTARS PUBLISHING"
+                    elif "MUSICALLSTARS B.V." in pdf_text:
+                        self.alldict["company"] = "MUSICALLSTARS B.V."
                     else:
                         return {"result": "WarnerChappell version are in the current Statements but is changed"}
 
                     details = text.index(self.findSplitedLine(pdf_text, "Period: "))
                     statement_period = text[details][8:]
                     original_currency = text[details + 1][15:]
-                    payee_account_number = self.findSplitedLine(pdf_text, "Payee Account Code").split(" ")[-2]
+                    payee_account_number = self.findSplitedLine(pdf_text, "Payee Account Code")[18:]
                     royalty = float(
                         self.findSplitedLine(pdf_text, "Gross Payable Royalties ").replace(",", "").split(" ")[-1])
 
@@ -445,7 +451,6 @@ class Formats:
         except (ValueError, IndexError):
             return {"result": "Koda version are in the current Statements but is changed"}
 
-
     def AMRA(self, pdf_text):
         try:
             text = pdf_text.split("\n")
@@ -513,8 +518,7 @@ class Formats:
                 return {"result": "ARMA version not supported"}
 
         except (ValueError, IndexError):
-                return {"result": "ARMA version are in the current Statements but is changed"}
-
+            return {"result": "ARMA version are in the current Statements but is changed"}
 
     def MCPS(self, pdf_text):
         try:
@@ -534,16 +538,16 @@ class Formats:
             else:
                 return {"result": "MCPS version not supported"}
         except (ValueError, IndexError):
-                return {"result": "MCPS version are in the current Statements but is changed"}
+            return {"result": "MCPS version are in the current Statements but is changed"}
 
-    def HOWE(self,pdf_text):
+    def HOWE(self, pdf_text):
         try:
             if pdf_text.startswith("New Royalty List\n\nHowe Sound Music Publishing, LLC"):
-                statement_period = self.findSplitedLine(pdf_text,"Collection Period:")[18   :]
-                original_currency = self.findSplitedLine(pdf_text,"Currency: ")[10:]
-                payee_account_number = self.findSplitedLine(pdf_text,"Agreement Id: ")[14:]
+                statement_period = self.findSplitedLine(pdf_text, "Collection Period:")[18:]
+                original_currency = self.findSplitedLine(pdf_text, "Currency: ")[10:]
+                payee_account_number = self.findSplitedLine(pdf_text, "Agreement Id: ")[14:]
                 pdf_text = pdf_To_text(self.pathFile, [0], True)
-                royalty = float(self.rfindSplitedLine(pdf_text,"Grand Total ")[11:].replace(",",""))
+                royalty = float(self.rfindSplitedLine(pdf_text, "Grand Total ")[11:].replace(",", ""))
 
                 self.alldict["statement_period"] = statement_period
                 self.alldict["original_currency"] = original_currency
@@ -554,15 +558,16 @@ class Formats:
             else:
                 return {"result": "HOWE version not supported"}
         except (ValueError, IndexError):
-                return {"result": "HOWE version are in the current Statements but is changed"}
+            return {"result": "HOWE version are in the current Statements but is changed"}
 
-    def CURVE(self,pdf_text):
+    def CURVE(self, pdf_text):
         try:
             text = pdf_text.split("\n")
             if "DISTRIBUTION STATEMENT" in pdf_text and pdf_text.startswith("Beatroot"):
-                statement_period = " ".join(text[text.index(self.findSplitedLine(pdf_text,"DISTRIBUTION STATEMENT"))+2].split(" ")[:-2])
-                royalties = float(self.findSplitedLine(pdf_text,"TOTAL INCOME ")[14:].replace(",",""))
-                original_currency = self.rfindSplitedLine(pdf_text,"All amounts are in ")[19:]
+                statement_period = " ".join(
+                    text[text.index(self.findSplitedLine(pdf_text, "DISTRIBUTION STATEMENT")) + 2].split(" ")[:-2])
+                royalties = float(self.findSplitedLine(pdf_text, "TOTAL INCOME ")[14:].replace(",", ""))
+                original_currency = self.rfindSplitedLine(pdf_text, "All amounts are in ")[19:]
 
                 self.alldict["original_currency"] = original_currency
                 self.alldict["royalties"] = royalties
@@ -571,7 +576,416 @@ class Formats:
             else:
                 return {"result": "CURVE version not supported"}
         except (ValueError, IndexError):
-                return {"result": "CURVE version are in the current Statements but is changed"}
+            return {"result": "CURVE version are in the current Statements but is changed"}
+
+    def SACEM(self, pdf_text):
+        try:
+
+            if "SACEM - RELEVÉ DE VOS DROITS D'AUTEUR" in pdf_text:
+                text = pdf_text.split("\n")
+
+                details = text.index(self.findSplitedLine(pdf_text, "RÉPARTITION"))
+                statement_period = " ".join(text[details].split(" ")[-3:])
+                rights_type = text[details + 2][:text[details + 2].index("AVANT") - 1]
+                royalties = float(text[details + 2][len(rights_type) + 28:-1].replace(",", "").replace("\xa0", ""))
+                original_currency = text[details + 2][-1]
+                try:
+                    payee_contract_id = self.findSplitedLine(pdf_text, "N° compte : ")[12:]
+                except ValueError:
+                    payee_contract_id = self.findSplitedLine(pdf_text, "N° de compte : ")[14:]
+
+                self.alldict["statement_period"] = statement_period
+                self.alldict["rights_type"] = rights_type
+                self.alldict["royalties"] = royalties
+                self.alldict["payee_contract_id"] = payee_contract_id
+                self.alldict["original_currency"] = original_currency
+                return self.alldict
+            else:
+                return {"result": "SACEM version not supported"}
+
+        except (ValueError, IndexError):
+            return {"result": "SACEM version are in the current Statements but is changed"}
+
+    def ADMINMP(self, pdf_text):
+        try:
+            text = pdf_text.split("\n")
+
+            if "Client Royalty Summary" in pdf_text and (
+                    "Company:Administration Music Rights" in pdf_text or "Company:The Administration MP" in pdf_text):
+                payee_account_number = self.findSplitedLine(pdf_text, "Payee: ").split(" ")[-1].replace(".", "")[1:-1]
+                statement_period = self.findSplitedLine(pdf_text, "Quarterly for period ")[21:]
+                royalties = float(text[text.index("TOTAL ROYALTIES") + 7].replace(",", ""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royalties"] = royalties
+                return self.alldict
+            else:
+                return {"result": "ADMINMP version not supported"}
+
+        except (ValueError, IndexError):
+            return {"result": "ADMINMP version are in the current Statements but is changed"}
+
+    def UNITEDMASTERS(self, pdf_text):
+        try:
+            text = pdf_text.split("\n")
+
+            if "UnitedMasters" in pdf_text:
+                statement_period = self.findSplitedLine(pdf_text, "Reference")[10:text[2].index("_")]
+                distribution_date = self.findSplitedLine(pdf_text, "Created on ")[11:]
+
+                try:
+                    page5 = pdf_To_text(self.pathFile, [4])
+                    details = self.findSplitedLine(page5, "Total Balance").split(" ")[-1]
+                except ValueError:
+                    page5 = pdf_To_text(self.pathFile, [3])
+                    details = self.findSplitedLine(page5, "Total Balance").split(" ")[-1]
+
+                royalties = float(details[1:details[1:].index(details[0]) + 1])
+
+                self.alldict["distribution_date"] = distribution_date
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royalties"] = royalties
+                return self.alldict
+            else:
+                return {"result": "UnitedMasters version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "UnitedMasters version are in the current Statements but is changed"}
+
+    def ENVATOMARKETPLACE(self, pdf_text):
+        try:
+            text = pdf_text.split("\n")
+
+            if "Earnings Account Summary" in text[0]:
+                statement_period = self.findSplitedLine(pdf_text, "Period:")[7:]
+                royalties = float(text[text.index(
+                    self.findSplitedLine(pdf_text, "Income Summary to Earnings Account Amount")) + 1].split(" ")[-1][
+                                  1:].replace(",", ""))
+                original_currency = self.findSplitedLine(pdf_text, "Total: ")[7:10]
+
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royalties"] = royalties
+                self.alldict["original_currency"] = original_currency
+
+                return self.alldict
+            else:
+                return {"result": "ENVATOMARKETPLACE version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "ENVATOMARKETPLACE version are in the current Statements but is changed"}
+
+    def PEERMUSIC(self, pdf_text):
+        try:
+            pdf_text = pdf_text.replace("\xa0", " ")
+            text = pdf_text.split("\n")
+            if "SUMMARY STATEMENT" == text[0]:
+                payee_account_number = self.findSplitedLine(pdf_text, "Payee: ")[8:-1]
+                statement_period = text[text.index("For the Period:") + 2]
+                royaliy = float(
+                    re.findall("([A-Za-z]\d+(,|)\d+\.\d{2}Balance( | )this( | )Period)", pdf_text)[0][0][1:-20].replace(
+                        ",", ""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royaliy
+                return self.alldict
+            elif text[1].startswith("Earnings") and "Acct" in text[0]:
+                payee_account_number = text[0].split(" ")[-1][:-1]
+                statement_period = text[1][16:]
+                details = text[text.index("BALANCE") + 1].split(" ")
+                royalties = float(details[-1].replace(",", ""))
+                original_currency = details[0]
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royalties
+                self.alldict["original_currency"] = original_currency
+                return self.alldict
+
+            else:
+                return {"result": "PEERMUSIC version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "PEERMUSIC version are in the current Statements but is changed"}
+
+    def DISNEY(self, pdf_text):
+        return self.BasicStatement(pdf_text, "WALT DISNEY MUSIC COMPANY", "Fox")
+
+    def FOX(self, pdf_text):
+        return self.BasicStatement(pdf_text, "T C F MUSIC PUBLISHING,", "Fox")
+
+    def BUCKS(self, pdf_text):
+        return self.BasicStatement(pdf_text, "BUCKS MUSIC GROUP LTD", "BUCKS")
+
+    def CTM(self, pdf_text):
+        self.alldict = self.BasicStatement(pdf_text, "CTM PUBLISHING BV", "CTM")
+        pdf_text = pdf_To_text(self.pathFile, [0], True)
+        royalties = float(self.findSplitedLine(pdf_text, "Statement Total").split(" ")[-1].replace(",", ""))
+        self.alldict["royaliy"] = royalties
+        return self.alldict
+
+    def BasicStatement(self, pdf_text, startwith, company):
+        try:
+            pdf_text = pdf_To_textPypdf(self.pathFile, 0)
+            if pdf_text.startswith(startwith):
+                statement_period = re.findall("For the Period +: +(\w+ \d+ \w+ \w+ \d+)\w", pdf_text)[0]
+                payee_account_number = re.findall("In Account with +: +(\(\d+\))", pdf_text)[0][1:-1]
+                try:
+                    details = re.findall("Balance this period +: +(\w*.) +(\d+(,|)\d+\.\d{2}) ", pdf_text)[0]
+                    royalties = float(details[1].replace(",", ""))
+                    original_currency = details[0]
+                except:
+                    royalties = None
+                    original_currency = None  # check later
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royalties
+                self.alldict["original_currency"] = original_currency
+                return self.alldict
+            else:
+                return {"result": company + " version not supported"}
+        except (ValueError, IndexError):
+            return {"result": company + " version are in the current Statements but is changed"}
+
+    def CCMG(self, pdf_text):
+        try:
+            text = pdf_text.split("\n")
+            if pdf_text.startswith("Publishing Detail Statement"):
+                statement_period = text[1][15:]
+                pdf_text = pdf_To_text(self.pathFile, [0], True)
+                details = re.findall("Gross Royalties Earned this Statement (.+) \n", pdf_text)[0].replace(",",
+                                                                                                           "").replace(
+                    " ", "")
+                royaliy = float(details[1:])
+                original_currency = details[0]
+                payee_account_number = re.findall("Payee:.+(\(\d+\))", pdf_text)[0][1:-1]
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royaliy
+                self.alldict["original_currency"] = original_currency
+                return self.alldict
+            else:
+                return {"result": "CCMG version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "CCMG version are in the current Statements but is changed"}
+
+    def RONDOR(self, pdf_text):
+        try:
+            text = pdf_text.split("\n")
+            if text[0] == "Rondor Music International":
+
+                text = pdf_text.split("\n")
+                payee_account_number = text[2].split(" ")[-1][1:-1]
+                if "Client: " in pdf_text:
+                    pdf_text = pdf_To_text(self.pathFile, [14])
+                    client_account_number = re.findall("Client: (\w+) - ", pdf_text)[0]
+                    royalties = float(
+                        text[text.index(self.findSplitedLine(pdf_text, "Balance last period")) + 1].split(" ")[
+                            -1].replace(",", ""))
+                    self.alldict["payee_account_number"] = client_account_number
+                else:
+                    pdf_text = pdf_To_text(self.pathFile, [0], True)
+                    royalties = float(
+                        self.findSplitedLine(pdf_text, "Final Totals").split(" ")[-3][1:].replace(",", ""))
+
+                statement_period = self.findSplitedLine(pdf_text, "Royalty Period: ")[17:]
+
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royalties
+
+                return self.alldict
+            else:
+                return {"result": "Rondor version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "Rondor version are in the current Statements but is changed"}
+
+    def RESERVOIR(self, pdf_text):
+        try:
+            text = pdf_text.split("\n")
+            if "Payee: Company:" in pdf_text:
+                payee_account_number = text[text.index(self.findSplitedLine(pdf_text, "Payee:")) + 2].split(" ")[-1][
+                                       1:-2]
+                statement_period = text[text.index(self.findSplitedLine(pdf_text, "In Account with:")) + 2]
+                royaliy = float(text[text.index("TOTAL TRANSACTIONS") + 8].replace(",", ""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royaliy
+                return self.alldict
+
+            elif text[0] == "Client Royalty Summary":
+                payee_account_number = re.findall("Payee:.+\((\d+)\)", pdf_text)[0]
+                statement_period = \
+                    re.findall("\n.(.+\d+(\.|\/)\d+(\.|\/)\d+ to \d+(\.|\/)\d+(\.|\/)\d+)\n", pdf_text)[0][0]
+                details = self.findSplitedLine(pdf_text, "TOTAL ROYALTIES")
+                original_currency = details[16]
+                if original_currency.isnumeric():
+                    royaliy = float(details[16:].replace(",", ""))
+                    original_currency = self.findSplitedLine(pdf_text, "BALANCE CARRIED FORWARD")[-3:]
+                else:
+                    royaliy = float(details[17:].replace(",", ""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royaliy
+                self.alldict["original_currency"] = original_currency
+
+                return self.alldict
+            else:
+                return {"result": "Reservoir version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "Reservoir version are in the current Statements but is changed"}
+
+    def SPIRITONE(self, pdf_text):
+        try:
+            if "Client Royalty Summary" in pdf_text:
+                payee_account_number = re.findall("Payee:.+\((\d+)\)", pdf_text)[0]
+                statement_period = \
+                    re.findall("\n(.+\d+(\.|\/)\d+(\.|\/)\d+ to \d+(\.|\/)\d+(\.|\/)\d+)\n", pdf_text)[0][0]
+
+                pdf_text = pdf_To_text(self.pathFile, [1])
+                text = pdf_text.split("\n")
+
+                for i in range(1, 4):
+                    if "BALANCE CARRIED FORWARD" in text[-3]:
+                        details = text.index("TOTAL ROYALTIES")
+                        if text[details + 8] == "Royalty Transfers":
+                            details += 2
+                        royalty = float(text[details + 8].replace(",", ""))
+                        break
+                    elif "BALANCE CARRIED FORWARD" in text[-7]:
+                        royalty = float(text[0].replace(",", ""))
+                        break
+                    else:
+                        pdf_text = pdf_To_text(self.pathFile, [i])
+                        text = pdf_text.split("\n")
+                else:
+                    return {"result": "SPIRITONE version not supported"}
+
+                original_currency = text[-3][:3]
+                if not original_currency.isalpha():
+                    pdf_text = pdf_To_text(self.pathFile, [3])
+                    text = pdf_text.split("\n")
+                    original_currency = text[-3][:3]
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royalty
+                self.alldict["original_currency"] = original_currency
+
+                return self.alldict
+            else:
+                return {"result": "SPIRITONE version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "SPIRITONE version are in the current Statements but is changed"}
+
+    def ARMADAMUSIC(self, pdf_text):
+        try:
+            if pdf_text.startswith("Royalty Summary Page"):
+                original_currency = self.rfindSplitedLine(pdf_text, "All amounts printed in ")[23:]
+                pdf_text = pdf_To_text(self.pathFile, [1])
+                payee_account_number = self.findSplitedLine(pdf_text, "Account:").split(" ")[-1][1:-1]
+                statement_period = self.findSplitedLine(pdf_text, "FOR PERIOD")[11:]
+                royaliy = float(self.findSplitedLine(pdf_text, "TOTAL ROYALTIES").split(" ")[-1].replace(",", ""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royaliy
+                self.alldict["original_currency"] = original_currency
+                return self.alldict
+            else:
+                return {"result": "ARMADAMUSIC version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "ARMADAMUSIC version are in the current Statements but is changed"}
+
+    def DIMMAK(self, pdf_text):
+        try:
+            if pdf_text.startswith("Royalty Summary Page"):
+                original_currency = self.rfindSplitedLine(pdf_text, "All amounts printed in ")[23:]
+                payee_account_number = self.findSplitedLine(pdf_text, "Account:").split(" ")[-1][1:-1]
+                statement_period = self.findSplitedLine(pdf_text, "FOR PERIOD")[11:]
+                royaliy = float(self.findSplitedLine(pdf_text, "TOTAL ROYALTIES").split(" ")[-1].replace(",", ""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royaliy
+                self.alldict["original_currency"] = original_currency
+                return self.alldict
+            else:
+                return {"result": "DIMMAK version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "DIMMAK version are in the current Statements but is changed"}
+
+    def ESSENTIAL(self, pdf_text):
+        text = pdf_text.split("\n")
+        try:
+            if pdf_text.startswith("Client Royalty Summary"):
+                payee_account_number = re.findall("Payee:.+\((\d+ \/ \d+)\)", pdf_text)[0]
+                detalils = text.index(self.findSplitedLine(pdf_text, "In Account with:"))
+                client_account_number = text[detalils].split(" ")[-1][1:-1]
+                statement_period = text[detalils + 2]
+                pdf_text = pdf_To_text(self.pathFile, [1])
+
+                royaliy = float(self.findSplitedLine(pdf_text, "TOTAL TRANSACTIONS").split(" ")[-1].replace(",", ""))
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royaliy
+                self.alldict["client_account_number"] = client_account_number
+                return self.alldict
+            else:
+                return {"result": "ESSENTIAL version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "ESSENTIAL version are in the current Statements but is changed"}
+
+    def SOCAN(self, pdf_text):
+        text = pdf_text.split("\n")
+        try:
+            if "Member Statement" in text:
+                details = text.index(self.findSplitedLine(pdf_text, "SOCAN NO"))
+                payee_account_number = text[details][10:]
+                statement_period = text[details + 2][13:]
+                distribution_date = text[details + 3][18:]
+                royalties = self.findSplitedLine(pdf_text, "Earnings").split(" ")[-1]
+                original_currency = "CAD"
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royalties
+                self.alldict["distribution_date"] = distribution_date
+                self.alldict["original_currency"] = original_currency
+
+                return self.alldict
+            else:
+                return {"result": "SOCAN version not supported"}
+        except (ValueError, IndexError):
+            return {"result": "SOCAN version are in the current Statements but is changed"}
+
+    def BUNIQUE(self, pdf_text):
+        text = pdf_text.split("\n")
+        try:
+            if "Client Royalty Summary" in text:
+                details = re.findall("(In Account with: .+\((\d+)\).*)\n", pdf_text)[0]
+                payee_account_number = details[1]
+                statement_period = text[text.index(details[0]) + 2]
+                details = text.index(self.findSplitedLine(pdf_text, "TOTAL ROYALTIES")) + 10
+                if "BALANCE CARRIED FORWARD" in text[details]:
+                    details -= 12
+
+                royalties = float(text[details][1:].replace(",", ""))
+                original_currency = text[details][0]
+
+                self.alldict["payee_account_number"] = payee_account_number
+                self.alldict["statement_period"] = statement_period
+                self.alldict["royaliy"] = royalties
+                self.alldict["original_currency"] = original_currency
+
+                return self.alldict
+            else:
+                return {"result": "SOCAN version not supported"}
+
+        except (ValueError, IndexError):
+            return {"result": "SOCAN version are in the current Statements but is changed"}
 
     def findSplitedLine(self, source, text):
         detailsIndex = source.index(text)
