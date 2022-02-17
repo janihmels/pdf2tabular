@@ -19,7 +19,6 @@ def PdfAudit():
     try:
         filename = request.form.get('filename')
         filepath = request.form.get('path')
-        format = request.form.get('format')
         page = request.form.get('page')
         fullfile = str(filepath) + "/" + str(filename)
 
@@ -28,10 +27,7 @@ def PdfAudit():
         else:
             page = int(page)
 
-        if format is None:
-            return jsonify({"result": "Error Parameters"})
-
-        return jsonify(pdfAudit(fullfile, format, page))
+        return jsonify(pdfAudit(fullfile, page))
     except FileNotFoundError:
         return jsonify({"result": "Error File Not Found"})
 

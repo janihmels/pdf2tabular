@@ -5,7 +5,7 @@ import tabula
 import math
 import re
 
-path = "C:\\Users\\Gad\\Documents\\GitHub\\pdf2tabular\\exempleAudit\\Newlyannotated\\BUnique\\To Be Anotated\\SAM PRESTON 12 2015.pdf"
+path = "C:\\Users\\Gad\\Documents\\GitHub\\pdf2tabular\\exempleAudit\\Newlyannotated\\PeerMusic\\Annotated\\1H_2021_010101_JOANJETT_FCST202106.pdf"
 pdf_text = pdf_To_text(path, [0])
 
 print(pdf_text)

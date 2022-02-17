@@ -5,16 +5,66 @@ import tabula
 import math
 
 
-def pdfAudit(pathFile, format, page):
-    if format.upper() == "PEERMUSIC":
+def pdfAudit(pathFile, page):
+    pdf_text = pdf_To_text(pathFile, [0], False)
+
+    format = FindFormat(pdf_text).upper()
+
+    if format == "PEERMUSIC":
         page = 1
-    pdf_text = pdf_To_text(pathFile, [page], format == "KOBALT")
+    elif format == "KOBALT":
+        pdf_text = pdf_To_text(pathFile, [0], True)
+
     dicts = Formats(pathFile)
     try:
-        return getattr(dicts, format.upper())(pdf_text)
+        return getattr(dicts, format)(pdf_text)
     except AttributeError:
         return {"result": "Format not supported"}
 
+
+def FindFormat(pdf_text):
+    formatdict = {}
+    formatdict["BMI's Next Distribution Will Occur During: Moving? Visit bmi.com to change your address"] = "BMI"
+    formatdict["American Society of Composers, Authors and Publishers"] = "ASCAP"
+    formatdict["Please note that the PRS"] = "PRS"  # 0,2
+    formatdict["SoundExchange"] = "SoundExchange"
+    formatdict["BMG Rights Management"] = "BMG"
+    formatdict["Kobalt Music Services America Inc (KMSA)"] = "Kobalt"
+    formatdict["Sony/ATV Music Publishing"] = "Sony1"  # 8, 2, 10, 11
+    formatdict["Sony Music Publishing LLC"] = "Sony11"
+    formatdict["UNIVERSAL MUSIC PUBL. LTD."] = "UNIVERSAL"
+    formatdict["WarnerChappell.com"] = "Warner1"  # 0,1
+    formatdict["WB MUSIC CORP"] = "Warner11"  # 0,1
+    formatdict["Koda"] = "Koda"
+    formatdict["AMRA"] = "AMRA"
+    formatdict["MCPS"] = "MCPS"
+    formatdict["Howe Sound Music Publishing, LLC"] = "HOWE"
+    formatdict["Beatroot"] = "CURVE"
+    formatdict["SACEM"] = "SCEM"
+    formatdict["Company:The Administration MP"] = "ADMINMP"
+    formatdict["Company:Administration Music Rights"] = "ADMINMP"
+    formatdict["UnitedMasters"] = "UnitedMasters"
+    formatdict["Earnings Account Summary"] = "ENVATOMARKETPLACE"
+    formatdict["Earnings Account Summary"] = "ENVATOMARKETPLACE"
+    formatdict["peermusic"] = "peermusic"
+    formatdict["WALT DISNEY MUSIC COMPANY"] = "Disney"
+    formatdict["T C F MUSIC PUBLISHING,"] = "Fox"
+    formatdict["BUCKS MUSIC GROUP LTD"] = "BUCKS"
+    formatdict["CTM PUBLISHING BV"] = "CTM"
+    formatdict["Digital Mechanical Subs"] = "CCMG"
+    formatdict["Rondor Music International"] = "Rondor"
+    formatdict["Reservoir"] = "RESERVOIR"
+    formatdict["Spirit One"] = "SpiritOne"
+    formatdict["Armada Music"] = "ArmadaMusic"
+    formatdict["DIM MAK"] = "DIMMAK"
+    formatdict["SOCAN"] = "SOCAN"
+    formatdict["B-UNIQUE"] = "BUNIQUE"
+    formatdict["Essential"]= "Essential"
+    keylst = list(formatdict.keys())
+    for i in range(len(keylst)):
+        if keylst[i] in pdf_text:
+            return formatdict[keylst[i]]
+    return "None"
 
 class Formats:
     def __init__(self, pathFile):
@@ -245,7 +295,7 @@ class Formats:
         try:
             text = pdf_text.split("\n")
             if text[0] == "New Royalty List":
-                details = findSplitedLine(pdf_text, "Grand Total")
+                details = self.findSplitedLine(pdf_text, "Grand Total")
                 royalty = float(details[11:].replace(",", "").replace(" ", ""))
             else:
                 pdf_text = pdf_To_text(self.pathFile, [1], True)
@@ -308,7 +358,7 @@ class Formats:
             elif "Sony Music Publishing LLC" in pdf_text:
                 company = "Sony Music Publishing"
             else:
-                return "Sony"
+                return {"result": "SONY version not supported"}
 
             self.alldict["payee_account_number"] = payee_account_number
             self.alldict["statement_period"] = statement_period
