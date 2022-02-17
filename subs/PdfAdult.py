@@ -10,7 +10,10 @@ def pdfAudit(pathFile, format, page):
         page = 1
     pdf_text = pdf_To_text(pathFile, [page], format == "KOBALT")
     dicts = Formats(pathFile)
-    return getattr(dicts, format.upper())(pdf_text)
+    try:
+        return getattr(dicts, format.upper())(pdf_text)
+    except AttributeError:
+        return {"result": "Format not supported"}
 
 
 class Formats:
