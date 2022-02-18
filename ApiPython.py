@@ -1,9 +1,10 @@
 from subs.PdfIdentification import CheckPdf, PdfIdentifier
 from subs.Pdf_To_Text import pdf_To_text
-from subs.PdfAdult import *
+from subs.PdfAudit import *
 from subs.WixenParser import WixenParser
 from subs.PRSParser import PRSParser
 from subs.CMGParser import CMGParser
+from subs.sql2xlsx import sql2xlsx
 
 import flask
 from flask import request, jsonify
@@ -62,5 +63,20 @@ def PdfParse():
     return jsonify({"result": "file successfully extracted to {0}".format(dst_fullfile)})
 
 
+@app.route('/sql2xlsx', methods=['POST'])
+@cross_origin()
+def SQL2XLSX():
+
+    dbname = request.form.get('dbname')
+    queries = request.form.get('queries')
+    queries = eval(queries)
+
+    dst_filename = request.form.get('dst_filename')
+    dst_filepath = request.form.get('dst_filepath')
+    dst_fullfile = str(dst_filepath) + '/' + str(dst_filename)
+
+    sql2xlsx(dbname=dbname, queries=queries, output_filename=dst_fullfile)
+
+
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(port=5100)
