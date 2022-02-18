@@ -23,7 +23,9 @@ def pdfAudit(pathFile, page):
 
 
 def FindFormat(pdf_text):
-    formatdict = {}
+
+    formatdict = dict()
+
     formatdict["BMI's Next Distribution Will Occur During: Moving? Visit bmi.com to change your address"] = "BMI"
     formatdict["American Society of Composers, Authors and Publishers"] = "ASCAP"
     formatdict["Please note that the PRS"] = "PRS"  # 0,2
@@ -59,14 +61,19 @@ def FindFormat(pdf_text):
     formatdict["DIM MAK"] = "DIMMAK"
     formatdict["SOCAN"] = "SOCAN"
     formatdict["B-UNIQUE"] = "BUNIQUE"
-    formatdict["Essential"]= "Essential"
+    formatdict["Essential"] = "Essential"
+
     keylst = list(formatdict.keys())
+
     for i in range(len(keylst)):
         if keylst[i] in pdf_text:
             return formatdict[keylst[i]]
+
     return "None"
 
+
 class Formats:
+
     def __init__(self, pathFile):
         self.alldict = {}
         self.pathFile = pathFile
@@ -1030,7 +1037,7 @@ class Formats:
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royalties
+                self.alldict["royalty"] = royalties
                 self.alldict["original_currency"] = original_currency
 
                 return self.alldict
@@ -1039,6 +1046,203 @@ class Formats:
 
         except (ValueError, IndexError):
             return {"result": "SOCAN version are in the current Statements but is changed"}
+
+    def REDONE(self, pdf_text):
+
+        pdf_text = pdf_To_text(path=self.pathFile,
+                               pages=[0, 1])
+
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        payee_account_number_row = rows[6]
+        payee_account_number_start_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == '('][0]
+        payee_account_number_end_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == ')'][0]
+        payee_account_number = payee_account_number_row[payee_account_number_start_idx+1: payee_account_number_end_idx]
+
+        client_account_number_row = rows[13]
+        client_account_number_start_idx = max([i for i in range(len(client_account_number_row)) if client_account_number_row[i] == '('])
+        client_account_number_end_idx = max([i for i in range(len(client_account_number_row)) if client_account_number_row[i] == ')'])
+        client_account_number = client_account_number_row[client_account_number_start_idx+1: client_account_number_end_idx]
+
+        period_row = rows[14]
+        period_row_splitted = period_row.split()
+        to_index = period_row_splitted.index('to')
+        period_start = period_row_splitted[to_index - 1]
+        period_end = period_row_splitted[to_index + 1]
+
+        royalties = rows[rows.index('1Page:') + 1]
+        original_currency = re.search('[A-Z]*', rows[rows.index('2Page:') - 3]).group(0)
+
+        self.alldict['payee_account_number'] = payee_account_number
+        self.allict['client_account_number'] = client_account_number
+        self.alldict['statement_period'] = period_start + ' - ' + period_end
+        self.alldict['royalty']  = royalties
+        self.alldict['original_currency'] = original_currency
+
+    def ULTRA(self, pdf_text):
+
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        payee_account_number_row = rows[3]
+        payee_account_number_start_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == '('][0]
+        payee_account_number_end_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == ')'][0]
+        payee_account_number = payee_account_number_row[payee_account_number_start_idx+1: payee_account_number_end_idx]
+
+        period_row = rows[[i for i in range(len(rows)) if 'Half-Yearly for period' in rows[i]][0]]
+        period_row_splitted = period_row.split()
+        to_index = period_row_splitted.index('to')
+        period_start = period_row_splitted[to_index - 1]
+        period_end = period_row_splitted[to_index + 1]
+
+        royalties = rows[rows.index('TOTAL ROYALTIES') - 1]
+        original_currency_row = rows[[i for i in range(len(rows)) if 'BALANCE CARRIED FORWARD' in rows[i]][0]]
+        original_currency = re.search('[A-Z]*', original_currency_row).group(0)
+
+        self.alldict['payee_account_number'] = payee_account_number
+        self.alldict['statement_period'] = period_start + ' - ' + period_end
+        self.alldict['royalty']  = royalties
+        self.alldict['original_currency'] = original_currency
+
+    def CURVE(self, pdf_text):
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        period = rows[rows.index('DISTRIBUTION STATEMENT') + 1].split()[0]
+
+        royalties = rows[[i for i in range(len(rows)) if 'TOTAL INCOME' in rows[i]][0]].split()[-1][1:]
+        original_currency_row = rows[[i for i in range(len(rows)) if 'All amounts are in' in rows[i]][0]]
+        original_currency = original_currency_row.split()[-1]
+
+        self.alldict['period'] = period
+        self.alldict['royalty'] = royalties
+        self.alldict['original_currency'] = original_currency
+
+    def HOWE(self, pdf_text):
+
+        pdf_text_last_page = pdf_To_text(path='../exempleAudit/AGR664240_31_December_2020_clients_client_royalty_list.pdf',
+                                         pages=[0],
+                                         isLastpage=True)
+
+        rows_last_page = pdf_text_last_page.split('\n')
+
+        rows_last_page = [item.strip() for item in rows_last_page]
+        rows_last_page = [item for item in rows_last_page if item != '']
+
+        period = rows_last_page[min([i for i in range(len(rows_last_page)) if 'Collection Period:' in rows_last_page[i]])].split(':')[1]
+        currency = rows_last_page[min([i for i in range(len(rows_last_page)) if 'Currency:' in rows_last_page[i]])].split(':')[1][1:]
+        payee_account_number = rows_last_page[min([i for i in range(len(rows_last_page)) if 'Agreement Id:' in rows_last_page[i]])].split(':')[1][1:]
+        royalties = rows_last_page[max([i for i in range(len(rows_last_page)) if 'Grand Total' in rows_last_page[i]])].split()[2]
+
+        self.alldict['period'] = period
+        self.alldict['royalty'] = royalties
+        self.alldict['original_currency'] = currency
+        self.alldict['payee_account_number'] = payee_account_number
+
+    def PULSE(self, pdf_text):
+
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        payee_account_number_row = rows[1]
+        payee_account_number = re.search("['(']([0-9]*)[')']", payee_account_number_row).group(0)[1:-1]
+
+        period_row = rows[[i for i in range(len(rows)) if 'for period' in rows[i]][0]].split()
+        period_start = period_row[-3]
+        period_end = period_row[-1]
+
+        royalties = rows[rows.index('Royalty Transfers') + 1]
+
+        currency_row = rows[max([i for i in range(len(rows)) if 'BALANCE CARRIED FORWARD' in rows[i]])]
+        currency = re.search("[A-Z]*", currency_row).group(0)
+
+        self.alldict['payee_account_number'] = payee_account_number
+        self.alldict['statement_period'] = period_start + ' - ' + period_end
+        self.alldict['royalty'] = royalties
+        self.alldict['original_currency'] = currency
+
+    def BLUEWATER_MUSIC(self, pdf_text):
+
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        period_idx = [i for i in range(len(rows)) if 'Period:' in rows[i]][0]
+        period_row = rows[period_idx].split()
+        period_start = period_row[-3]
+        period_end = period_row[-1]
+
+        royalties_row = rows[[i for i in range(len(rows)) if 'Balance Due:' in rows[i]][0]].split()
+        royalties = royalties_row[1]
+
+        original_currency = royalties_row[0]
+
+        payee_account_number_row = rows[period_idx + 1]
+        payee_account_number = payee_account_number_row.split('-')[1].strip()[1:-1]
+
+        self.alldict['payee_account_number'] = payee_account_number
+        self.alldict['statement_period'] = period_start + ' - ' + period_end
+        self.alldict['royalty'] = royalties
+        self.alldict['original_currency'] = original_currency
+
+    def MOJO(self, pdf_text):
+
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        period_idx = [i for i in range(len(rows)) if 'for period' in rows[i]][0]
+        period_row = rows[period_idx].split()
+        period_start = period_row[-3]
+        period_end = period_row[-1]
+
+        royalties_row = rows[[i for i in range(len(rows)) if 'AMOUNT OWED:' in rows[i]][0]]
+        royalties = royalties_row[:-len('AMOUNT OWED:')]
+
+        original_currency, royalties = royalties.split()
+
+        self.alldict['statement_period'] = period_start + ' - ' + period_end
+        self.alldict['royalty'] = royalties
+        self.alldict['original_currency'] = original_currency
+
+    def WIXEN(self, pdf_text):
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        payee_account_number = rows[0].split(':')[1].split()[0][1:-1]
+
+        period_idx = [i for i in range(len(rows)) if 'ForthePeriod:' in rows[i]][0]
+        period = rows[period_idx].split(':')[1]
+        to_index = period.index('to')
+        from_year = period[to_index-4: to_index]
+        from_month = period[0: to_index-4]
+        to_year = period[-4:]
+        to_month = period[to_index+2: -4]
+
+        period = from_month + ' ' + from_year + ' - ' + to_month + ' ' + to_year
+
+        royalties_row = rows[[i for i in range(len(rows)) if 'ROYLTSRoyaltiesforperiodending' in rows[i]][0]]
+        royalties = re.search("([0-9]*)['.']([0-9]*)", royalties_row.split()[-1]).group(0)
+
+        currency_row = rows[[i for i in range(len(rows)) if 'Balancethisperiod' in rows[i]][0]]
+        original_currency = currency_row.split(':')[1].strip()[0]
+
+        self.alldict['statement_period'] = period
+        self.alldict['royalty'] = royalties
+        self.alldict['original_currency'] = original_currency
 
     def findSplitedLine(self, source, text):
         detailsIndex = source.index(text)
