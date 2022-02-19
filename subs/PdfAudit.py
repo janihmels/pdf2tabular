@@ -1109,6 +1109,7 @@ class Formats:
         self.alldict['royalty']  = royalties
         self.alldict['original_currency'] = original_currency
 
+    '''
     def CURVE(self, pdf_text):
         rows = pdf_text.split('\n')
 
@@ -1145,7 +1146,7 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
         self.alldict['payee_account_number'] = payee_account_number
-
+    '''
     def PULSE(self, pdf_text):
 
         rows = pdf_text.split('\n')
