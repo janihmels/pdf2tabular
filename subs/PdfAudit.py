@@ -1058,9 +1058,16 @@ class Formats:
         rows = [item for item in rows if item != '']
 
         payee_account_number_row = rows[6]
-        payee_account_number_start_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == '('][0]
-        payee_account_number_end_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == ')'][0]
-        payee_account_number = payee_account_number_row[payee_account_number_start_idx+1: payee_account_number_end_idx]
+
+        try:
+            payee_account_number_start_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == '('][0]
+            payee_account_number_end_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == ')'][0]
+            payee_account_number = payee_account_number_row[payee_account_number_start_idx+1: payee_account_number_end_idx]
+        except IndexError:
+            payee_account_number_row = rows[7]
+            payee_account_number_start_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == '('][0]
+            payee_account_number_end_idx = [i for i in range(len(payee_account_number_row)) if payee_account_number_row[i] == ')'][0]
+            payee_account_number = payee_account_number_row[payee_account_number_start_idx+1: payee_account_number_end_idx]
 
         client_account_number_row = rows[13]
         client_account_number_start_idx = max([i for i in range(len(client_account_number_row)) if client_account_number_row[i] == '('])
@@ -1073,13 +1080,22 @@ class Formats:
         period_start = period_row_splitted[to_index - 1]
         period_end = period_row_splitted[to_index + 1]
 
-        royalties = rows[rows.index('1Page:') + 1]
-        original_currency = re.search('[A-Z]*', rows[rows.index('2Page:') - 3]).group(0)
+        royalties = rows[rows.index('TOTAL ROYALTIES') - 1]
+
+        if not (re.match('[0-9]*[.][0-9]*', royalties) is None):
+            span = re.match('[0-9]*[.][0-9]*', royalties).span()
+
+            if not (span[0] == 0 and span[1] == len(royalties)):
+                # royalties is not a decimal number
+                royalties = rows[rows.index('Royalty Transfers') + 1]
+
+        original_currency = re.search('[A-Z]*',
+                                      rows[max([i for i in range(len(rows)) if 'BALANCE CARRIED FORWARD' in rows[i]])]).group(0)
 
         self.alldict['payee_account_number'] = payee_account_number
         self.allict['client_account_number'] = client_account_number
         self.alldict['statement_period'] = period_start + ' - ' + period_end
-        self.alldict['royalty']  = royalties
+        self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = original_currency
 
     def ULTRA(self, pdf_text):
@@ -1257,9 +1273,14 @@ class Formats:
         period_start = period_row[-3]
         period_end = period_row[-1]
 
-        royalties_idx = rows.index('TOTAL TRANSACTIONS')
-        royalties_idx = royalties_idx + 3 if 'DB' in rows else royalties_idx + 2
-        royalties = rows[royalties_idx]
+        try:
+            royalties_idx = rows.index('TOTAL TRANSACTIONS')
+            royalties_idx = royalties_idx + 3 if 'DB' in rows else royalties_idx + 2
+            royalties = rows[royalties_idx]
+        except ValueError:
+            # 'TOTAL TRANSACTIONS' not found in the 'rows' list
+            royalties_idx = min([i for i in range(len(rows)) if 'TOTAL ROYALTIES' in rows[i]])
+            royalties = re.search('([0-9]*[.,][0-9]*)*', rows[royalties_idx]).group(0)
 
         self.alldict['payee_account_number'] = payee_account_number
         self.alldict['statement_period'] = period_start + ' - ' + period_end
