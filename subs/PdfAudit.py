@@ -1509,7 +1509,10 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
 
-def findSplitedLine(self, source, text):
+    def WELK_MUSIC(self, pdf_text):
+        pass
+
+    def findSplitedLine(self, source, text):
         detailsIndex = source.index(text)
         return source[detailsIndex:detailsIndex + source[detailsIndex:].index("\n")]
 
