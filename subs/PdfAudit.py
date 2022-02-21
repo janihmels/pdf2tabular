@@ -1492,7 +1492,7 @@ class Formats:
         period_start = period[:10]
         period_end = period[10:]
 
-        # -- second page
+        # -- second page --
 
         pdf_text = pdf_To_text(path=self.pathFile, pages=[1])
 
@@ -1509,8 +1509,51 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
 
-    def WELK_MUSIC(self, pdf_text):
-        pass
+    def FUTURE_CLASSIC(self, pdf_text):
+
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        rows = [item.replace('\t', ' ') for item in rows]
+
+        try:
+            rights_type = ' '.join(rows[min([i for i in range(len(rows)) if 'Statement' in rows[i]])].split()[:-1])
+
+            try:
+                client_account_number = rows[min([i for i in range(len(rows)) if 'Client #:' in rows[i]])].split(':')[1].strip()
+            except ValueError:
+                client_account_number = None
+
+            payee_account_number = rows[min([i for i in range(len(rows)) if 'ATTN' in rows[i]])].split(':')[1].strip()
+            statement_period = rows[min([i for i in range(len(rows)) if 'Amount Check # ' in rows[i]]) - 1]
+
+            royalty_n_currency = rows[min([i for i in range(len(rows)) if 'Amount Payable:' in rows[i]])].split(':')[1].strip()
+
+            royalty = royalty_n_currency.split()[0][1:]
+            currency = royalty_n_currency.split()[1].strip()[1:-1]
+
+        except ValueError:
+            # the file is from the secondary format:
+
+            period_idx = min([i for i in range(len(rows)) if 'Period Activity Total' in rows[i]]) - 1
+
+            rights_type = rows[period_idx - 1][:rows[period_idx - 1].find("Royalties")].strip() + ' Royalties'
+            statement_period = rows[period_idx]
+            client_account_number = None
+            payee_account_number = None
+
+            currency_idx = min([i for i in range(len(rows)) if 'Total Payable To Writer' in rows[i]])
+            currency = rows[currency_idx].split()[-1][1:-1]
+            royalty = rows[currency_idx - 1][1:]
+
+        self.alldict['rights_type'] = rights_type
+        self.alldict['client_account_number'] = client_account_number
+        self.alldict['payee_account_number'] = payee_account_number
+        self.alldict['statement_period'] = statement_period
+        self.alldict['royalty'] = royalty
+        self.alldict['original_currency'] = currency
 
     def findSplitedLine(self, source, text):
         detailsIndex = source.index(text)
