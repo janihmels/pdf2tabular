@@ -41,27 +41,42 @@ def FindFormat(pdf_text):
     formatdict["AMRA"] = "AMRA"
     formatdict["MCPS"] = "MCPS"
     formatdict["Howe Sound Music Publishing, LLC"] = "HOWE"
-    formatdict["Beatroot"] = "CURVE"
     formatdict["SACEM"] = "SCEM"
     formatdict["Company:The Administration MP"] = "ADMINMP"
     formatdict["Company:Administration Music Rights"] = "ADMINMP"
     formatdict["UnitedMasters"] = "UnitedMasters"
-    formatdict["Earnings Account Summary"] = "ENVATOMARKETPLACE"
-    formatdict["Earnings Account Summary"] = "ENVATOMARKETPLACE"
-    formatdict["peermusic"] = "peermusic"
-    formatdict["WALT DISNEY MUSIC COMPANY"] = "Disney"
+    formatdict["audiojungle.net/statement"] = "ENVATOMARKETPLACE"
+    formatdict["peermusic"] = "PEERMUSIC"
+    formatdict["WALT DISNEY MUSIC COMPANY"] = "DISNEY"
     formatdict["T C F MUSIC PUBLISHING,"] = "Fox"
     formatdict["BUCKS MUSIC GROUP LTD"] = "BUCKS"
     formatdict["CTM PUBLISHING BV"] = "CTM"
     formatdict["Digital Mechanical Subs"] = "CCMG"
-    formatdict["Rondor Music International"] = "Rondor"
+    formatdict["Rondor Music International"] = "RONDOR"
     formatdict["Reservoir"] = "RESERVOIR"
-    formatdict["Spirit One"] = "SpiritOne"
+    formatdict["Spirit One"] = "SPIRITONE"
     formatdict["Armada Music"] = "ArmadaMusic"
     formatdict["DIM MAK"] = "DIMMAK"
     formatdict["SOCAN"] = "SOCAN"
     formatdict["B-UNIQUE"] = "BUNIQUE"
     formatdict["Essential"] = "Essential"
+    formatdict["Redone Productions"] = "REDONE"
+    formatdict["Ultra Music Publishing"] = "ULTRA"
+    formatdict["content@beatroot.com"] = "CURVE"
+    formatdict["MUSICALLSTARS PUBLISHING"] = "MUSICALLSTARS PUBLISHING"
+    formatdict["PULSE PUBLISHING ADMINISTRATION"] = "PULSE"
+    formatdict["Prior Period Balance Brought Forward:"] = "BLUEWATER_MUSIC"
+    formatdict["mojomusicandmedia"] = "MOJO"
+    formatdict["WIXEN MUSIC PUBLISHING"] = "WIXEN"
+    formatdict["STOART"] = "STOART"
+    formatdict["Red Brick Music Publishing"] = "REDBRICK"
+    formatdict["Notting Dale Songs"] = "NOTTING_HILL_MUSIC"
+    formatdict["this report contains detailed information regarding your GVL remuneration"] = "GVL"
+    formatdict["www.mushroommusic.com"] = "MUSHROOM_MUSIC"
+    formatdict["www.cmrra.ca"] = "CMRRA"
+    formatdict["avex music publishing"] = "AVEX"
+
+    # TODO: "Big Music Machine" + all the publishers that come after 'AVEX'
 
     keylst = list(formatdict.keys())
 
@@ -325,7 +340,6 @@ class Formats:
             self.alldict["royalty"] = royalty
             return self.alldict
 
-
         except (ValueError, IndexError):
             return {"result": "KOBALT version are in the current Statements but is changed"}
 
@@ -377,6 +391,7 @@ class Formats:
             self.alldict["company"] = company
 
             return self.alldict
+
         except (ValueError, IndexError):
             return {"result": "SONY version are in the current Statements but is changed"}
 
@@ -740,13 +755,13 @@ class Formats:
             if "SUMMARY STATEMENT" == text[0]:
                 payee_account_number = self.findSplitedLine(pdf_text, "Payee: ")[8:-1]
                 statement_period = text[text.index("For the Period:") + 2]
-                royaliy = float(
+                royalty = float(
                     re.findall("([A-Za-z]\d+(,|)\d+\.\d{2}Balance( | )this( | )Period)", pdf_text)[0][0][1:-20].replace(
                         ",", ""))
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royaliy
+                self.alldict["royalty"] = royalty
                 return self.alldict
             elif text[1].startswith("Earnings") and "Acct" in text[0]:
                 payee_account_number = text[0].split(" ")[-1][:-1]
@@ -757,7 +772,7 @@ class Formats:
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royalties
+                self.alldict["royalty"] = royalties
                 self.alldict["original_currency"] = original_currency
                 return self.alldict
 
@@ -779,7 +794,7 @@ class Formats:
         self.alldict = self.BasicStatement(pdf_text, "CTM PUBLISHING BV", "CTM")
         pdf_text = pdf_To_text(self.pathFile, [0], True)
         royalties = float(self.findSplitedLine(pdf_text, "Statement Total").split(" ")[-1].replace(",", ""))
-        self.alldict["royaliy"] = royalties
+        self.alldict["royalty"] = royalties
         return self.alldict
 
     def BasicStatement(self, pdf_text, startwith, company):
@@ -798,7 +813,7 @@ class Formats:
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royalties
+                self.alldict["royalty"] = royalties
                 self.alldict["original_currency"] = original_currency
                 return self.alldict
             else:
@@ -815,13 +830,13 @@ class Formats:
                 details = re.findall("Gross Royalties Earned this Statement (.+) \n", pdf_text)[0].replace(",",
                                                                                                            "").replace(
                     " ", "")
-                royaliy = float(details[1:])
+                royalty = float(details[1:])
                 original_currency = details[0]
                 payee_account_number = re.findall("Payee:.+(\(\d+\))", pdf_text)[0][1:-1]
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royaliy
+                self.alldict["royalty"] = royalty
                 self.alldict["original_currency"] = original_currency
                 return self.alldict
             else:
@@ -851,7 +866,7 @@ class Formats:
                 statement_period = self.findSplitedLine(pdf_text, "Royalty Period: ")[17:]
 
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royalties
+                self.alldict["royalty"] = royalties
 
                 return self.alldict
             else:
@@ -866,11 +881,11 @@ class Formats:
                 payee_account_number = text[text.index(self.findSplitedLine(pdf_text, "Payee:")) + 2].split(" ")[-1][
                                        1:-2]
                 statement_period = text[text.index(self.findSplitedLine(pdf_text, "In Account with:")) + 2]
-                royaliy = float(text[text.index("TOTAL TRANSACTIONS") + 8].replace(",", ""))
+                royalty = float(text[text.index("TOTAL TRANSACTIONS") + 8].replace(",", ""))
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royaliy
+                self.alldict["royalty"] = royalty
                 return self.alldict
 
             elif text[0] == "Client Royalty Summary":
@@ -880,14 +895,14 @@ class Formats:
                 details = self.findSplitedLine(pdf_text, "TOTAL ROYALTIES")
                 original_currency = details[16]
                 if original_currency.isnumeric():
-                    royaliy = float(details[16:].replace(",", ""))
+                    royalty = float(details[16:].replace(",", ""))
                     original_currency = self.findSplitedLine(pdf_text, "BALANCE CARRIED FORWARD")[-3:]
                 else:
-                    royaliy = float(details[17:].replace(",", ""))
+                    royalty = float(details[17:].replace(",", ""))
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royaliy
+                self.alldict["royalty"] = royalty
                 self.alldict["original_currency"] = original_currency
 
                 return self.alldict
@@ -930,7 +945,7 @@ class Formats:
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royalty
+                self.alldict["royalty"] = royalty
                 self.alldict["original_currency"] = original_currency
 
                 return self.alldict
@@ -946,11 +961,11 @@ class Formats:
                 pdf_text = pdf_To_text(self.pathFile, [1])
                 payee_account_number = self.findSplitedLine(pdf_text, "Account:").split(" ")[-1][1:-1]
                 statement_period = self.findSplitedLine(pdf_text, "FOR PERIOD")[11:]
-                royaliy = float(self.findSplitedLine(pdf_text, "TOTAL ROYALTIES").split(" ")[-1].replace(",", ""))
+                royalty = float(self.findSplitedLine(pdf_text, "TOTAL ROYALTIES").split(" ")[-1].replace(",", ""))
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royaliy
+                self.alldict["royalty"] = royalty
                 self.alldict["original_currency"] = original_currency
                 return self.alldict
             else:
@@ -964,11 +979,11 @@ class Formats:
                 original_currency = self.rfindSplitedLine(pdf_text, "All amounts printed in ")[23:]
                 payee_account_number = self.findSplitedLine(pdf_text, "Account:").split(" ")[-1][1:-1]
                 statement_period = self.findSplitedLine(pdf_text, "FOR PERIOD")[11:]
-                royaliy = float(self.findSplitedLine(pdf_text, "TOTAL ROYALTIES").split(" ")[-1].replace(",", ""))
+                royalty = float(self.findSplitedLine(pdf_text, "TOTAL ROYALTIES").split(" ")[-1].replace(",", ""))
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royaliy
+                self.alldict["royalty"] = royalty
                 self.alldict["original_currency"] = original_currency
                 return self.alldict
             else:
@@ -986,11 +1001,11 @@ class Formats:
                 statement_period = text[detalils + 2]
                 pdf_text = pdf_To_text(self.pathFile, [1])
 
-                royaliy = float(self.findSplitedLine(pdf_text, "TOTAL TRANSACTIONS").split(" ")[-1].replace(",", ""))
+                royalty = float(self.findSplitedLine(pdf_text, "TOTAL TRANSACTIONS").split(" ")[-1].replace(",", ""))
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royaliy
+                self.alldict["royalty"] = royalty
                 self.alldict["client_account_number"] = client_account_number
                 return self.alldict
             else:
@@ -1011,7 +1026,7 @@ class Formats:
 
                 self.alldict["payee_account_number"] = payee_account_number
                 self.alldict["statement_period"] = statement_period
-                self.alldict["royaliy"] = royalties
+                self.alldict["royalty"] = royalties
                 self.alldict["distribution_date"] = distribution_date
                 self.alldict["original_currency"] = original_currency
 
