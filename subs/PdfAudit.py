@@ -1,4 +1,4 @@
-from subs.Pdf_To_Text import *
+from Pdf_To_Text import *
 import os
 import re
 import tabula
@@ -7,6 +7,7 @@ import math
 
 def pdfAudit(pathFile):
     pdf_text = pdf_To_textPypdf(pathFile, 0)
+
     if "T C F MUSIC PUBLISHING," in pdf_text:
         format = "FOX"
     else:
@@ -29,6 +30,7 @@ def pdfAudit(pathFile):
         pdf_text = pdf_To_text(pathFile, [0], True)
 
     dicts = Formats(pathFile)
+
     try:
         if format == "NONE":
             isSony = dicts.SONY(pdf_text)
@@ -36,7 +38,7 @@ def pdfAudit(pathFile):
                 return {"result": "Format not supported " + format}
             else:
                 return isSony
-
+        print(format)
         return getattr(dicts, format)(pdf_text)
     except AttributeError as e:
         return {"result": "Format not supported " + format}
@@ -1155,6 +1157,8 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = original_currency
 
+        return self.alldict
+
     def ULTRA(self, pdf_text):
         try:
             rows = pdf_text.split('\n')
@@ -1251,6 +1255,8 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
 
+        return self.alldict
+
     def BLUEWATERMUSIC(self, pdf_text):
 
         rows = pdf_text.split('\n')
@@ -1275,6 +1281,7 @@ class Formats:
         self.alldict['statement_period'] = period_start + ' - ' + period_end
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = original_currency
+
         return self.alldict
 
     def MOJO(self, pdf_text):
@@ -1297,6 +1304,7 @@ class Formats:
         self.alldict['statement_period'] = period_start + ' - ' + period_end
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = original_currency
+
         return self.alldict
 
     def WIXEN(self, pdf_text):
@@ -1354,6 +1362,8 @@ class Formats:
         self.alldict['statement_period'] = period_start + ' - ' + period_end
         self.alldict['royalty'] = royalties
 
+        return self.alldict
+
     def NOTTINGHILLMUSIC(self, pdf_text):
 
         rows = pdf_text.split('\n')
@@ -1378,6 +1388,7 @@ class Formats:
         self.alldict['statement_period'] = period_start + ' - ' + period_end
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = original_currency
+
         return self.alldict
 
     def BIGMACHINE(self, pdf_text):
@@ -1475,6 +1486,8 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
 
+        return self.alldict
+
     def CMRRA(self, pdf_text):
 
         rows = pdf_text.split('\n')
@@ -1499,6 +1512,8 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
 
+        return self.alldict
+
     def AVEX(self, pdf_text):
 
         pdf_text = pdf_To_text(path=self.pathFile, pages=[0, 1])
@@ -1517,6 +1532,8 @@ class Formats:
         self.alldict['statement_period'] = statement_period
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
+
+        return self.alldict
 
     def CONCORD(self, pdf_text):
 
@@ -1537,6 +1554,8 @@ class Formats:
         self.alldict['original_currency'] = currency
         self.alldict['payee_account_number'] = payee_account_number
 
+        return self.alldict
+
     def HEYDAY_MEDIA(self, pdf_text):
 
         rows = pdf_text.split('\n')
@@ -1552,6 +1571,8 @@ class Formats:
         self.alldict['statement_period'] = statement_period
         self.alldict['royalty'] = royalty
         self.alldict['original_currency'] = currency
+
+        return self.alldict
 
     def HAL_LEONARD(self, pdf_text):
 
@@ -1577,6 +1598,8 @@ class Formats:
         self.alldict['royalty'] = royalties
         self.alldict['payee_contract_id'] = payee_contract_id
 
+        return self.alldict
+
     def RALEIGH(self, pdf_text):
 
         rows = pdf_text.split('\n')
@@ -1593,6 +1616,8 @@ class Formats:
         self.alldict['statement_period'] = period_start + ' - ' + period_end
         self.alldict['royalty'] = royalties
         self.alldict['payee_account_number'] = payee_account_number
+
+        return self.alldict
 
     def WARNER_MUSIC(self, pdf_text):
 
@@ -1625,6 +1650,8 @@ class Formats:
         self.alldict['statement_period'] = period_start + ' - ' + period_end
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
+
+        return self.alldict
 
     def FUTURE_CLASSIC(self, pdf_text):
 
@@ -1673,6 +1700,8 @@ class Formats:
         self.alldict['statement_period'] = statement_period
         self.alldict['royalty'] = royalty
         self.alldict['original_currency'] = currency
+
+        return self.alldict
         
     def PPL(self, pdf_text):
 
@@ -1712,6 +1741,8 @@ class Formats:
         self.alldict['statement_period'] = statement_period
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
+
+        return self.alldict
 
     def findSplitedLine(self, source, text):
         detailsIndex = source.index(text)
