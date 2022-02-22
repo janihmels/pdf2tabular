@@ -1,4 +1,4 @@
-from Pdf_To_Text import *
+from subs.Pdf_To_Text import *
 import os
 import re
 import tabula
@@ -31,17 +31,17 @@ def pdfAudit(pathFile):
 
     dicts = Formats(pathFile)
 
-    try:
-        if format == "NONE":
-            isSony = dicts.SONY(pdf_text)
-            if "result" in isSony.keys():
-                return {"result": "Format not supported " + format}
-            else:
-                return isSony
+   # try:
+    if format == "NONE":
+        isSony = dicts.SONY(pdf_text)
+        if "result" in isSony.keys():
+            return {"result": "Format not supported " + format}
+        else:
+            return isSony
 
-        return getattr(dicts, format)(pdf_text)
-    except AttributeError as e:
-        return {"result": "Format not supported " + format}
+    return getattr(dicts, format)(pdf_text)
+    #except AttributeError as e:
+     #   return {"result": "Format not supported " + format}
 
 
 def FindFormat(pdf_text):
@@ -54,6 +54,7 @@ def FindFormat(pdf_text):
     formatdict["BMG Rights Management"] = "BMG"
     formatdict["www.mybmg.com"] = "BMG"
     formatdict["SUMMARY STATEMENTBMG Rights Management"] = "BMG"
+    formatdict["SUMMARY STATEMENTBMG Rights Management"] = "BMG"
     formatdict["Kobalt Music Services America Inc (KMSA)"] = "Kobalt"
     formatdict["Sony/ATV Music Publishing"] = "SONY"  # 8, 2, 10, 11
     formatdict["Sony Music Publishing LLC"] = "SONY"
@@ -109,9 +110,11 @@ def FindFormat(pdf_text):
     formatdict["Statement ContractFrom periodTo periodPayment"] = "WARNER_MUSIC"
     # formatdict[""] = "WELK_MUSIC"  # TODO (ALSO DO PARSING)
     formatdict["Future Classic"] = "FUTURE_CLASSIC"
+    formatdict["Future	Classic"] = "FUTURE_CLASSIC"
     # formatdict[""] = "PPCA"  # TODO (ALSO DO PARSING)
-    formatdict["BMG Rights Management"] = "BMG"
     formatdict["PPL costs"] = "PPL"
+    formatdict["Royalty Earnings from Hal Leonard Corporation"] = "Hal_Leonard"
+
 
     keylst = list(formatdict.keys())
 
@@ -1152,7 +1155,7 @@ class Formats:
                                                 'BALANCE CARRIED FORWARD' in rows[i]])]).group(0)
 
         self.alldict['payee_account_number'] = payee_account_number
-        self.allict['client_account_number'] = client_account_number
+        self.alldict['client_account_number'] = client_account_number
         self.alldict['statement_period'] = period_start + ' - ' + period_end
         self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = original_currency
@@ -1440,16 +1443,18 @@ class Formats:
             return {"result": "STOART version are in the current Statements but is changed"}
 
     def GVL(self, pdf_text):
-        try:
+      #  try:
             text = pdf_text.split("\n")
             if text[0] == "Howard Simon Bernstein":
-                details = re.findall("GVL-ID: (\d+) / Contract number: (\d+)",pdf_text)
+                details = re.findall("GVL-ID: (\d+) / Contract number: (\d+)",pdf_text)[0]
                 client_account_number = details[0]
                 payee_account_number = details[1]
                 statement_period = self.findSplitedLine(pdf_text, "Distribution").split(" ")[-1]
                 details = re.findall("Total amount \(rounded, please see note in glossary\) (\d+(\.|)\d+\,\d+) (.)",pdf_text)
-                royalties = details[0]
-                original_currency = details[1]
+                if details == []:
+                    details = re.findall("Subtotals and total amount (\d+(,|)\d{2}) (.)",pdf_text)
+                royalties = float(details[0][0].replace(",",""))
+                original_currency = details[0][2]
 
                 self.alldict['client_account_number'] = client_account_number
                 self.alldict['payee_account_number'] = payee_account_number
@@ -1458,10 +1463,10 @@ class Formats:
                 self.alldict['original_currency'] = original_currency
                 return self.alldict
             else:
-                return {"result": "STOART version not supported"}
+                return {"result": "GVL version not supported"}
 
-        except (ValueError, IndexError):
-            return {"result": "STOART version are in the current Statements but is changed"}
+        #except (ValueError, IndexError):
+        #    return {"result": "GVL version are in the current Statements but is changed"}
 
     def MUSHROOM_MUSIC(self, pdf_text):
 
@@ -1621,8 +1626,6 @@ class Formats:
 
     def WARNER_MUSIC(self, pdf_text):
 
-        pdf_text = pdf_To_text(path="../exempleAudit/Statement_78044_007_78044_527443_20190630.pdf", pages=[0])
-
         rows = pdf_text.split('\n')
         rows = [item.strip() for item in rows]
         rows = [item for item in rows if item != '']
@@ -1702,7 +1705,7 @@ class Formats:
         self.alldict['original_currency'] = currency
 
         return self.alldict
-        
+
     def PPL(self, pdf_text):
 
         rows = pdf_text.split('\n')

@@ -30,11 +30,12 @@ class Filesfunc:
 
         if pdf_type == "PRS":
             parser = PRSParser(pdf_filepath=src_fullfile)
-        elif pdf_type == "Wixen":
+        elif pdf_type == "WIXEN":
             parser = WixenParser(pdf_filepath=src_fullfile)
         elif pdf_type == "CMG":
             parser = CMGParser(pdf_filepath=src_fullfile)
         else:
+            print(pdf_type)
             # format wasn't found:
             return {"result": "format wasn't found"}
 
