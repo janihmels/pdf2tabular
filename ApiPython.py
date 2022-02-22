@@ -29,20 +29,20 @@ class Filesfunc:
         pdf_type = PdfIdentifier(filepath)
 
         if pdf_type == "PRS":
-            parser = PRSParser(pdf_filepath=src_fullfile)
+            parser = PRSParser(pdf_filepath=filepath)
         elif pdf_type == "WIXEN":
-            parser = WixenParser(pdf_filepath=src_fullfile)
+            parser = WixenParser(pdf_filepath=filepath)
         elif pdf_type == "CMG":
-            parser = CMGParser(pdf_filepath=src_fullfile)
+            parser = CMGParser(pdf_filepath=filepath)
         else:
             print(pdf_type)
             # format wasn't found:
             return {"result": "format wasn't found"}
 
         parser.parse()
-        parser.save_result(dst_fullfile)
+        parser.save_result(os.getcwd() + "\\Files\\xlss\\1.csv")
 
-        return {"result": "file successfully extracted to {0}".format(dst_fullfile)}
+        return {"Success": "file successfully extracted to {0}".format(filepath)}
 
     def Sql2Xlsx(self, filepath):
 
@@ -67,6 +67,7 @@ def upload_file1():
         f.close()
         funcs = Filesfunc()
         value = getattr(funcs, function)(os.getcwd() + "\\Files\\" + f.filename)
+
         return jsonify(value)
 
 

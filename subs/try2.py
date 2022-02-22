@@ -1,4 +1,3 @@
-'''
 from Pdf_To_Text import *
 from PdfAudit import pdfAudit
 import os
@@ -15,7 +14,7 @@ print(pdf_text)
 # print(text)
 
 
-
+'''
 #pdf_text = pdf_To_textPypdf(path, 0)
 
 df = tabula.read_pdf(path,pages=1, area = (0,410,800,539))
@@ -23,19 +22,3 @@ print(df)
 # area = (620.79874016,929.83181102,79.838740157,336.88818898))
     
 '''
-from Pdf_To_Text import pdf_To_text
-from PdfAudit import pdfAudit
-from PdfIdentification import PdfIdentifier
-import os
-
-path = "C:\\Users\\Gad\\Documents\\GitHub\\pdf2tabular\\exempleParsing"
-for root, dirs, files in os.walk(path):
-    for file in files:
-        if file[-4:].lower() == ".pdf" :
-
-            pathFile = os.path.join(root, file)
-            path1 = pathFile.split("\\")[7]
-            if pathFile.split("\\")[7] != "NotNow":
-                iden = PdfIdentifier(pathFile)
-                if iden != path1:
-                    print(path1,iden)

@@ -112,7 +112,7 @@ def PdfIdentifier(fullfile):
         res = CheckPdf(pdf_text, fullfile)
         return res
     except FileNotFoundError:
-        return "Error File Not Found!"
+        return "Error File Not Found! or Filename with spaces"
 
 '''
 
