@@ -1,4 +1,4 @@
-import MySQLdb  # IMPORTANT : pip3 install mysqlclient
+#import MySQLdb  # IMPORTANT : pip3 install mysqlclient
 import pandas as pd
 
 

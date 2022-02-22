@@ -11,15 +11,15 @@ import PyPDF2
 
 
 def pdf_To_textPypdf(path, pages):
-    #try:
+    try:
         pdfFileObj = open(path, 'rb')
         pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
         pageObj = pdfReader.getPage(pages)
         text = pageObj.extractText()
         pdfFileObj.close()
         return text
-    #except:
-    #    return "None"
+    except:
+        return "None"
 
 
 def pdf_To_text(path, pages, isLastpage=False):

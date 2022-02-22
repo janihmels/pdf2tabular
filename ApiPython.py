@@ -5,75 +5,51 @@ from subs.WixenParser import WixenParser
 from subs.PRSParser import PRSParser
 from subs.CMGParser import CMGParser
 from subs.sql2xlsx import sql2xlsx
+from werkzeug.utils import secure_filename
 
 import flask
 from flask import request, jsonify
-from flask_cors import cross_origin
+from flask_cors import cross_origin, CORS
 
 app = flask.Flask(__name__)
+cors = CORS(app)
 app.config["DEBUG"] = True
 app.config['UPLOAD_FOLDER'] = "Files"
 app.config['MAX_CONTENT_PATH'] = 4194304
 
-@app.route('/pdfAudit', methods=['POST'])
-@cross_origin()
-def PdfAudit():
-    try:
-        fullfile = os.listdir("Files")[0]
 
-        if page is None:
-            page = 0
+class Filesfunc:
+    def PdfAudit(self, filepath):
+        try:
+            return pdfAudit(filepath)
+        except FileNotFoundError:
+            return {"result": "Error File Not Found"}
+
+    def PdfParse(self, filepath):
+        pdf_type = PdfIdentifier(filepath)
+
+        if pdf_type == "PRS":
+            parser = PRSParser(pdf_filepath=src_fullfile)
+        elif pdf_type == "Wixen":
+            parser = WixenParser(pdf_filepath=src_fullfile)
+        elif pdf_type == "CMG":
+            parser = CMGParser(pdf_filepath=src_fullfile)
         else:
-            page = int(page)
+            # format wasn't found:
+            return {"result": "format wasn't found"}
 
-        return jsonify(pdfAudit(fullfile, page))
-    except FileNotFoundError:
-        return jsonify({"result": "Error File Not Found"})
+        parser.parse()
+        parser.save_result(dst_fullfile)
 
+        return {"result": "file successfully extracted to {0}".format(dst_fullfile)}
 
-@app.route('/pdfParse', methods=['POST'])
-@cross_origin()
-def PdfParse():
-    src_filename = request.form.get('src_filename')
-    src_filepath = request.form.get('src_filepath')
+    def Sql2Xlsx(self, filepath):
 
-    dst_filename = request.form.get('dst_filename')
-    dst_filepath = request.form.get('dst_filepath')
+        # dbname = request.form.get('dbname')
+        # queries = request.form.get('queries')                     =============================here=============================
+        # queries = eval(queries)
 
-    src_fullfile = str(src_filepath) + '/' + str(src_filename)
-    dst_fullfile = str(dst_filepath) + '/' + str(dst_filename)
-
-    pdf_type = PdfIdentifier(src_fullfile)
-
-    if pdf_type == "PRS":
-        parser = PRSParser(pdf_filepath=src_fullfile)
-    elif pdf_type == "Wixen":
-        parser = WixenParser(pdf_filepath=src_fullfile)
-    elif pdf_type == "CMG":
-        parser = CMGParser(pdf_filepath=src_fullfile)
-    else:
-        # format wasn't found:
-        return jsonify({"result": "Error File Not Found"})
-
-    parser.parse()
-    parser.save_result(dst_fullfile)
-
-    return jsonify({"result": "file successfully extracted to {0}".format(dst_fullfile)})
-
-
-@app.route('/sql2xlsx', methods=['POST'])
-@cross_origin()
-def SQL2XLSX():
-
-    dbname = request.form.get('dbname')
-    queries = request.form.get('queries')
-    queries = eval(queries)
-
-    dst_filename = request.form.get('dst_filename')
-    dst_filepath = request.form.get('dst_filepath')
-    dst_fullfile = str(dst_filepath) + '/' + str(dst_filename)
-
-    sql2xlsx(dbname=dbname, queries=queries, output_filename=dst_fullfile)
+        return sql2xlsx(dbname=dbname, queries=queries, output_filename=filepath)
 
 
 @app.route('/upload')
@@ -84,8 +60,13 @@ def upload_file():
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file1():
     if request.method == 'POST':
-        f = request.files['fileinput']
-        f.save(secure_filename(f.filename))
+        function = request.form.get("thefunction")
+        f = request.files["thefile"]
+        f.save("Files/" + secure_filename(f.filename))
+        f.close()
+        funcs = Filesfunc()
+        value = getattr(funcs, function)(os.getcwd() + "\\Files\\" + f.filename)
+        return jsonify(value)
 
 
 if __name__ == "__main__":
