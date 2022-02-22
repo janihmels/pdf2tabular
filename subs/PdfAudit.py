@@ -1241,8 +1241,9 @@ class Formats:
         rows = [item.strip() for item in rows]
         rows = [item for item in rows if item != '']
 
-        payee_account_number_row = rows[1]
-        payee_account_number = re.search("['(']([0-9]*)[')']", payee_account_number_row).group(0)[1:-1]
+
+        payee_account_number_row = rows[2]
+        payee_account_number = re.findall("\(([0-9]+)\)", payee_account_number_row)[0]
 
         period_row = rows[[i for i in range(len(rows)) if 'for period' in rows[i]][0]].split()
         period_start = period_row[-3]
