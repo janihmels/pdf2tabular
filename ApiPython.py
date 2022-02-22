@@ -12,16 +12,14 @@ from flask_cors import cross_origin
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-
+app.config['UPLOAD_FOLDER'] = "Files"
+app.config['MAX_CONTENT_PATH'] = 4194304
 
 @app.route('/pdfAudit', methods=['POST'])
 @cross_origin()
 def PdfAudit():
     try:
-        filename = request.form.get('filename')
-        filepath = request.form.get('path')
-        page = request.form.get('page')
-        fullfile = str(filepath) + "/" + str(filename)
+        fullfile = os.listdir("Files")[0]
 
         if page is None:
             page = 0
@@ -76,6 +74,18 @@ def SQL2XLSX():
     dst_fullfile = str(dst_filepath) + '/' + str(dst_filename)
 
     sql2xlsx(dbname=dbname, queries=queries, output_filename=dst_fullfile)
+
+
+@app.route('/upload')
+def upload_file():
+    return render_template('main.html')
+
+
+@app.route('/uploader', methods=['GET', 'POST'])
+def upload_file1():
+    if request.method == 'POST':
+        f = request.files['fileinput']
+        f.save(secure_filename(f.filename))
 
 
 if __name__ == "__main__":
