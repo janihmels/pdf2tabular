@@ -48,17 +48,17 @@ def FindFormat(pdf_text):
     formatdict["BMI's Next Distribution Will Occur During: Moving? Visit bmi.com to change your address"] = "BMI"
     formatdict["American Society of Composers, Authors and Publishers"] = "ASCAP"
     formatdict["PRS"] = "PRS"  # 0,2
-    formatdict["SoundExchange"] = "SoundExchange"
+    formatdict["SoundExchange"] = "SOUNDEXCHANGE"
     formatdict["BMG Rights Management"] = "BMG"
     formatdict["www.mybmg.com"] = "BMG"
-    formatdict["SUMMARY STATEMENTBMG Rights Management"] = "BMG"
+    formatdict["SUMMARY STATEMENTBMG Rights Management"] = "BMG"
     formatdict["Kobalt Music Services America Inc (KMSA)"] = "Kobalt"
-    formatdict["Sony/ATV Music Publishing"] = "Sony"  # 8, 2, 10, 11
-    formatdict["Sony Music Publishing LLC"] = "Sony"
+    formatdict["Sony/ATV Music Publishing"] = "SONY"  # 8, 2, 10, 11
+    formatdict["Sony Music Publishing LLC"] = "SONY"
     formatdict["UNIVERSAL MUSIC PUBL. LTD."] = "UNIVERSAL"
     formatdict["WarnerChappell.com"] = "WARNERCHAPPELL"  # 0,1
     formatdict["WB MUSIC CORP"] = "WARNERCHAPPELL"  # 0,1
-    formatdict["Koda"] = "Koda"
+    formatdict["Koda"] = "KODA"
     formatdict["AMRA"] = "AMRA"
     formatdict["Mechanical-Copyright Protection Society"] = "MCPS"
     formatdict["Howe Sound Music Publishing, LLC"] = "HOWE"
@@ -102,10 +102,14 @@ def FindFormat(pdf_text):
     formatdict["avex music publishing"] = "AVEX"
     formatdict["pubroyalty@concord.com"] = "concord"
     formatdict["Yes Dear Music"] = "HEYDAY_MEDIA"
-    formatdict[""] = "RALEIGH"
+    formatdict["heydaymediagroup"] = "HEYDAY_MEDIA"
+    formatdict["Raleigh Music"] = "RALEIGH"
     formatdict[""] = "WARNER_MUSIC"
+    # formatdict[""] = "WELK_MUSIC"  # TODO (ALSO DO PARSING)
     formatdict["Future Classic"] = "FUTURE_CLASSIC"
-
+    # formatdict[""] = "PPCA"  # TODO (ALSO DO PARSING)
+    formatdict["BMG Rights Management"] = "BMG"
+    formatdict["PPL costs"] = "PPL"
 
     keylst = list(formatdict.keys())
 
@@ -1668,6 +1672,45 @@ class Formats:
         self.alldict['payee_account_number'] = payee_account_number
         self.alldict['statement_period'] = statement_period
         self.alldict['royalty'] = royalty
+        self.alldict['original_currency'] = currency
+        
+    def PPL(self, pdf_text):
+
+        rows = pdf_text.split('\n')
+
+        rows = [item.strip() for item in rows]
+        rows = [item for item in rows if item != '']
+
+        try:
+            payee_account_number = rows[rows.index('Member ID:') + 1]
+        except ValueError:
+            payee_account_number = rows[min([i for i in range(len(rows)) if 'Member ID:' in rows[i]])].split(':')[1].strip()
+
+        statement_period = ' '.join(rows[min([i for i in range(len(rows)) if 'Payment' in rows[i]])].split()[1:3])
+
+        # -- second page parsing
+
+        royalty_extracted = False
+
+        try:
+            royalties = rows[max([i for i in range(len(rows)) if 'Amount:' in rows[i]])].split(':')[1].strip()[1:]
+            royalty_extracted = True
+            currency = rows[max([i for i in range(len(rows)) if 'Currency:' in rows[i]])].split(':')[1].strip()
+        except ValueError:
+            pdf_text = pdf_To_text(path=self.pathFile, pages=[1])
+            rows = pdf_text.split('\n')
+
+            rows = [item.strip() for item in rows]
+            rows = [item for item in rows if item != '']
+
+            if not royalty_extracted:
+                royalties = rows[max([i for i in range(len(rows)) if 'Amount:' in rows[i]])].split(':')[1].strip()[1:]
+
+            currency = rows[max([i for i in range(len(rows)) if 'Currency:' in rows[i]])].split(':')[1].strip()
+
+        self.alldict['payee_account_number'] = payee_account_number
+        self.alldict['statement_period'] = statement_period
+        self.alldict['royalty'] = royalties
         self.alldict['original_currency'] = currency
 
     def findSplitedLine(self, source, text):
