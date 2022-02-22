@@ -58,7 +58,7 @@ def PdfParse():
     parser.parse()
     parser.save_result(dst_fullfile)
 
-    return jsonify({"result": "file successfully extracted to {0}".format(dst_fullfile)})
+    return jsonify({"result": "file was successfully extracted to {0}".format(dst_fullfile)})
 
 
 @app.route('/sql2xlsx', methods=['POST'])
@@ -75,6 +75,7 @@ def SQL2XLSX():
 
     sql2xlsx(dbname=dbname, queries=queries, output_filename=dst_fullfile)
 
+<<<<<<< HEAD
 
 @app.route('/upload')
 def upload_file():
@@ -88,5 +89,9 @@ def upload_file1():
         f.save(secure_filename(f.filename))
 
 
+=======
+    return jsonify({"result": "queries were successfully extracted to {0}".format(dst_fullfile)})
+    
+>>>>>>> 234cb45cd19dda12ecf776218c7f0681535d1b87
 if __name__ == "__main__":
     app.run(port=5100)
