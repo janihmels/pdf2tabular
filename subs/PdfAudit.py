@@ -14,11 +14,11 @@ def pdfAudit(pathFile):
         pdf_text = pdf_To_text(pathFile, [1], False)
         if "WarnerChappell.com" in pdf_text or "WB MUSIC CORP" in pdf_text:
             format = "WARNERCHAPPELL"
-        elif "PRS" in pdf_text:
+        elif "Please note that the PRS Account" in pdf_text:
             format = "PRS"
         else:
             pdf_text = pdf_To_text(pathFile, [2], False)
-            if "PRS" in pdf_text:
+            if "Please note that the PRS Account" in pdf_text:
                 format = "PRS"
             else:
                 pdf_text = pdf_To_text(pathFile, [0], False)
@@ -38,7 +38,7 @@ def pdfAudit(pathFile):
                 return {"result": "Format not supported " + format}
             else:
                 return isSony
-        print(format)
+
         return getattr(dicts, format)(pdf_text)
     except AttributeError as e:
         return {"result": "Format not supported " + format}
@@ -49,7 +49,7 @@ def FindFormat(pdf_text):
 
     formatdict["BMI's Next Distribution Will Occur During: Moving? Visit bmi.com to change your address"] = "BMI"
     formatdict["American Society of Composers, Authors and Publishers"] = "ASCAP"
-    formatdict["PRS"] = "PRS"  # 0,2
+    formatdict["Please note that the PRS Account"] = "PRS"  # 0
     formatdict["SoundExchange"] = "SOUNDEXCHANGE"
     formatdict["BMG Rights Management"] = "BMG"
     formatdict["www.mybmg.com"] = "BMG"
@@ -88,7 +88,7 @@ def FindFormat(pdf_text):
     formatdict["ole Media Management L.P."] = "REDONE"
     formatdict["Ultra Music Publishing Europe AG"] = "Ultra"
     formatdict["PULSE PUBLISHING ADMINISTRATION, LLC"] = "PULSE"
-    formatdict["CONCORD MUSIC PUBLISHING"] = "PULSE"
+    #    formatdict["CONCORD MUSIC PUBLISHING"] = "PULSE"
     formatdict["Prior Period Balance Brought Forward"] = "BLUEWATERMUSIC"
     formatdict["carrie@horipro.com"] = "MOJO"
     formatdict["carrie@mojomusicandmedia.com"] = "MOJO"
@@ -1443,11 +1443,11 @@ class Formats:
         try:
             text = pdf_text.split("\n")
             if text[0] == "Howard Simon Bernstein":
-                details = re.findall("GVL-ID: (\d+) / Contract number: (\d+)")
+                details = re.findall("GVL-ID: (\d+) / Contract number: (\d+)",pdf_text)
                 client_account_number = details[0]
                 payee_account_number = details[1]
                 statement_period = self.findSplitedLine(pdf_text, "Distribution").split(" ")[-1]
-                details = re.findall("Total amount \(rounded, please see note in glossary\) (\d+(\.|)\d+\,\d+) (.)")
+                details = re.findall("Total amount \(rounded, please see note in glossary\) (\d+(\.|)\d+\,\d+) (.)",pdf_text)
                 royalties = details[0]
                 original_currency = details[1]
 

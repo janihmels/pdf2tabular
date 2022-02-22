@@ -10,8 +10,8 @@ pdf_text = pdf_To_text(path, [0])
 
 print(pdf_text)
 
-#text = pdf_To_textPypdf(path,0)
-#print(text)
+# text = pdf_To_textPypdf(path,0)
+# print(text)
 
 
 '''
