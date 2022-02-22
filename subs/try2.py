@@ -5,13 +5,13 @@ import tabula
 import math
 import re
 
-path = "C:\\Users\\Gad\\Documents\\GitHub\\pdf2tabular\\exempleAudit\\Newlyannotated\\SESAC\\Annotated\\Jacob Lee Sooter - SESAC - 483800 - 2Q2020.pdf"
-#pdf_text = pdf_To_text(path, [0])
+path = "C:\\Users\\Gad\\Documents\\GitHub\\pdf2tabular\\exempleAudit\\Newlyannotated\\WarnerMusic\\Annotated\\Statement_5473_009_1183_527443_20170630.pdf"
+pdf_text = pdf_To_text(path, [0])
 
-#print(pdf_text)
+print(pdf_text)
 
-text = pdf_To_textPypdf(path,0)
-print(text)
+#text = pdf_To_textPypdf(path,0)
+#print(text)
 
 
 '''

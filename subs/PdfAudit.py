@@ -106,7 +106,7 @@ def FindFormat(pdf_text):
     formatdict["Yes Dear Music"] = "HEYDAY_MEDIA"
     formatdict["heydaymediagroup"] = "HEYDAY_MEDIA"
     formatdict["Raleigh Music"] = "RALEIGH"
-    formatdict[""] = "WARNER_MUSIC"
+    formatdict["Statement ContractFrom periodTo periodPayment"] = "WARNER_MUSIC"
     # formatdict[""] = "WELK_MUSIC"  # TODO (ALSO DO PARSING)
     formatdict["Future Classic"] = "FUTURE_CLASSIC"
     # formatdict[""] = "PPCA"  # TODO (ALSO DO PARSING)
