@@ -55,7 +55,7 @@ class Filesfunc:
 
 @app.route('/upload')
 def upload_file():
-    return render_template('main.html')
+    return render_template('index.html')
 
 
 @app.route('/uploader', methods=['GET', 'POST'])
