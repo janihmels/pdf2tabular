@@ -70,6 +70,29 @@ def upload_file1():
 
         return jsonify(value)
 
+@app.route('/parse', methods=['POST'])
+def parse():
+    path_pdf = request.form.get('path_pdf')
+    path_csv= request.form.get('path_csv')
+
+    pdf_type = PdfIdentifier(path_pdf)
+
+    print("-------")
+    print(path_pdf)
+    print(pdf_type)
+
+    if pdf_type == "PRS":
+        parser = PRSParser(pdf_filepath=path_pdf)
+    elif pdf_type == "WIXEN":
+        parser = WixenParser(pdf_filepath=path_pdf)
+    elif pdf_type == "CMG":
+        parser = CMGParser(pdf_filepath=path_pdf)
+    else:
+        return jsonify({"Type": "not found"})
+
+    parser.parse()
+    parser.save_result(path_csv)
+    return jsonify({"Type": pdf_type})
 
 if __name__ == "__main__":
     app.run(port=5100)
