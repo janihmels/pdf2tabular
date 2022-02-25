@@ -1,6 +1,7 @@
 import tabula
 import pandas as pd
 import PyPDF2
+import re
 
 
 class WixenParser:
@@ -46,7 +47,7 @@ class WixenParser:
             if [name for name in page.columns] == parsing_page_column_names:
                 self.pages_to_parse.append(page.iloc[1:].reset_index(drop=True))
             else:
-                if 'Unnamed: 5' in page.columns and page['Unnamed: 5'][0] == 'Page: 1':
+                if 'Page: 1' in [s.strip() for s in page.iloc[:, -1] if type(s) is str]:
 
                     if not saw_page_1:
                         saw_page_1 = True
@@ -87,6 +88,13 @@ class WixenParser:
                                                                           curr_territory)
 
         self.result = pd.concat(self.parsed_pages, ignore_index=True)
+
+        # -- finalize --
+
+        hypens = ['-' * j for j in range(2, 20)]
+
+        if self.result.iloc[-1]['Share'] in hypens:
+            self.result = self.result[:-1]
 
     def parse_page(self, page_df, curr_song_name, curr_artist, curr_territory):
         """
@@ -130,11 +138,29 @@ class WixenParser:
 
         # ----- cleaning the page's dataframe ----- :
 
-        i = 0
         rows_to_remove = []
+        remove_next_row = False
+
+        if not pd.isna(page_df.iloc[0]['Amount']):
+            rows_to_remove.append(0)
 
         for i in range(0, len(page_df)):
-            if pd.isna(page_df['Unnamed: 0'][i]):
+            if type(page_df['Amount'][i]) is str and \
+                    page_df['Amount'][i].strip() in (['-' * i for i in range(0, 25)] + ['Due']):
+
+                # it's a row that come before/after some total some row, or an unnecessary row
+                rows_to_remove += [i]
+
+            if 0 < i < len(page_df) - 1 and \
+                    (type(page_df['Amount'][i-1]) is str and \
+                     page_df['Amount'][i-1].strip() in (['-' * j for j in range(25)] + ['=' * j for j in range(25)])) and \
+                    (type(page_df['Amount'][i+1]) is str and \
+                     page_df['Amount'][i+1].strip() in (['-' * j for j in range(25)] + ['=' * j for j in range(25)])):
+
+                # it's a total sum row
+                rows_to_remove += [i]
+
+            if sum([pd.isna(l) for l in page_df.iloc[i]]) >= 7 and (not pd.isna(page_df.iloc[i]['Amount'])):
                 rows_to_remove += [i]
 
         page_df = page_df.drop(rows_to_remove, axis=0).reset_index(drop=True)
@@ -161,98 +187,102 @@ class WixenParser:
 
         curr_block_is_open = False
 
-        for i in range(0, len(page_df)):
+        try:
+            for i in range(0, len(page_df)):
 
-            # reminder : header_cnt is the amount of rows before this one whom 'Amt Rcvd/Price Your' column was empty
+                # reminder : header_cnt is the amount of rows before this one whom 'Amt Rcvd/Price Your' column was empty
 
-            if is_header_line(page_df.iloc[i]):
-                # curr line is a header:
+                if is_header_line(page_df.iloc[i]):
+                    # curr line is a header:
 
-                if header_cnt == 0 and i != 0:
-                    # we've just finished to move over a new block
-                    blocks.append(Block(block_df=page_df.iloc[curr_block_start_idx: i].reset_index(drop=True),
-                                        song_name=curr_song_name,
-                                        artist=curr_artist,
-                                        territory=curr_territory))
+                    if header_cnt == 0 and i != 0:
+                        # we've just finished to move over a new block
+                        blocks.append(Block(block_df=page_df.iloc[curr_block_start_idx: i].reset_index(drop=True),
+                                            song_name=curr_song_name,
+                                            artist=curr_artist,
+                                            territory=curr_territory))
 
-                    curr_block_is_open = False
+                        curr_block_is_open = False
 
-                # updating the header counter
-                header_cnt += 1
-            else:
-                # curr line is a data line and not a header one:
-                if header_cnt > 0:
-                    # we've reached a new block:
-
-                    # updating metadata
-                    if header_cnt >= 1:
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 1]
-                    if header_cnt >= 2:
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
-                                      page_df['Unnamed: 1'].fillna('')[i - 2] + \
-                                      page_df['Unnamed: 2'].fillna('')[i - 2]
-                    if header_cnt >= 3:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 3] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 3] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 3]
-
-                    if header_cnt == 4:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 4] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 4] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 4]
-
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 3] + \
-                                      page_df['Unnamed: 1'].fillna('')[i - 3] + \
-                                      page_df['Unnamed: 2'].fillna('')[i - 3]
-
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 1]
-
-                    if header_cnt == 5:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 5] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 5] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 5]
-
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
-                                      page_df['Unnamed: 1'].fillna('')[i - 2] + \
-                                      page_df['Unnamed: 2'].fillna('')[i - 2]
-
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 1]
-
-                    if header_cnt >= 6:
-                        curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 3] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 3] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 3]
-
-                        curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
-                                      page_df['Unnamed: 1'].fillna('')[i - 2] + \
-                                      page_df['Unnamed: 2'].fillna('')[i - 2]
-
-                        curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 1'].fillna('')[i - 1] + \
-                                         page_df['Unnamed: 2'].fillna('')[i - 1]
-
-                    # declaring a new starting of a block
-                    curr_block_start_idx = i
-                    curr_block_is_open = True
-
-                    # resetting the header counter
-                    header_cnt = 0
-
+                    # updating the header counter
+                    header_cnt += 1
                 else:
-                    # we're just inside some block
-                    pass
+                    # curr line is a data line and not a header one:
+                    if header_cnt > 0:
+                        # we've reached a new block:
 
-        if curr_block_is_open:
-            blocks.append(Block(block_df=page_df.iloc[curr_block_start_idx: len(page_df)].reset_index(drop=True),
-                                song_name=curr_song_name,
-                                artist=curr_artist,
-                                territory=curr_territory))
+                        # updating metadata
+                        if header_cnt >= 1:
+                            curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 1]
+                        if header_cnt >= 2:
+                            curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
+                                          page_df['Unnamed: 1'].fillna('')[i - 2] + \
+                                          page_df['Unnamed: 2'].fillna('')[i - 2]
+                        if header_cnt >= 3:
+                            curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 3] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 3] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 3]
+
+                        if header_cnt == 4:
+                            curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 4] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 4] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 4]
+
+                            curr_artist = page_df['Unnamed: 0'].fillna('')[i - 3] + \
+                                          page_df['Unnamed: 1'].fillna('')[i - 3] + \
+                                          page_df['Unnamed: 2'].fillna('')[i - 3]
+
+                            curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 1]
+
+                        if header_cnt == 5:
+                            curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 5] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 5] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 5]
+
+                            curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
+                                          page_df['Unnamed: 1'].fillna('')[i - 2] + \
+                                          page_df['Unnamed: 2'].fillna('')[i - 2]
+
+                            curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 1]
+
+                        if header_cnt >= 6:
+                            curr_song_name = page_df['Unnamed: 0'].fillna('')[i - 3] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 3] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 3]
+
+                            curr_artist = page_df['Unnamed: 0'].fillna('')[i - 2] + \
+                                          page_df['Unnamed: 1'].fillna('')[i - 2] + \
+                                          page_df['Unnamed: 2'].fillna('')[i - 2]
+
+                            curr_territory = page_df['Unnamed: 0'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 1'].fillna('')[i - 1] + \
+                                             page_df['Unnamed: 2'].fillna('')[i - 1]
+
+                        # declaring a new starting of a block
+                        curr_block_start_idx = i
+                        curr_block_is_open = True
+
+                        # resetting the header counter
+                        header_cnt = 0
+
+                    else:
+                        # we're just inside some block
+                        pass
+
+            if curr_block_is_open:
+                blocks.append(Block(block_df=page_df.iloc[curr_block_start_idx: len(page_df)].reset_index(drop=True),
+                                    song_name=curr_song_name,
+                                    artist=curr_artist,
+                                    territory=curr_territory))
+        except UnboundLocalError:
+            # it's some of the last pages, which we don't need to parse
+            pass
 
         return blocks, curr_song_name, curr_artist, curr_territory
 
@@ -276,14 +306,12 @@ class WixenParser:
                                        'Share',
                                        'Amount'])
 
-        block.df.to_csv('last_block.csv')
-
         curr_usage = None
 
         for i in range(0, len(block.df)):
             line = block.df.iloc[i]
 
-            if ~pd.isna(line['Unnamed: 0']):
+            if not pd.isna(line['Unnamed: 0']):
                 curr_usage = line['Unnamed: 0']
 
             A = line['Unnamed: 1']
@@ -295,6 +323,10 @@ class WixenParser:
             price = line['Amt Rcvd/Price']
             share = line['Your']
             amount = line['Amount']
+
+            if len(period.split('-')) == 1:
+                # we are in some of the last blocks at the file and this line is not necessary, we stop parsing here
+                break
 
             line_df = pd.DataFrame({'Song Name': [block.song_name],
                                     'Artist': [block.artist],
