@@ -164,7 +164,6 @@ class WixenParser:
         # ----- cleaning the page's dataframe ----- :
 
         rows_to_remove = []
-        remove_next_row = False
 
         if not pd.isna(page_df.iloc[0]['Amount']):
             rows_to_remove.append(0)
@@ -186,6 +185,10 @@ class WixenParser:
                 rows_to_remove += [i]
 
             if sum([pd.isna(l) for l in page_df.iloc[i]]) >= 7 and (not pd.isna(page_df.iloc[i]['Amount'])):
+                rows_to_remove += [i]
+
+            if [name for name in page_df.columns if (not pd.isna(page_df.iloc[i][name]))] == ['Amt Rcvd/Price', 'Amount']:
+                # it's a sub total row that wasn't removed
                 rows_to_remove += [i]
 
         page_df = page_df.drop(rows_to_remove, axis=0).reset_index(drop=True)
@@ -319,7 +322,7 @@ class WixenParser:
         """
 
         result = pd.DataFrame(columns=['Song Name',
-                                       'Artist',
+                                       'C',
                                        'Territory',
                                        'Usage',
                                        'A',
@@ -354,7 +357,7 @@ class WixenParser:
                 break
 
             line_df = pd.DataFrame({'Song Name': [block.song_name],
-                                    'Artist': [block.artist],
+                                    'C': [block.artist],
                                     'Territory': [block.territory],
                                     'Usage': [curr_usage],
                                     'A': [A],

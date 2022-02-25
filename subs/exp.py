@@ -1,13 +1,23 @@
 
-import re
+from WixenParser import WixenParser
 import os
 
-rxcountpages = re.compile(r"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
+if __name__ == "__main__":
 
-def count_pages(filename):
-    data = open(filename, "rb").read()
-    return len(rxcountpages.findall(data))
+    pdfs_folder = '../Jeremy R Wixen PDFs'
+    csvs_folder = '../csvs'
 
-if __name__=="__main__":
-    filename = '../exempleParsing/PRS/2016/Essex David_070172307_2016041_052_089780_26722.PDF'
-    print(count_pages(filename))
+    for filename in os.listdir(pdfs_folder):
+
+        if filename.endswith('.pdf'):
+
+            input_file = f'{pdfs_folder}/{filename}'
+            output_file = f"{csvs_folder}/{filename.split('.')[0] + '.csv'}"
+
+            print(f"Parsing {input_file}")
+
+            parser = WixenParser(pdf_filepath=input_file)
+            parser.parse()
+            parser.save_result(output_filepath=output_file)
+
+            print(f"Parsed {input_file} to {output_file}")
