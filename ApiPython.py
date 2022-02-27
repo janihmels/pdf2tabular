@@ -42,7 +42,8 @@ class Filesfunc:
         parser.parse()
         parser.save_result(os.getcwd() + "\\Files\\xlss\\1.csv")
 
-        return {"Success": "file successfully extracted to {0}".format(filepath)}
+        return {"Success": flask.url_for("static",filename=os.getcwd()+"\\Files\\xlss\\Thefile.csv",_external=True) }
+
 
     def Sql2Xlsx(self, filepath):
 
@@ -67,7 +68,6 @@ def upload_file1():
         f.close()
         funcs = Filesfunc()
         value = getattr(funcs, function)(os.getcwd() + "\\Files\\" + f.filename)
-
         return jsonify(value)
 
 @app.route('/parse', methods=['POST'])
