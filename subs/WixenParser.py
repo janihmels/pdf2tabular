@@ -129,7 +129,6 @@ class WixenParser:
                                                                           curr_song_name=curr_song_name,
                                                                           curr_artist=curr_artist,
                                                                           curr_territory=curr_territory)
-            print(i)
 
         # -- extra care for the last page --
 
