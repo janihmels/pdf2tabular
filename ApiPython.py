@@ -79,7 +79,7 @@ def upload_file1():
 @app.route('/parse', methods=['POST'])
 def parse():
     path_pdf = request.form.get('path_pdf')
-    path_csv = ' '.join(path_pdf.split()[:-1]) + '.pdf'
+    path_csv = '.'.join(path_pdf.split('.')[:-1]) + '.pdf'
 
     pdf_type = PdfIdentifier(path_pdf)
 
