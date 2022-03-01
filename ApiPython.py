@@ -1,3 +1,5 @@
+
+
 from subs.PdfIdentification import CheckPdf, PdfIdentifier
 from subs.Pdf_To_Text import pdf_To_text
 from subs.PdfAudit import *
@@ -6,6 +8,9 @@ from subs.PRSParser import PRSParser
 from subs.CMGParser import CMGParser
 from subs.sql2xlsx import sql2xlsx
 from werkzeug.utils import secure_filename
+from subs.names_classifier.model import NamesClassifier
+import torch
+from transformers import logging
 
 import flask
 from flask import request, jsonify
@@ -70,6 +75,7 @@ def upload_file1():
         value = getattr(funcs, function)(os.getcwd() + "\\Files\\" + f.filename)
         return jsonify(value)
 
+
 @app.route('/parse', methods=['POST'])
 def parse():
     path_pdf = request.form.get('path_pdf')
@@ -94,5 +100,19 @@ def parse():
     parser.save_result(path_csv)
     return jsonify({"Type": pdf_type})
 
+
+@app.route('/classify_name', methods=['POST'])
+def classify():
+    name = request.form.get('name')
+
+    return jsonify({"is title": model.classify(name)})
+
+
 if __name__ == "__main__":
+
+    logging.set_verbosity_error()
+    model = NamesClassifier()
+    model.load_state_dict(torch.load('./subs/names_classifier/best_model.pth'))
+
     app.run(port=5100)
+
