@@ -77,12 +77,13 @@ class WixenParser:
                         self.contract_to_pages[contract_id].append(i)
                 i += 1
 
-        contracts_ids_dfs = tabula.read_pdf('../Jeremy R Wixen PDFs/ruzumna wixen q1 2021.pdf',
+        contracts_ids_dfs = tabula.read_pdf(self.pdf_filepath,
                                             pages='all',
                                             area=(74.88, 28.08, 195.84, 557.28),
                                             columns=(43.92, 108.72, 214.56, 249.12, 299.52, 418.32, 458.64, 578.16))
 
-        contracts_ids = [df.columns[2].split()[0].strip()[1:-1] for df in contracts_ids_dfs]
+        contracts_ids = [[item.strip() for item in df.columns[2].split()] for df in contracts_ids_dfs]
+        contracts_ids = [splitted_string[min([i for i in range(len(splitted_string)) if '(' in splitted_string[i]] + [len(splitted_string)-1])][1:-1] for splitted_string in contracts_ids]
 
         pages = tabula.read_pdf(self.pdf_filepath,
                                 pages='all',
