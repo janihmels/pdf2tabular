@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
     logging.set_verbosity_error()
     model = NamesClassifier()
-    model.load_state_dict(torch.load('./subs/names_classifier/best_model.pth'))
+    model.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
 
     app.run(port=5100)
 
