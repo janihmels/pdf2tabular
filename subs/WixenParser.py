@@ -112,8 +112,11 @@ class WixenParser:
         # else:
 
         for contract_id, df in self.result.items():
-            df.to_csv('.'.join(output_filepath.split('.')[:-1]) + f'_{contract_id}.' + output_filepath.split('.')[-1],
+            curr_contract_path = '.'.join(output_filepath.split('.')[:-1]) + f'_{contract_id}.' + output_filepath.split('.')[-1]
+            df.to_csv(curr_contract_path,
                       index=False)
+
+            print(f"Parsed contract # {contract_id} details to {curr_contract_path}")
 
     def parse(self):
 
