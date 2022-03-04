@@ -101,11 +101,12 @@ def parse():
     return jsonify({"Type": pdf_type})
 
 
-@app.route('/classify_name', methods=['POST'])
+@app.route('/classify_names', methods=['POST'])
 def classify():
-    name = request.form.get('name')
+    names = request.form.get('names')
+    names = [n.strip() for n in names.split(',')]
 
-    return jsonify({"is title": model.classify(name)})
+    return jsonify({name: model.classify(name) for name in names})
 
 
 if __name__ == "__main__":
