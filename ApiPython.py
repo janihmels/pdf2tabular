@@ -104,7 +104,7 @@ def parse():
 @app.route('/classify_names', methods=['POST'])
 def classify():
     names = request.form.get('names')
-    names = [n.strip() for n in names.split(',')]
+    names = json.loads(s=names)
 
     return jsonify({name: model.classify(name) for name in names})
 
