@@ -12,6 +12,8 @@ from subs.names_classifier.model import NamesClassifier
 import torch
 from transformers import logging
 import json
+from subs.source_classifier.model import SourceClassifier
+import pickle
 
 import flask
 from flask import request, jsonify
@@ -102,19 +104,32 @@ def parse():
     return jsonify({"Type": pdf_type})
 
 
+
 @app.route('/classify_names', methods=['POST'])
-def classify():
+def classify_name():
     names = request.form.get('names')
     names = json.loads(s=names)
 
-    return jsonify({name: model.classify(name) for name in names})
+    return jsonify({name: title_classifier.classify(name) for name in names})
+
+
+@app.route('/classify_sources', methods=['POST'])
+def classify_source():
+    names = request.form.get('sources')
+    names = json.loads(s=names)
+
+    return jsonify({name: source_classifier.classify(name) for name in names})
 
 
 if __name__ == "__main__":
-
     logging.set_verbosity_error()
-    model = NamesClassifier()
-    model.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
+    title_classifier = NamesClassifier()
+    title_classifier.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
+
+    label_to_source_map = pickle.load(open('subs/source_classifier/label_to_name_mapper.pkl', 'rb'))
+    source_classifier = SourceClassifier(num_cls=len(label_to_source_map.values()), label_to_name=label_to_source_map)
+    source_classifier.load_state_dict(torch.load('./subs/source_classifier/best_model.pth', map_location=torch.device('cpu')))
 
     app.run(port=5100)
+
 
