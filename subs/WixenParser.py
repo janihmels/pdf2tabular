@@ -1,7 +1,7 @@
 import tabula
 import pandas as pd
 import PyPDF2
-import re
+from collections import defaultdict
 
 
 class WixenParser:
@@ -14,19 +14,19 @@ class WixenParser:
         read_pdf = PyPDF2.PdfFileReader(pdf_file)
         self.num_pages = read_pdf.getNumPages()
 
-        self.pages_to_parse = None
+        self.contract_to_pages = defaultdict(lambda: [])
+        self.pages_to_parse = []
         self.init_pages_to_parse()
 
         self.parsed_pages = []
-
-        self.result = None
+        self.result = {}
 
     def init_pages_to_parse(self):
         """
-        sacns the document and initializes the fields start_page, end_page, and pages_to_parse.
+        scans the document and initializes the fields start_page, end_page, and pages_to_parse.
         """
 
-        def scan(pages):
+        def scan(pages, contracts_ids):
             parsing_page_column_names = ['Unnamed: 0',
                                          'Unnamed: 1',
                                          'Unnamed: 2',
@@ -40,22 +40,27 @@ class WixenParser:
             parsing_page_column_names_1[5] = 'A mt Rcvd/Price'
 
             saw_page_1 = False
+            i = 0
 
-            for page in pages:
+            for page, contract_id in zip(pages, contracts_ids):
 
                 if [name for name in page.columns] == parsing_page_column_names:
-                    self.pages_to_parse.append(page.iloc[1:].reset_index(drop=True))
+                    final_page = page.iloc[1:].reset_index(drop=True)
+                    self.pages_to_parse.append((i, final_page))
+                    self.contract_to_pages[contract_id] += [i]
 
                 elif [name for name in page.columns] == (parsing_page_column_names + ['Song']):
-                    self.pages_to_parse.append(page.iloc[1:, :-1].reset_index(drop=True))
+                    final_page = page.iloc[1:, :-1].reset_index(drop=True)
+                    self.pages_to_parse.append((i, final_page))
+                    self.contract_to_pages[contract_id] += [i]
 
                 elif [name for name in page.columns] == (parsing_page_column_names_1 + ['Song']):
-                    self.pages_to_parse.append(page.iloc[1:, :-1].reset_index(drop=True).rename(columns={'A mt Rcvd/Price':
-                                                                                                         'Amt Rcvd/Price'}))
+                    final_page = page.iloc[1:, :-1].reset_index(drop=True).rename(columns={'A mt Rcvd/Price': 'Amt Rcvd/Price'})
+                    self.pages_to_parse.append((i, final_page))
+                    self.contract_to_pages[contract_id] += [i]
 
                 else:
                     if 'Page: 1' in [s.strip() for s in page.iloc[:, -1] if type(s) is str]:
-
                         if not saw_page_1:
                             saw_page_1 = True
                             continue
@@ -63,12 +68,22 @@ class WixenParser:
                         # this is the first page we're going to parse at the document:
                         # performing some initial preprocessing:
 
-                        page = page.iloc[5:].reset_index(drop=True).rename(columns={original_name: new_name for
+                        final_page = page.iloc[5:].reset_index(drop=True).rename(columns={original_name: new_name for
                                                                                     original_name, new_name in
                                                                                     zip(page.columns,
                                                                                         parsing_page_column_names)})
 
-                        self.pages_to_parse.append(page)
+                        self.pages_to_parse.append((i, final_page))
+                        self.contract_to_pages[contract_id].append(i)
+                i += 1
+
+        contracts_ids_dfs = tabula.read_pdf(self.pdf_filepath,
+                                            pages='all',
+                                            area=(74.88, 28.08, 195.84, 557.28),
+                                            columns=(43.92, 108.72, 214.56, 249.12, 299.52, 418.32, 458.64, 578.16))
+
+        contracts_ids = [[item.strip() for item in df.columns[2].split()] for df in contracts_ids_dfs]
+        contracts_ids = [splitted_string[min([i for i in range(len(splitted_string)) if '(' in splitted_string[i]] + [len(splitted_string)-1])][1:-1] for splitted_string in contracts_ids]
 
         pages = tabula.read_pdf(self.pdf_filepath,
                                 pages='all',
@@ -76,7 +91,7 @@ class WixenParser:
                                 columns=(111.6, 133.92, 218.88, 250.56, 302.4, 419.76, 465.84, 582))
 
         self.pages_to_parse = []
-        scan(pages)
+        scan(pages, contracts_ids)
 
         if len(self.pages_to_parse) / len(pages) < 0.25:
             # this is the format of years >= 2021
@@ -86,7 +101,7 @@ class WixenParser:
                                     pages='all',
                                     area=(111.6, 30, 777.72, 575.28),
                                     columns=(97.92, 118.08, 174.96, 220.32, 259.92, 366.48, 401.76, 504.72))
-            scan(pages)
+            scan(pages, contracts_ids)
 
     def save_result(self, output_filepath):
 
@@ -96,7 +111,12 @@ class WixenParser:
 
         # else:
 
-        self.result.to_csv(output_filepath)
+        for contract_id, df in self.result.items():
+            curr_contract_path = '.'.join(output_filepath.split('.')[:-1]) + f'_{contract_id}.' + output_filepath.split('.')[-1]
+            df.to_csv(curr_contract_path,
+                      index=False)
+
+            print(f"Parsed contract # {contract_id} details to {curr_contract_path}")
 
     def parse(self):
 
@@ -106,29 +126,69 @@ class WixenParser:
 
         curr_song_name, curr_artist, curr_territory = None, None, None
 
-        for page_df in self.pages_to_parse:
-            curr_song_name, curr_artist, curr_territory = self.parse_page(page_df,
-                                                                          curr_song_name,
-                                                                          curr_artist,
-                                                                          curr_territory)
+        for i, page_df in self.pages_to_parse:
+            curr_song_name, curr_artist, curr_territory = self.parse_page(page_df=page_df,
+                                                                          page_idx=i,
+                                                                          curr_song_name=curr_song_name,
+                                                                          curr_artist=curr_artist,
+                                                                          curr_territory=curr_territory)
+            print(i)
 
-        self.result = pd.concat(self.parsed_pages, ignore_index=True)
-
-        # -- finalize --
+        # -- extra care for the last page --
 
         hypens = ['-' * j for j in range(2, 20)]
 
-        if self.result.iloc[-1]['Share'] in hypens:
-            self.result = self.result[:-1]
+        if self.parsed_pages[-1][1].iloc[-1]['Share'] in hypens:
+            self.parsed_pages[-1][1].iloc[-1]['Share'] = self.parsed_pages[-1][1][:-1]
 
-    def parse_page(self, page_df, curr_song_name, curr_artist, curr_territory):
+        # -- concatenating the df's for each contract id --
+
+        for contract_id, pages_idxs in self.contract_to_pages.items():
+            self.result[contract_id] = pd.concat([page_df for i, page_df in self.parsed_pages if i in pages_idxs],
+                                                 ignore_index=True)
+
+            # finalize
+            curr_df = self.result[contract_id]
+
+            # changing the columns names
+            curr_df = curr_df.rename(columns={'Song Name': 'song',
+                                              'C': 'credit',
+                                              'Territory': 'channel',
+                                              'Usage': 'source',
+                                              'A': 'country',
+                                              'B': 'specification',
+                                              'Units': 'units',
+                                              'Price': 'price',
+                                              'Share': 'share',
+                                              'Amount': 'amount'})
+
+            # finalizing the country and the period columns
+            curr_df['country'] = [''.join(item.split()) if pd.notna(item) else '' for item in curr_df['country']]
+            curr_df['period'] = curr_df['Period - Start'] + '-' + curr_df['Period - End']
+
+            # dropping those 2 columns
+            curr_df.drop('Period - Start', inplace=True, axis=1)
+            curr_df.drop('Period - End', inplace=True, axis=1)
+
+            # moving the new 'period' column to be before 'price', 'share' and 'amount' columns
+            cols = list(curr_df.columns)
+            curr_df = curr_df[cols[:-4] + [cols[-1]] + cols[-4: -1]]
+
+            # adding the new contract id column
+            curr_df['contract'] = [contract_id for i in range(len(curr_df))]
+
+            self.result[contract_id] = curr_df
+
+    def parse_page(self, page_df, page_idx, curr_song_name, curr_artist, curr_territory):
         """
         adds the parsed data frame to the list self.parsed_pages.
 
-        :param curr_song_name: the song name of the last block in the previous page we were parsing.
-        :param curr_artist: the artist name "".
-        :param curr_territory: the territory "".
         :param page_df: tabula's extracted df of the page we currently want to parse at the document.
+        :param page_idx: The identifier of the page (it's name at the document).
+        :param curr_song_name: The song name of the last block in the previous page we were parsing.
+        :param curr_artist: The artist name " " ".
+        :param curr_territory: The territory " " ".
+
         :return: curr_song_name, curr_artist, curr_territory.
         """
 
@@ -143,7 +203,7 @@ class WixenParser:
             parsed_blocks += [self.parse_block(block=block)]
 
         if len(parsed_blocks) > 0:
-            self.parsed_pages += [pd.concat(parsed_blocks, ignore_index=True)]
+            self.parsed_pages += [(page_idx, pd.concat(parsed_blocks, ignore_index=True))]
         else:
             # we are at the end of the document and identified this page as a data page,
             # while it's not.
@@ -170,7 +230,7 @@ class WixenParser:
 
         for i in range(0, len(page_df)):
             if type(page_df['Amount'][i]) is str and \
-                    page_df['Amount'][i].strip() in (['-' * i for i in range(0, 25)] + ['Due']):
+                    page_df['Amount'][i].strip() in (['-' * j for j in range(0, 25)] + ['Due']):
 
                 # it's a row that come before/after some total some row, or an unnecessary row
                 rows_to_remove += [i]
