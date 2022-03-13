@@ -68,12 +68,13 @@ def upload_file1():
                     value[-1].save_result(os.getcwd() + "\\Files\\csv\\Thefile"+str(fileNum)+".csv")
                     zip.write(os.getcwd() + "\\Files\\csv\\Thefile"+str(fileNum)+".csv","Thefile"+str(fileNum)+".csv")
             zip.close()
-        '''
-        if function == "PdfParse":
-            path = os.getcwd() + "\\Files\\zip"
-            zipname="myFile.zip"
-            return flask.send_from_directory(path,zipname)
-     '''
+
+    if function == "PdfParse":
+        path = os.getcwd() + "\\Files\\zip"
+        zipname = "myFile.zip"
+        return flask.send_from_directory(path, zipname)
+
+    '''
         print("here")
         if function == "PdfParse":
             path = os.getcwd() + "\\Files\\zip"
@@ -93,6 +94,7 @@ def upload_file1():
             return response
         else:
             return jsonify(value)
+            '''
     '''
     if function == "PdfParse":
         import base64
