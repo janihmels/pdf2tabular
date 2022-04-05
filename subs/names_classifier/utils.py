@@ -1,7 +1,7 @@
 import pandas as pd
 import MySQLdb
 import os
-import enchant
+# import enchant
 import matplotlib.pyplot as plt
 import itertools
 
@@ -167,9 +167,10 @@ def get_data(featurize_data=False):
     names = clean_nans(names)
     not_names = clean_nans(not_names)
 
-    en_dict = enchant.Dict("en_US")
+    # en_dict = enchant.Dict("en_US")
 
     if featurize_data:
+        en_dict = None
         return [featurize(english_dict=en_dict, phrase=str(name)) for name in names], \
                [featurize(english_dict=en_dict, phrase=str(not_name)) for not_name in not_names]
     else:
@@ -185,6 +186,7 @@ def prepro(tokenizer, name):
     :param name: A string.
     :return: A dictionary containing the tokenized data for the string.
     """
+
     name = tokenizer.encode_plus(name)
 
     input_ids = name['input_ids']
