@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/original_outputs_code" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/outputs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sql_outputs" vcs="Git" />
+  </component>
+</project>
