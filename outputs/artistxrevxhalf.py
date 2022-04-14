@@ -50,8 +50,8 @@ def artistxrevxhalf(df: pd.DataFrame):
                         sorted_year_cols +
                         ['% Of Revenue', 'Cumulative %']]
 
-    i = 0
-    output.to_csv(f'{i}.csv')
+    # i = 0
+    # output.to_csv(f'{i}.csv')
 
     return output
 
