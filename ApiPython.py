@@ -137,10 +137,10 @@ def home_getSummary():
     mydict = request.get_json()
     dicts = {}
     parquet_file = pd.read_parquet("ouputsApi/databases/"+mydict["database"]+".gzip", engine='pyarrow')
-    dicts["SongXrevXhalf"] = SimpleExtract("Song_Name_9LC",parquet_file).replace(np.nan,None).to_dict('records')
-    dicts["IncomeXrevXhalf"] = SimpleExtract("Normalized_Income_Type_9LC",parquet_file).replace(np.nan,None).to_dict('records')
-    dicts["SourceXrevXhalf"] = SimpleExtract("Normalized_Source_9LC",parquet_file).replace(np.nan,None).to_dict('records')
-    #dicts["SongXincomeXrevXhalf"] = list(map(toDict,SongxIncomexRevxHalf(parquet_file)))
+    dicts["SongXrevXhalf"] = [SimpleExtract("Song_Name_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
+    dicts["IncomeXrevXhalf"] = [SimpleExtract("Normalized_Income_Type_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
+    dicts["SourceXrevXhalf"] = [SimpleExtract("Normalized_Source_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
+    dicts["SongXincomeXrevXhalf"] = list(map(toDict, SongxIncomexRevxHalf(parquet_file)))#3.5 sec
     stop = timeit.default_timer()
     print(stop - start, "seconds")
     return jsonify(dicts)

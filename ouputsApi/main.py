@@ -28,19 +28,20 @@ def SongxIncomexRevxHalf(parquet_file):
         # 'add finel Line(sum of all column)'
         df = {}
         for year in Years:
-            df[year] = newDataFrame[year].sum()
+            df[year] = newDataFrame[year].sum().round(2)
 
         ################################################################################
         # 'add Total title and total value(sum of all row)'##############################
-        Total = sum(df.values())
+        Total = sum(df.values()).round(2)
         # 'add % Of Revenue sum/total *100 and round to 2'
         newDataFrame['% Of Revenue'] = round((newDataFrame["Total"] / Total) * 100,2)
         # 'add Cumulative % sum/total *100 and round to 2'
-        newDataFrame['Cumulative %'] = newDataFrame['% Of Revenue'].cumsum()
+        newDataFrame['Cumulative %'] = newDataFrame['% Of Revenue'].cumsum().round(2)
         df["Total"] = Total
         df["Normalized_Income_Type_9LC"] = "Total"
         df = pd.DataFrame(df,index=[0])
         newDataFrame = pd.concat([newDataFrame, df], ignore_index = True, axis = 0)
+        newDataFrame = pd.concat([pd.DataFrame({"Song_Name_9LC" : ""},index=[0]), newDataFrame], ignore_index=True, axis=0)
         newDataFrameAryfinished.append(newDataFrame)
         ################################################################################
     return newDataFrameAryfinished
@@ -66,26 +67,26 @@ def SimpleExtract(TheColumn,parquet_file):
     newDataFrame.columns.name = None
 
     # 'Total column is the sum of all columns except song title'
-    newDataFrame['Total'] = newDataFrame.sum(axis=1,numeric_only=True)
+    newDataFrame['Total'] = newDataFrame.sum(axis=1,numeric_only=True).round(2)
 
     # 'add finel Line(sum of all column)'
     df = {}
     for year in Years:
-        df[year] = newDataFrame[year].sum()
+        df[year] = newDataFrame[year].sum().round(2)
 
     ################################################################################
     # 'add Total title and total value(sum of all row)'##############################
-    Total = sum(df.values())
+    Total = sum(df.values()).round(2)
     # 'add % Of Revenue sum/total *100 and round to 2'
     newDataFrame['% Of Revenue'] = round((newDataFrame["Total"] / Total) * 100,2)
     # 'add Cumulative % sum/total *100 and round to 2'
-    newDataFrame['Cumulative %'] = newDataFrame['% Of Revenue'].cumsum()
+    newDataFrame['Cumulative %'] = newDataFrame['% Of Revenue'].cumsum().round(2)
     df["Total"] = Total
     df[TheColumn] = "Total"
     df = pd.DataFrame(df,index=[0])
     newDataFrame = pd.concat([newDataFrame, df], ignore_index = True, axis = 0)
     df = pd.DataFrame({TheColumn : "("+",".join(parquet_file[["Third_Party_9LC"]].drop_duplicates()["Third_Party_9LC"].to_list())+")" },index=[0])
-    newDataFrame = pd.concat([newDataFrame, df], ignore_index = True, axis = 0)
+    newDataFrame = pd.concat([df,newDataFrame ], ignore_index = True, axis = 0)
     ################################################################################
     return newDataFrame
 
