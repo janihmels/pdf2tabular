@@ -14,7 +14,7 @@ from werkzeug.utils import secure_filename
 import json
 #from subs.source_classifier.model import SourceClassifier
 import pickle
-from ouputsApi.main import SimpleExtract,SongxIncomexRevxHalf
+from ouputsApi.main import *
 import flask
 from flask import request, jsonify
 from flask_cors import cross_origin, CORS
@@ -141,9 +141,18 @@ def home_getSummary():
     dicts["IncomeXrevXhalf"] = [SimpleExtract("Normalized_Income_Type_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
     dicts["SourceXrevXhalf"] = [SimpleExtract("Normalized_Source_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
     dicts["SongXincomeXrevXhalf"] = list(map(toDict, SongxIncomexRevxHalf(parquet_file)))#3.5 sec
+
+    dicts["ArtistXrevXhalf"] = [artistxrevxhalf(parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
+    dicts["payorXincomeXtypeXrevXhalf"] = list(map(toDict, payorXincomeXtypeXrevXhalf(parquet_file)))#1.5 sec
+    dicts["payorXsongXrevXhalf"] = list(map(toDict, payorXsongXrevXhalf(parquet_file)))#3.5 sec
+    #dicts["payorXsourceXrevXhalf"] = list(map(toDict, payorXsourceXrevXhalf(parquet_file)))#16 sec
+
+
+
     stop = timeit.default_timer()
     print(stop - start, "seconds")
     return jsonify(dicts)
+
 
 if __name__ == "__main__":
 #    logging.set_verbosity_error()
