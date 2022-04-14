@@ -4,13 +4,12 @@ from torch import nn
 import pytorch_lightning as pl
 from collections import defaultdict
 from transformers import AutoModel, BertTokenizer
-from subs.names_classifier.utils import prepro
+from utils import prepro
 
 
 class NamesClassifier(pl.LightningModule):
 
     def __init__(self):
-
         super().__init__()
 
         self.bert = AutoModel.from_pretrained('prajjwal1/bert-tiny')

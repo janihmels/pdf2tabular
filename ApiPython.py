@@ -1,3 +1,5 @@
+
+
 from subs.PdfIdentification import CheckPdf, PdfIdentifier
 from subs.Pdf_To_Text import pdf_To_text
 from subs.PdfAudit import *
@@ -6,14 +8,18 @@ from subs.PRSParser import PRSParser
 from subs.CMGParser import CMGParser
 from subs.sql2xlsx import sql2xlsx
 from werkzeug.utils import secure_filename
-from zipfile import *
-import io
+from subs.names_classifier.model import NamesClassifier
+import torch
+from transformers import logging
+import json
+from subs.source_classifier.model import SourceClassifier
+import pickle
+
 import flask
-import  time
 from flask import request, jsonify
 from flask_cors import cross_origin, CORS
 
-app = flask.Flask(__name__, static_url_path='')
+app = flask.Flask(__name__)
 cors = CORS(app)
 app.config["DEBUG"] = True
 app.config['UPLOAD_FOLDER'] = "Files"
@@ -25,7 +31,7 @@ class Filesfunc:
         try:
             return pdfAudit(filepath)
         except FileNotFoundError:
-            return "None"
+            return {"result": "Error File Not Found"}
 
     def PdfParse(self, filepath):
         pdf_type = PdfIdentifier(filepath)
@@ -37,11 +43,15 @@ class Filesfunc:
         elif pdf_type == "CMG":
             parser = CMGParser(pdf_filepath=filepath)
         else:
-            return "None"
+            print(pdf_type)
+            # format wasn't found:
+            return {"result": "format wasn't found"}
 
         parser.parse()
+        parser.save_result(os.getcwd() + "\\Files\\xlss\\1.csv")
 
-        return parser
+        return {"Success": flask.url_for("static",filename=os.getcwd()+"\\Files\\xlss\\Thefile.csv",_external=True) }
+
 
     def Sql2Xlsx(self, filepath):
 
@@ -49,70 +59,30 @@ class Filesfunc:
         # queries = request.form.get('queries')                     =============================here=============================
         # queries = eval(queries)
 
-        return jsonify(sql2xlsx(dbname=dbname, queries=queries, output_filename=filepath))
+        return sql2xlsx(dbname=dbname, queries=queries, output_filename=filepath)
+
+
+@app.route('/upload')
+def upload_file():
+    return render_template('index.html')
 
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file1():
     if request.method == 'POST':
         function = request.form.get("thefunction")
-        fileslist = request.files.getlist("thefiles")
+        f = request.files["thefile"]
+        f.save("Files/" + secure_filename(f.filename))
+        f.close()
         funcs = Filesfunc()
-        value = []
-        with ZipFile("Files\\zip\\myFile.zip", 'w', ZIP_DEFLATED) as zip:
-            for fileNum in range(len(fileslist)):
-                fileslist[fileNum].save("Files/pdf/Thefile.pdf")
-                fileslist[fileNum].close()
-                value.append(getattr(funcs, function)(os.getcwd() + "\\Files\\pdf\\Thefile.pdf"))
-                if function == "PdfParse":
-                    value[-1].save_result(os.getcwd() + "\\Files\\csv\\Thefile"+str(fileNum)+".csv")
-                    zip.write(os.getcwd() + "\\Files\\csv\\Thefile"+str(fileNum)+".csv","Thefile"+str(fileNum)+".csv")
-            zip.close()
-
-    if function == "PdfParse":
-        path = os.getcwd() + "\\Files\\zip"
-        zipname = "myFile.zip"
-        return flask.send_from_directory(path, zipname)
-
-    '''
-        print("here")
-        if function == "PdfParse":
-            path = os.getcwd() + "\\Files\\zip"
-            zipname="myFile.zip"
-            FILEPATH = path+"\\"+zipname
-            fileobj = io.BytesIO()
-            with ZipFile(fileobj, 'w') as zip_file:
-                zip_info = ZipInfo(FILEPATH)
-                zip_info.date_time = time.localtime(time.time())[:6]
-                zip_info.compress_type = ZIP_DEFLATED
-                with open(FILEPATH, 'rb') as fd:
-                    zip_file.writestr(zip_info, fd.read())
-            fileobj.seek(0)
-            response = flask.make_response(fileobj.read())
-            response.headers.set('Content-Type', 'zip')
-            response.headers.set('Content-Disposition', 'attachment', filename='%s.zip' % os.path.basename(FILEPATH))
-            return response
-        else:
-            return jsonify(value)
-            '''
-    '''
-    if function == "PdfParse":
-        import base64
-        path = os.getcwd() + "\\Files\\zip"
-        zipname = "myFile.zip"
-        FILEPATH = path + "\\" + zipname
-        file = open(FILEPATH,"rb")
-        message = file.read()
-        base64_bytes = base64.b64encode(message)
-        print(base64_bytes)
-        return base64_bytes
-    '''
+        value = getattr(funcs, function)(os.getcwd() + "\\Files\\" + f.filename)
+        return jsonify(value)
 
 
 @app.route('/parse', methods=['POST'])
 def parse():
     path_pdf = request.form.get('path_pdf')
-    path_csv = request.form.get('path_csv')
+    path_csv = '.'.join(path_pdf.split('.')[:-1]) + '.csv'
 
     pdf_type = PdfIdentifier(path_pdf)
 
@@ -134,6 +104,32 @@ def parse():
     return jsonify({"Type": pdf_type})
 
 
+
+@app.route('/classify_names', methods=['POST'])
+def classify_name():
+    names = request.form.get('names')
+    names = json.loads(s=names)
+
+    return jsonify({name: title_classifier.classify(name) for name in names})
+
+
+@app.route('/classify_sources', methods=['POST'])
+def classify_source():
+    names = request.form.get('sources')
+    names = json.loads(s=names)
+
+    return jsonify({name: source_classifier.classify(name) for name in names})
+
+
 if __name__ == "__main__":
+    logging.set_verbosity_error()
+    title_classifier = NamesClassifier()
+    title_classifier.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
+
+    label_to_source_map = pickle.load(open('subs/source_classifier/label_to_name_mapper.pkl', 'rb'))
+    source_classifier = SourceClassifier(num_cls=len(label_to_source_map.values()), label_to_name=label_to_source_map)
+    source_classifier.load_state_dict(torch.load('./subs/source_classifier/best_model.pth', map_location=torch.device('cpu')))
+
     app.run(port=5100)
+
 

@@ -28,7 +28,7 @@ if __name__ == "__main__":
                                        shuffle=False,
                                        num_workers=16)
 
-    trainer = pl.Trainer(max_epochs=num_training_epochs, gpus=1)
+    trainer = pl.Trainer(max_epochs=num_training_epochs, gpus=0)
     trainer.fit(model, train_dataloader, validation_dataloader)
 
 
