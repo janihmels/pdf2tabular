@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ecabe19e-c884-4dc2-a269-091bda83d3df" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pdf2tabular.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pdf2tabular.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ApiPython.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApiPython.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile0.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile5.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile6.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/csv/Thefile7.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Files/csv/Thefile7.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/pdf/Thefile.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Files/pdf/Thefile.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Files/zip/myFile.zip" beforeDir="false" afterPath="$PROJECT_DIR$/Files/zip/myFile.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_201902A_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_201902A_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019041_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019041_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_201906A_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_201906A_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019071_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019071_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019121_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019121_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019122_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Data/Manderson_00618760530_2019122_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/23. PRS - February 2019/Manderson_00618760530_201902A_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/23. PRS - February 2019/Manderson_00618760530_201902A_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/23. PRS - February 2019/Manderson_00618760530_201902A_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/23. PRS - February 2019/Manderson_00618760530_201902A_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/24. PRS - April 2019/Manderson_00618760530_2019041_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/24. PRS - April 2019/Manderson_00618760530_2019041_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/24. PRS - April 2019/Manderson_00618760530_2019041_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/24. PRS - April 2019/Manderson_00618760530_2019041_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/25. PRS - June 2019/Manderson_00618760530_201906A_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/25. PRS - June 2019/Manderson_00618760530_201906A_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/25. PRS - June 2019/Manderson_00618760530_201906A_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/25. PRS - June 2019/Manderson_00618760530_201906A_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/26. PRS - July 2019/Manderson_00618760530_2019071_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/26. PRS - July 2019/Manderson_00618760530_2019071_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/26. PRS - July 2019/Manderson_00618760530_2019071_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/26. PRS - July 2019/Manderson_00618760530_2019071_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/27. PRS - October 2019/Manderson_00618760530_2019101_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/27. PRS - October 2019/Manderson_00618760530_2019101_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/27. PRS - October 2019/Manderson_00618760530_2019101_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/27. PRS - October 2019/Manderson_00618760530_2019101_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/28. PRS - December 2019 (1)/Manderson_00618760530_2019121_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/28. PRS - December 2019 (1)/Manderson_00618760530_2019121_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/28. PRS - December 2019 (1)/Manderson_00618760530_2019121_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/28. PRS - December 2019 (1)/Manderson_00618760530_2019121_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/29. PRS - December 2019 (2)/Manderson_00618760530_2019122_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/29. PRS - December 2019 (2)/Manderson_00618760530_2019122_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/29. PRS - December 2019 (2)/Manderson_00618760530_2019122_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2019/Statements/29. PRS - December 2019 (2)/Manderson_00618760530_2019122_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_202001A_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_202001A_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_202002A_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_202002A_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020041_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020041_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_202006A_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_202006A_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020071_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020071_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020101_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020101_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020121_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020121_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020122_052_143276.csv" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Data/Manderson_00618760530_2020122_052_143276.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/30. PRS - January 2020/Manderson_00618760530_202001A_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/30. PRS - January 2020/Manderson_00618760530_202001A_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/30. PRS - January 2020/Manderson_00618760530_202001A_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/30. PRS - January 2020/Manderson_00618760530_202001A_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/31. PRS - February 2020/Manderson_00618760530_202002A_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/31. PRS - February 2020/Manderson_00618760530_202002A_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/31. PRS - February 2020/Manderson_00618760530_202002A_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/31. PRS - February 2020/Manderson_00618760530_202002A_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/32. PRS - April 2020/Manderson_00618760530_2020041_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/32. PRS - April 2020/Manderson_00618760530_2020041_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/32. PRS - April 2020/Manderson_00618760530_2020041_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/32. PRS - April 2020/Manderson_00618760530_2020041_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/33. PRS - June 2020/Manderson_00618760530_202006A_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/33. PRS - June 2020/Manderson_00618760530_202006A_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/33. PRS - June 2020/Manderson_00618760530_202006A_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/33. PRS - June 2020/Manderson_00618760530_202006A_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/34. PRS - July 2020/Manderson_00618760530_2020071_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/34. PRS - July 2020/Manderson_00618760530_2020071_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/34. PRS - July 2020/Manderson_00618760530_2020071_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/34. PRS - July 2020/Manderson_00618760530_2020071_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/35. PRS - October 2020/Manderson_00618760530_2020101_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/35. PRS - October 2020/Manderson_00618760530_2020101_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/35. PRS - October 2020/Manderson_00618760530_2020101_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/35. PRS - October 2020/Manderson_00618760530_2020101_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/36. PRS - December 2020 (1)/Manderson_00618760530_2020121_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/36. PRS - December 2020 (1)/Manderson_00618760530_2020121_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/36. PRS - December 2020 (1)/Manderson_00618760530_2020121_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/36. PRS - December 2020 (1)/Manderson_00618760530_2020121_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/37. PRS - December 2020 (2)/Manderson_00618760530_2020122_052_143276_102178.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/37. PRS - December 2020 (2)/Manderson_00618760530_2020122_052_143276_102178.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/37. PRS - December 2020 (2)/Manderson_00618760530_2020122_052_143276_92920.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/exempleAudit/PROs/PRS/2020/Statements/37. PRS - December 2020 (2)/Manderson_00618760530_2020122_052_143276_92920.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201602B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201602B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201603B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201603B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016041_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016041_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201604B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201604B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201604D_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201604D_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016071_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016071_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016101_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016101_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201611D_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201611D_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016121_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016121_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016122_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_2016122_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201612B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201612B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201612C_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/Essex David_070172307_201612C_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2016/sample.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2016/sample.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201701E_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201701E_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017041_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017041_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201705B_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201705B_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017071_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017071_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017072_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017072_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201708A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201708A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201711A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_201711A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2017/Essex David_070172307_2017122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_201803A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_201803A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018041_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018041_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_201805C_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_201805C_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_201806A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_201806A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2018/Essex David_00070172307_2018122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2019/1.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2019/1.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2019/2.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2019/2.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2019/Essex David_00070172307_2019071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2019/Essex David_00070172307_2019071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2019/Essex David_00070172307_2019101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2019/Essex David_00070172307_2019101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2019/Essex David_00070172307_2019121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2019/Essex David_00070172307_2019121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_202002A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_202002A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020041_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020041_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_202008A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_202008A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_202011A_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_202011A_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2020/Essex David_00070172307_2020122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021041_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021041_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021041_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021041_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021071_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021071_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021071_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021071_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021101_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021101_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021101_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021101_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021121_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021121_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021121_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021121_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021122_052_089780_26722.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021122_052_089780_26722.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021122_052_089780_282405.PDF" beforeDir="false" afterPath="$PROJECT_DIR$/exempleParsing/PRS/2021/Essex David_00070172307_2021122_052_089780_282405.PDF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/last_block.csv" beforeDir="false" afterPath="$PROJECT_DIR$/last_block.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/CMGParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/CMGParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/PRSParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/PRSParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/PRSParser_Finalizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/PRSParser_Finalizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/PdfAudit.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/PdfAudit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/PdfIdentification.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/PdfIdentification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/Pdf_To_Text.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/Pdf_To_Text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/WixenParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/WixenParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/exp.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/exp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/exp1.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/exp1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/filetry.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/filetry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/names_classifier/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/names_classifier/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/names_classifier/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/names_classifier/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/names_classifier/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/names_classifier/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/names_classifier/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/names_classifier/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/names_classifier/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/names_classifier/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/source_classifier/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/source_classifier/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/source_classifier/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/source_classifier/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/source_classifier/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/source_classifier/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/source_classifier/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/source_classifier/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/sql2xlsx.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/sql2xlsx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/try.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/try.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subs/try2.py" beforeDir="false" afterPath="$PROJECT_DIR$/subs/try2.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/subs/try2.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/subs/Pdf_To_Text.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/subs/try.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="24bkHPL3cyLcZ3C2klxsPOSgXgb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="E:/LouieProject-main" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Gad\Documents\GitHub\pdf2tabular\exempleAudit\Newlyannotated" />
+      <recent name="C:\Users\Gad\Documents\GitHub\pdf2tabular" />
+      <recent name="C:\Users\Gad\Documents\GitHub\pdf2tabular\exempleAudit\PROs" />
+      <recent name="C:\Users\Gad\Documents\GitHub\pdf2tabular\subs" />
+      <recent name="C:\Users\Gad\Documents\GitHub\pdf2tabular\Lab" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.ApiPython">
+    <configuration name="ApiPython" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pdf2tabular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ApiPython.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PdfAudit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pdf2tabular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subs/PdfAudit.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="filetry" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pdf2tabular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subs/filetry.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="try (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pdf2tabular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subs/try.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="try2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pdf2tabular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subs/try2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ApiPython" />
+        <item itemvalue="Python.try (1)" />
+        <item itemvalue="Python.try2 (1)" />
+        <item itemvalue="Python.filetry" />
+        <item itemvalue="Python.PdfAudit" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ecabe19e-c884-4dc2-a269-091bda83d3df" name="Changes" comment="" />
+      <created>1643906584551</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643906584551</updated>
+    </task>
+    <servers />
+  </component>
+</project>
