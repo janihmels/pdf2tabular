@@ -1,0 +1,3 @@
+[submodule "Bitsonic-sql2pandas/outputs"]
+	path = Bitsonic-sql2pandas/outputs
+	url = https://github.com/ilanmotiei/Bitsonic-sql2pandas.git
