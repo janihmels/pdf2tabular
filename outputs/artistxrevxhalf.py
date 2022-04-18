@@ -30,7 +30,8 @@ def artistxrevxhalf(df: pd.DataFrame):
 
         output.append(artist_output)
 
-    output = pd.concat(output, ignore_index=True).sort_values(by='Total', ascending=False).reset_index(drop=True)
+    output = pd.concat(output, ignore_index=True).sort_values(by='Total', ascending=False)
+    output.reset_index(drop=True, inplace=True)
     output['% Of Revenue'] = (100 * (output['Total'] / output['Total'].sum()))
     output['Cumulative %'] = output['% Of Revenue'].cumsum().iloc[::-1]
 
@@ -49,6 +50,10 @@ def artistxrevxhalf(df: pd.DataFrame):
         output = output[['Third Party', 'Income Type'] +
                         sorted_year_cols +
                         ['% Of Revenue', 'Cumulative %']]
+
+    totals_row = output.sum(axis=0, numeric_only=True).round(2)
+    totals_row['Release Artist'] = 'Total'
+    output.loc[len(output)] = totals_row
 
     # i = 0
     # output.to_csv(f'{i}.csv')

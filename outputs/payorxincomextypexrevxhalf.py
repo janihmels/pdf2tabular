@@ -33,7 +33,8 @@ def payorXincomeXtypeXrevXhalf(df: pd.DataFrame):
 
             third_party_output.append(income_output)
 
-        third_party_output = pd.concat(third_party_output, ignore_index=True).sort_values(by='Total', ascending=False).reset_index(drop=True)
+        third_party_output = pd.concat(third_party_output, ignore_index=True).sort_values(by='Total', ascending=False)
+        third_party_output.reset_index(drop=True, inplace=True)
         third_party_output['% Of Revenue'] = (100 * (third_party_output['Total'] / third_party_output['Total'].sum()))
         third_party_output['Cumulative %'] = third_party_output['% Of Revenue'].cumsum().iloc[::-1]
 
@@ -52,6 +53,10 @@ def payorXincomeXtypeXrevXhalf(df: pd.DataFrame):
             third_party_output = third_party_output[['Third Party', 'Income Type'] +
                                                     sorted_year_cols +
                                                     ['% Of Revenue', 'Cumulative %']]
+
+        totals_row = third_party_output.sum(axis=0, numeric_only=True).round(2)
+        totals_row['Income Type'] = 'Total'
+        third_party_output.loc[len(third_party_output)] = totals_row
 
         outputs.append(third_party_output)
 
