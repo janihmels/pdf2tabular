@@ -21,6 +21,7 @@ from flask_cors import cross_origin, CORS
 import timeit
 import pandas as pd
 import numpy as np
+import requests
 
 app = flask.Flask(__name__)
 cors = CORS(app)
@@ -130,28 +131,48 @@ def classify_source():
 def toDict(df):
   return df.replace(np.nan,None).to_dict('records')
 
-@app.route('/getSummary', methods=['POST'])
+@app.route('/PublishMongo', methods=['POST'])
 def home_getSummary():
     start = timeit.default_timer()
-
+    print("publishMongo start")
+    url = 'https://api.bademeister-jan.pro/outputs/store'
     mydict = request.get_json()
     dicts = {}
-    parquet_file = pd.read_parquet("ouputsApi/databases/"+mydict["database"]+".gzip", engine='pyarrow')
-    dicts["SongXrevXhalf"] = [SimpleExtract("Song_Name_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
-    dicts["IncomeXrevXhalf"] = [SimpleExtract("Normalized_Income_Type_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
-    dicts["SourceXrevXhalf"] = [SimpleExtract("Normalized_Source_9LC",parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
-    dicts["SongXincomeXrevXhalf"] = list(map(toDict, SongxIncomexRevxHalf(parquet_file)))#3.5 sec
+    parquet_file = pd.read_parquet("ouputsApi/databases/"+mydict["projectid"]+".gzip", engine='pyarrow')
+    #mydict = mydict['projectid'].split("_")
+    myobj = {'projectid': mydict["projectid"],"tabid" : "songXrevXhalf", "data" : [SimpleExtract("Song_Name_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
+    requests.post(url, data=myobj)
 
-    dicts["ArtistXrevXhalf"] = [artistxrevxhalf(parquet_file).replace(np.nan,None).to_dict('records')]#1 sec
-    dicts["payorXincomeXtypeXrevXhalf"] = list(map(toDict, payorXincomeXtypeXrevXhalf(parquet_file)))#1.5 sec
-    dicts["payorXsongXrevXhalf"] = list(map(toDict, payorXsongXrevXhalf(parquet_file)))#3.5 sec
-    #dicts["payorXsourceXrevXhalf"] = list(map(toDict, payorXsourceXrevXhalf(parquet_file)))#16 sec
+    myobj = {'projectid': mydict["projectid"],"tabid" : "incomeXrevXhalf","data" : [SimpleExtract("Normalized_Income_Type_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
+    requests.post(url, data=myobj)
 
+    myobj = {'projectid': mydict["projectid"], "tabid": "sourceXrevXhalf", "data": [SimpleExtract("Normalized_Source_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
+    requests.post(url, data=myobj)
 
+    myobj = {'projectid': mydict["projectid"],"tabid" : "songXincomeXrevXhalf","data" : list(map(toDict, SongxIncomexRevxHalf(parquet_file)))}#3.5 sec
+    requests.post(url, data=myobj)
+
+    myobj = {'projectid': mydict["projectid"],"tabid" : "artistXrevXhalf","data" : [artistxrevxhalf(parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
+    requests.post(url, data=myobj)
+
+    myobj = {'projectid': mydict["projectid"],"tabid" : "payorXincomeXtypeXrevXhalf","data" : list(map(toDict, payorXincomeXtypeXrevXhalf(parquet_file)))}#1.5 sec
+    requests.post(url, data=myobj)
+
+    myobj = {'projectid': mydict["projectid"],"tabid" : "payorXsongXrevXhalf","data" : list(map(toDict, payorXsongXrevXhalf(parquet_file)))}#3.5 sec
+    requests.post(url, data=myobj)
+
+    myobj = {'projectid': mydict["projectid"],"tabid" : "payorXsourceXrevXhalf","data" : list(map(toDict, payorXsourceXrevXhalf(parquet_file)))}#16 sec
+    requests.post(url, data=myobj)
+
+    myobj = {'projectid': mydict["projectid"],"tabid" : "Catalog_Details","data" : [defualtDetails(parquet_file).replace(np.nan,None).to_dict('records')]}
+    requests.post(url, data=myobj)
 
     stop = timeit.default_timer()
     print(stop - start, "seconds")
-    return jsonify(dicts)
+    print("publishMongo end")
+
+    return jsonify()
+
 
 
 if __name__ == "__main__":
