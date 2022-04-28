@@ -137,9 +137,11 @@ def home_getSummary():
     print("publishMongo start")
     url = 'https://api.bademeister-jan.pro/outputs/store'
     mydict = request.get_json()
-    dicts = {}
     parquet_file = pd.read_parquet("ouputsApi/databases/"+mydict["projectid"]+".gzip", engine='pyarrow')
     #mydict = mydict['projectid'].split("_")
+    myobj = {'projectid': mydict["projectid"],"tabid" : "Catalog_Details","data" : [defualtDetails(parquet_file).replace(np.nan,None).to_dict('records')]}
+    requests.post(url, data=myobj)
+
     myobj = {'projectid': mydict["projectid"],"tabid" : "songXrevXhalf", "data" : [SimpleExtract("Song_Name_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
     requests.post(url, data=myobj)
 
@@ -162,9 +164,6 @@ def home_getSummary():
     requests.post(url, data=myobj)
 
     myobj = {'projectid': mydict["projectid"],"tabid" : "payorXsourceXrevXhalf","data" : list(map(toDict, payorXsourceXrevXhalf(parquet_file)))}#16 sec
-    requests.post(url, data=myobj)
-
-    myobj = {'projectid': mydict["projectid"],"tabid" : "Catalog_Details","data" : [defualtDetails(parquet_file).replace(np.nan,None).to_dict('records')]}
     requests.post(url, data=myobj)
 
     stop = timeit.default_timer()
