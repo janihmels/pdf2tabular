@@ -129,7 +129,7 @@ def classify_source():
 
 
 def toDict(df):
-  return df.replace(np.nan,None).to_dict('records')
+  return df.replace(np.nan,None).to_dict()
 
 @app.route('/PublishMongo', methods=['POST'])
 def home_getSummary():
@@ -139,21 +139,26 @@ def home_getSummary():
     mydict = request.get_json()
     parquet_file = pd.read_parquet("ouputsApi/databases/"+mydict["projectid"]+".gzip", engine='pyarrow')
     #mydict = mydict['projectid'].split("_")
+
+    '''
     myobj = {'projectid': mydict["projectid"],"tabid" : "Catalog_Details","data" : [defualtDetails(parquet_file).replace(np.nan,None).to_dict('records')]}
     requests.post(url, data=myobj)
+    
 
     myobj = {'projectid': mydict["projectid"],"tabid" : "songXrevXhalf", "data" : [SimpleExtract("Song_Name_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
     requests.post(url, data=myobj)
-
+    
     myobj = {'projectid': mydict["projectid"],"tabid" : "incomeXrevXhalf","data" : [SimpleExtract("Normalized_Income_Type_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
     requests.post(url, data=myobj)
+    
 
     myobj = {'projectid': mydict["projectid"], "tabid": "sourceXrevXhalf", "data": [SimpleExtract("Normalized_Source_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
     requests.post(url, data=myobj)
-
-    myobj = {'projectid': mydict["projectid"],"tabid" : "songXincomeXrevXhalf","data" : list(map(toDict, SongxIncomexRevxHalf(parquet_file)))}#3.5 sec
-    requests.post(url, data=myobj)
-
+    '''
+    print(list(map(toDict, SongxIncomexRevxHalf(parquet_file)))[0])
+    #myobj = {'projectid': mydict["projectid"],"tabid" : "songXincomeXrevXhalf","data" : list(map(toDict, SongxIncomexRevxHalf(parquet_file)))}#3.5 sec
+    #requests.post(url, data=myobj)
+    '''
     myobj = {'projectid': mydict["projectid"],"tabid" : "artistXrevXhalf","data" : [artistxrevxhalf(parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
     requests.post(url, data=myobj)
 
@@ -165,7 +170,7 @@ def home_getSummary():
 
     myobj = {'projectid': mydict["projectid"],"tabid" : "payorXsourceXrevXhalf","data" : list(map(toDict, payorXsourceXrevXhalf(parquet_file)))}#16 sec
     requests.post(url, data=myobj)
-
+    '''
     stop = timeit.default_timer()
     print(stop - start, "seconds")
     print("publishMongo end")
