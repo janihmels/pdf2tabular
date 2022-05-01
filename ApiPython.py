@@ -1,5 +1,4 @@
 
-
 from subs.PdfIdentification import CheckPdf, PdfIdentifier
 from subs.Pdf_To_Text import pdf_To_text
 from subs.PdfAudit import *
@@ -8,11 +7,11 @@ from subs.PRSParser import PRSParser
 from subs.CMGParser import CMGParser
 from subs.sql2xlsx import sql2xlsx
 from werkzeug.utils import secure_filename
-#from subs.names_classifier.model import NamesClassifier
-#import torch
-#from transformers import logging
+# from subs.names_classifier.model import NamesClassifier
+# import torch
+# from transformers import logging
 import json
-#from subs.source_classifier.model import SourceClassifier
+# from subs.source_classifier.model import SourceClassifier
 import pickle
 from ouputsApi.main import *
 import flask
@@ -57,7 +56,7 @@ class Filesfunc:
         parser.parse()
         parser.save_result(os.getcwd() + "\\Files\\xlss\\1.csv")
 
-        return {"Success": flask.url_for("static",filename=os.getcwd()+"\\Files\\xlss\\Thefile.csv",_external=True) }
+        return {"Success": flask.url_for("static" ,filename=os.getcwd( ) +"\\Files\\xlss\\Thefile.csv" ,_external=True) }
 
 
     def Sql2Xlsx(self, filepath):
@@ -129,54 +128,48 @@ def classify_source():
 
 
 def toDict(df):
-  return df.replace(np.nan,None).to_dict()
+    return df.replace(np.nan ,None).to_dict('list')
 
-@app.route('/PublishMongo', methods=['POST'])
-def home_getSummary():
+@app.route('/PublishCatalog', methods=['POST'])
+def home_PublishCatalog():
     start = timeit.default_timer()
-    print("publishMongo start")
-    url = 'https://api.bademeister-jan.pro/outputs/store'
-    mydict = request.get_json()
-    parquet_file = pd.read_parquet("ouputsApi/databases/"+mydict["projectid"]+".gzip", engine='pyarrow')
-    #mydict = mydict['projectid'].split("_")
+    projectid = request.form.get('projectid')
+    pathParquet = request.form.get('path_to_parquet')
+    pathResult = request.form.get('path_to_result')
 
-    '''
-    myobj = {'projectid': mydict["projectid"],"tabid" : "Catalog_Details","data" : [defualtDetails(parquet_file).replace(np.nan,None).to_dict('records')]}
-    requests.post(url, data=myobj)
-    
+    parquet_file = pd.read_parquet(pathParquet+projectid + ".gzip", engine='pyarrow')
+    print("PublishCatalog start")
 
-    myobj = {'projectid': mydict["projectid"],"tabid" : "songXrevXhalf", "data" : [SimpleExtract("Song_Name_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
-    requests.post(url, data=myobj)
-    
-    myobj = {'projectid': mydict["projectid"],"tabid" : "incomeXrevXhalf","data" : [SimpleExtract("Normalized_Income_Type_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
-    requests.post(url, data=myobj)
-    
+    catalogDict = {}
+    catalogDict["Catalog_Details"] = [defualtDetails(parquet_file).replace(np.nan, None).to_dict('list')]
+    catalogDict["songXrevXhalf"] = [SimpleExtract("Song_Name_9LC" ,parquet_file).replace(np.nan, None).to_dict('list')]  # 1 sec
+    catalogDict["incomeXrevXhalf"] = [SimpleExtract("Normalized_Income_Type_9LC", parquet_file).replace(np.nan, None).to_dict('list')]# 1 sec
+    catalogDict["sourceXrevXhalf"] = [SimpleExtract("Normalized_Source_9LC", parquet_file).replace(np.nan, None).to_dict('list')]
+    catalogDict["artistXrevXhalf"] = [artistxrevxhalf(parquet_file).replace(np.nan, None).to_dict('list')]
+    catalogDict["payorXincomeXtypeXrevXhalf"] = list(map(toDict, payorXincomeXtypeXrevXhalf(parquet_file)))
+    catalogDict["payorXsongXrevXhalf"] = list(map(toDict, payorXsongXrevXhalf(parquet_file)))
+    catalogDict["payorXsourceXrevXhalf"] = list(map(toDict, payorXsourceXrevXhalf(parquet_file)))
 
-    myobj = {'projectid': mydict["projectid"], "tabid": "sourceXrevXhalf", "data": [SimpleExtract("Normalized_Source_9LC",parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
-    requests.post(url, data=myobj)
-    '''
-    print(list(map(toDict, SongxIncomexRevxHalf(parquet_file)))[0])
-    #myobj = {'projectid': mydict["projectid"],"tabid" : "songXincomeXrevXhalf","data" : list(map(toDict, SongxIncomexRevxHalf(parquet_file)))}#3.5 sec
-    #requests.post(url, data=myobj)
-    '''
-    myobj = {'projectid': mydict["projectid"],"tabid" : "artistXrevXhalf","data" : [artistxrevxhalf(parquet_file).replace(np.nan,None).to_dict('records')]}#1 sec
-    requests.post(url, data=myobj)
+    filePath = pathResult+projectid
+    if os.path.exists(filePath):
+        os.remove(filePath)
 
-    myobj = {'projectid': mydict["projectid"],"tabid" : "payorXincomeXtypeXrevXhalf","data" : list(map(toDict, payorXincomeXtypeXrevXhalf(parquet_file)))}#1.5 sec
-    requests.post(url, data=myobj)
+    file = open(filePath, "w",encoding="utf-8")
+    file.write(str(catalogDict))
 
-    myobj = {'projectid': mydict["projectid"],"tabid" : "payorXsongXrevXhalf","data" : list(map(toDict, payorXsongXrevXhalf(parquet_file)))}#3.5 sec
-    requests.post(url, data=myobj)
-
-    myobj = {'projectid': mydict["projectid"],"tabid" : "payorXsourceXrevXhalf","data" : list(map(toDict, payorXsourceXrevXhalf(parquet_file)))}#16 sec
-    requests.post(url, data=myobj)
-    '''
     stop = timeit.default_timer()
     print(stop - start, "seconds")
-    print("publishMongo end")
+    print("PublishCatalog end")
 
     return jsonify()
 
+@app.route('/PullTable', methods=['POST'])
+def PullTable():
+    projectid = request.form.get('projectid')
+    pathResult = request.form.get('path_to_result')
+    filePath = pathResult+projectid
+    file = open(filePath, "r", encoding="utf-8")
+    return jsonify(file.readlines())
 
 
 if __name__ == "__main__":
