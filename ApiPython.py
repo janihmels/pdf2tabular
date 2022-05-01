@@ -14,10 +14,14 @@ from transformers import logging
 import json
 from subs.source_classifier.model import SourceClassifier
 import pickle
-
+import timeit
 import flask
 from flask import request, jsonify
 from flask_cors import cross_origin, CORS
+import pandas as pd
+import numpy as np
+
+from ouputsApi.main import *
 
 app = flask.Flask(__name__)
 cors = CORS(app)
@@ -166,7 +170,7 @@ def PullTable():
         data = json.load(json_file)
     return jsonify(data)
 
-    
+
 if __name__ == "__main__":
     logging.set_verbosity_error()
     title_classifier = NamesClassifier()
