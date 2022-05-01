@@ -8,11 +8,11 @@ from subs.PRSParser import PRSParser
 from subs.CMGParser import CMGParser
 from subs.sql2xlsx import sql2xlsx
 from werkzeug.utils import secure_filename
-from subs.names_classifier.model import NamesClassifier
-import torch
-from transformers import logging
+#from subs.names_classifier.model import NamesClassifier
+##import torch
+#from transformers import logging
 import json
-from subs.source_classifier.model import SourceClassifier
+#from subs.source_classifier.model import SourceClassifier
 import pickle
 import timeit
 import flask
@@ -153,7 +153,7 @@ def home_PublishCatalog():
         os.remove(filePath)
 
     file = open(filePath, "w",encoding="utf-8")
-    file.write(str(catalogDict))
+    file.write(json.dumps(catalogDict))
 
     stop = timeit.default_timer()
     print(stop - start, "seconds")
@@ -166,19 +166,18 @@ def PullTable():
     projectid = request.form.get('projectid')
     pathResult = request.form.get('path_to_result')
     filePath = pathResult+projectid
-    with open(filePath) as json_file:
-        data = json.load(json_file)
-    return jsonify(data)
+    file = open(filePath, "r", encoding="utf-8")
+    return jsonify(file.readlines())
 
 
 if __name__ == "__main__":
-    logging.set_verbosity_error()
-    title_classifier = NamesClassifier()
-    title_classifier.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
+#    logging.set_verbosity_error()
+#    title_classifier = NamesClassifier()
+#    title_classifier.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
 
     label_to_source_map = pickle.load(open('subs/source_classifier/label_to_name_mapper.pkl', 'rb'))
-    source_classifier = SourceClassifier(num_cls=len(label_to_source_map.values()), label_to_name=label_to_source_map)
-    source_classifier.load_state_dict(torch.load('./subs/source_classifier/best_model.pth', map_location=torch.device('cpu')))
+#    source_classifier = SourceClassifier(num_cls=len(label_to_source_map.values()), label_to_name=label_to_source_map)
+#    source_classifier.load_state_dict(torch.load('./subs/source_classifier/best_model.pth', map_location=torch.device('cpu')))
 
     app.run(port=5100)
 
