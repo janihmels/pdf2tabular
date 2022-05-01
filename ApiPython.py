@@ -121,6 +121,52 @@ def classify_source():
     return jsonify({name: source_classifier.classify(name) for name in names})
 
 
+def toDict(df):
+    return df.replace(np.nan ,None).to_dict('list')
+
+@app.route('/PublishCatalog', methods=['POST'])
+def home_PublishCatalog():
+    start = timeit.default_timer()
+    projectid = request.form.get('projectid')
+    pathParquet = request.form.get('path_to_parquet')
+    pathResult = request.form.get('path_to_result')
+
+    parquet_file = pd.read_parquet(pathParquet+projectid + ".gzip", engine='pyarrow')
+    print("PublishCatalog start")
+
+    catalogDict = {}
+    catalogDict["Catalog_Details"] = [defualtDetails(parquet_file).replace(np.nan, None).to_dict('list')]
+    catalogDict["songXrevXhalf"] = [SimpleExtract("Song_Name_9LC" ,parquet_file).replace(np.nan, None).to_dict('list')]  # 1 sec
+    catalogDict["incomeXrevXhalf"] = [SimpleExtract("Normalized_Income_Type_9LC", parquet_file).replace(np.nan, None).to_dict('list')]# 1 sec
+    catalogDict["sourceXrevXhalf"] = [SimpleExtract("Normalized_Source_9LC", parquet_file).replace(np.nan, None).to_dict('list')]
+    catalogDict["artistXrevXhalf"] = [artistxrevxhalf(parquet_file).replace(np.nan, None).to_dict('list')]
+    catalogDict["payorXincomeXtypeXrevXhalf"] = list(map(toDict, payorXincomeXtypeXrevXhalf(parquet_file)))
+    catalogDict["payorXsongXrevXhalf"] = list(map(toDict, payorXsongXrevXhalf(parquet_file)))
+    catalogDict["payorXsourceXrevXhalf"] = list(map(toDict, payorXsourceXrevXhalf(parquet_file)))
+
+    filePath = pathResult+projectid
+    if os.path.exists(filePath):
+        os.remove(filePath)
+
+    file = open(filePath, "w",encoding="utf-8")
+    file.write(str(catalogDict))
+
+    stop = timeit.default_timer()
+    print(stop - start, "seconds")
+    print("PublishCatalog end")
+
+    return jsonify()
+
+@app.route('/PullTable', methods=['POST'])
+def PullTable():
+    projectid = request.form.get('projectid')
+    pathResult = request.form.get('path_to_result')
+    filePath = pathResult+projectid
+    with open(filePath) as json_file:
+        data = json.load(json_file)
+    return jsonify(data)
+
+    
 if __name__ == "__main__":
     logging.set_verbosity_error()
     title_classifier = NamesClassifier()
