@@ -351,16 +351,19 @@ def payorXsourceXrevXhalf(df: pd.DataFrame):
 
 def defualtDetails(parquet_file):
     df = parquet_file[
-        ["Payout_Currency_9LC", "Third_Party_9LC", "Contract_ID_9LC", "Adjusted_Royalty_SB", "Adjusted_Royalty_USD_SB"]]
+        ["Payout_Currency_9LC", "Third_Party_9LC", "Contract_ID_9LC", "Royalty_Payable_SB","Adjusted_Royalty_SB", "Adjusted_Royalty_USD_SB"]]
     df = df.groupby(['Payout_Currency_9LC', 'Third_Party_9LC', "Contract_ID_9LC"])
     lineCount = df.size()
     df = df.sum()
     df["Line Count"] = lineCount.tolist()
     df = df.reset_index()
-    df.rename(columns={"Payout_Currency_9LC": "Currency", "Third_Party_9LC": "Party","Contract_ID_9LC" : "Contract","Adjusted_Royalty_SB" : "Nominal","Adjusted_Royalty_USD_SB" : "Adjusted"}, inplace=True)
+    currency = df["Payout_Currency_9LC"].drop_duplicates()[0]
+    df.rename(columns={"Payout_Currency_9LC": "Currency", "Third_Party_9LC": "Party","Contract_ID_9LC" : "Contract","Adjusted_Royalty_SB" : "Adjusted("+currency+")","Adjusted_Royalty_USD_SB" : "Adjusted($)","Royalty_Payable_SB" : "Nominal"}, inplace=True)
     #print(df)
+    df["Party/Contract"] = df["Party"]+"/"+df["Contract"]
+    df = df[["Party/Contract","Line Count","Currency","Nominal","Adjusted($)","Adjusted("+currency+")"]]
     return df
 
 
-#parquet_file = pd.read_parquet("databases/Mojo - David Essex_61f04127fead509ee33d2280.gzip", engine='pyarrow')
-#defualtDetails(parquet_file)
+    #parquet_file = pd.read_parquet("databases/61f04127fead509ee33d2280/master.parquet.gzip", engine='pyarrow')
+#print(defualtDetails(parquet_file))

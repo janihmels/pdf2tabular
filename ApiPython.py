@@ -131,11 +131,10 @@ def toDict(df):
 @app.route('/PublishCatalog', methods=['POST'])
 def home_PublishCatalog():
     start = timeit.default_timer()
-    projectid = request.form.get('projectid')
-    pathParquet = request.form.get('path_to_parquet')
-    pathResult = request.form.get('path_to_result')
+    data_directory = request.form.get('data_directory')
 
-    parquet_file = pd.read_parquet(pathParquet+projectid + ".gzip", engine='pyarrow')
+    print(data_directory+ "\master.parquet.gzip")
+    parquet_file = pd.read_parquet(data_directory+ "\master.parquet.gzip", engine='pyarrow')
     print("PublishCatalog start")
 
     catalogDict = {}
@@ -148,7 +147,7 @@ def home_PublishCatalog():
     catalogDict["payorXsongXrevXhalf"] = list(map(toDict, payorXsongXrevXhalf(parquet_file)))
     catalogDict["payorXsourceXrevXhalf"] = list(map(toDict, payorXsourceXrevXhalf(parquet_file)))
 
-    filePath = pathResult+projectid
+    filePath = data_directory+"\output.json"
     if os.path.exists(filePath):
         os.remove(filePath)
 
@@ -163,11 +162,13 @@ def home_PublishCatalog():
 
 @app.route('/PullTable', methods=['POST'])
 def PullTable():
-    projectid = request.form.get('projectid')
-    pathResult = request.form.get('path_to_result')
-    filePath = pathResult+projectid
-    file = open(filePath, "r", encoding="utf-8")
-    return jsonify(file.readlines())
+    data_directory = request.form.get('data_directory')
+    filePath = data_directory+"/output.json"
+    try:
+        file = open(filePath, "r", encoding="utf-8")
+        return jsonify(file.readlines())
+    except FileNotFoundError:
+        return jsonify()
 
 
 if __name__ == "__main__":
