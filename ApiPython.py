@@ -152,7 +152,7 @@ def home_PublishCatalog():
         os.remove(filePath)
 
     file = open(filePath, "w",encoding="utf-8")
-    file.write(catalogDict)
+    file.write(json.dumps(catalogDict))
 
     stop = timeit.default_timer()
     print(stop - start, "seconds")
