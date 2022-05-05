@@ -133,8 +133,8 @@ def home_PublishCatalog():
     start = timeit.default_timer()
     data_directory = request.form.get('data_directory')
 
-    print(data_directory+ "\master.parquet.gzip")
-    parquet_file = pd.read_parquet(data_directory+ "\master.parquet.gzip", engine='pyarrow')
+    print(data_directory+ "/master.parquet.gzip")
+    parquet_file = pd.read_parquet(data_directory+ "/master.parquet.gzip", engine='pyarrow')
     print("PublishCatalog start")
 
     catalogDict = {}
@@ -147,7 +147,7 @@ def home_PublishCatalog():
     catalogDict["payorXsongXrevXhalf"] = list(map(toDict, payorXsongXrevXhalf(parquet_file)))
     catalogDict["payorXsourceXrevXhalf"] = list(map(toDict, payorXsourceXrevXhalf(parquet_file)))
 
-    filePath = data_directory+"\output.json"
+    filePath = data_directory+"/output.json"
     if os.path.exists(filePath):
         os.remove(filePath)
 
