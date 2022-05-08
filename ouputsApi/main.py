@@ -186,7 +186,6 @@ def payorXincomeXtypeXrevXhalf(df: pd.DataFrame):
 
             third_party_output.append(income_output)
         if len(third_party_output) > 0:
-            print(third_party_output)
 
             third_party_output = pd.concat(third_party_output, ignore_index=True).sort_values(by='Total', ascending=False)
             third_party_output.reset_index(drop=True, inplace=True)
