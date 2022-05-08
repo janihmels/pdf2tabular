@@ -20,7 +20,7 @@ def SongxIncomexRevxHalf(parquet_file):
                        values=["Royalty_Payable_SB"])["Royalty_Payable_SB"]
 
     # 'column list and rest index and column name'
-    Years = list(newDataFrame.keys())[8:]
+    Years = list(newDataFrame.keys())# [8:]
     newDataFrame = newDataFrame[Years].reset_index()
     newDataFrame.columns.name = None
 
@@ -69,7 +69,7 @@ def SimpleExtract(TheColumn, parquet_file):
         "Royalty_Payable_SB"]
 
     # 'column list and rest index and column name'
-    Years = list(newDataFrame.keys())#[8:]
+    Years = list(newDataFrame.keys())# [8:]
     newDataFrame = newDataFrame[Years].reset_index()
     newDataFrame.columns.name = None
 
