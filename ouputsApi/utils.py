@@ -3,9 +3,8 @@ from datetime import date
 
 
 def find_cut_off_year(df: pd.DataFrame):
-
+    '''
     recent_years = df['Year_Statement_9LC'].drop_duplicates()
-
     todays_date = date.today()
     current_year = todays_date.year
 
@@ -14,6 +13,7 @@ def find_cut_off_year(df: pd.DataFrame):
         find_cut_off_year = current_year
     else:
         find_cut_off_year = current_year - 1
+
 
     # Find cut off
     statement_period_half_blank = \
@@ -27,7 +27,11 @@ def find_cut_off_year(df: pd.DataFrame):
             return True
 
     remove_blank = filter(check_blank, statement_period_half_blank)
+
     statement_period_minus_blank = list(remove_blank)
+
+    print(statement_period_minus_blank)
+
 
     if len(statement_period_minus_blank) > 10:
         standard_cut_off = statement_period_minus_blank[-10]
@@ -37,3 +41,5 @@ def find_cut_off_year(df: pd.DataFrame):
     year_cut_off = int(standard_cut_off[0:4])
 
     return year_cut_off
+    '''
+    return 0

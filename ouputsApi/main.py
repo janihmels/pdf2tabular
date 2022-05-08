@@ -106,7 +106,6 @@ def artistxrevxhalf(df: pd.DataFrame):
     artists = df.groupby(['Release_Artist_9LC'])
     output = []
     cut_off_year = find_cut_off_year(df)
-
     for release_artist, artist_df in artists:
         artist_output = {}
 
@@ -370,4 +369,4 @@ def defualtDetails(parquet_file):
 
 
 #parquet_file = pd.read_parquet("databases/6216bab69e34b2a3f1a4f5e9/master.parquet.gzip", engine='pyarrow')
-#print(SimpleExtract("Normalized_Income_Type_9LC", parquet_file))
+#print(artistxrevxhalf(parquet_file))
