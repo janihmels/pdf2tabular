@@ -166,7 +166,7 @@ def PullTable():
     filePath = data_directory+"/output.json"
     try:
         file = open(filePath, "r", encoding="utf-8")
-        return jsonify(file.readlines()).replace(np.nan, None)
+        return jsonify(file.readlines())
     except FileNotFoundError:
         return jsonify()
 
