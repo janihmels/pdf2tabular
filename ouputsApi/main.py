@@ -325,25 +325,25 @@ def payorXsourceXrevXhalf(df: pd.DataFrame):
             third_party_output.reset_index(drop=True, inplace=True)
             third_party_output['% Of Revenue'] = (100 * (third_party_output['Total'] / third_party_output['Total'].sum()))
             third_party_output['Cumulative %'] = third_party_output['% Of Revenue'].cumsum().iloc[::-1]
-
+    
             third_party_output['% Of Revenue'] = third_party_output['% Of Revenue'].round(2).astype(str) + '%'
             third_party_output['Cumulative %'] = third_party_output['Cumulative %'].round(2).astype(str) + '%'
             cols = third_party_output.columns.values.tolist()
             cols_wo_thirdparty_n_source = [i for i in cols if i not in ['Third Party', 'Source']]
             third_party_output = third_party_output[['Third Party', 'Source'] + cols_wo_thirdparty_n_source]
-
+    
             cols = third_party_output.columns.values.tolist()
             year_cols = [i for i in cols if i not in ['% Of Revenue', 'Cumulative %', 'Total', 'Third Party', 'Source']]
             sorted_year_cols = sorted(year_cols, key=lambda x: int(x.split()[0]) + int(x.split()[1][-1]) * 0.1)
-
+    
             if year_cols != sorted_year_cols:
                 third_party_output = third_party_output[
                     ['Third Party', 'Source'] + sorted_year_cols + ['% Of Revenue', 'Cumulative %']]
-
+    
             totals_row = third_party_output.sum(axis=0, numeric_only=True).round(2)
             totals_row['Source'] = 'Total'
             third_party_output.loc[len(third_party_output)] = totals_row
-
+    
             outputs.append(third_party_output)
 
     return outputs
