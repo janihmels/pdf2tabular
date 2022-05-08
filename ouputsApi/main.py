@@ -59,7 +59,6 @@ def SimpleExtract(TheColumn, parquet_file):
 
     # 'make Dataframe and take specific columns'
     newDataFrame = parquet_file[["Statement_Period_Half_9LC", TheColumn, "Royalty_Payable_SB"]]
-
     # 'groupby Song Name and make sum of Royalties round the sum to ^.^^ and reset index'
     newDataFrame = newDataFrame.groupby([TheColumn, "Statement_Period_Half_9LC"]).sum().round(2)
     newDataFrame = newDataFrame.reset_index()
@@ -70,9 +69,10 @@ def SimpleExtract(TheColumn, parquet_file):
         "Royalty_Payable_SB"]
 
     # 'column list and rest index and column name'
-    Years = list(newDataFrame.keys())[8:]
+    Years = list(newDataFrame.keys())#[8:]
     newDataFrame = newDataFrame[Years].reset_index()
     newDataFrame.columns.name = None
+
 
     # 'Total column is the sum of all columns except song title'
     newDataFrame['Total'] = newDataFrame.sum(axis=1, numeric_only=True).round(2)
@@ -186,6 +186,7 @@ def payorXincomeXtypeXrevXhalf(df: pd.DataFrame):
 
             third_party_output.append(income_output)
         if len(third_party_output) > 0:
+            print(third_party_output)
 
             third_party_output = pd.concat(third_party_output, ignore_index=True).sort_values(by='Total', ascending=False)
             third_party_output.reset_index(drop=True, inplace=True)
@@ -368,6 +369,3 @@ def defualtDetails(parquet_file):
     df = df[["Party/Contract","Line Count","Currency","Nominal","Adjusted($)","Adjusted("+currency+")"]]
     return df
 
-
-    #parquet_file = pd.read_parquet("databases/61f04127fead509ee33d2280/master.parquet.gzip", engine='pyarrow')
-#print(defualtDetails(parquet_file))
