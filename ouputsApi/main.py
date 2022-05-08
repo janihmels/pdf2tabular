@@ -317,7 +317,7 @@ def payorXsourceXrevXhalf(df: pd.DataFrame):
             source_output['Source'] = source
             source_output = pd.DataFrame.from_dict(source_output)
 
-            # print(source_output.columns)
+            # print(source_output.columns) .
 
             third_party_output.append(source_output)
         if len(third_party_output) > 0:
