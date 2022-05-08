@@ -385,5 +385,6 @@ def defualtDetails(parquet_file):
     return df
 
 
-parquet_file = pd.read_parquet("databases/61f04127fead509ee33d2280/master.parquet.gzip", engine='pyarrow')
-print(SimpleExtract("Song_Name_9LC" ,parquet_file))
+#parquet_file = pd.read_parquet("databases/61f04127fead509ee33d2280/master.parquet.gzip", engine='pyarrow')
+#print(SimpleExtract("Song_Name_9LC" ,parquet_file))
+#print(SimpleExtract("Song_Name_9LC" ,parquet_file))
