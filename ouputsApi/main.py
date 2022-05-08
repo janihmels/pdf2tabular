@@ -6,8 +6,11 @@ from ouputsApi.utils import find_cut_off_year
 def SongxIncomexRevxHalf(parquet_file):
     # Years = ["2016 H1","2016 H2","2017 H1","2017 H2","2018 H1","2018 H2","2019 H1","2019 H2","2020 H1","2020 H2","2021 H1","2021 H2"]
     # 'make Dataframe and take specific columns'
+
     newDataFrame = parquet_file[
         ["Statement_Period_Half_9LC", "Song_Name_9LC", "Normalized_Income_Type_9LC", "Royalty_Payable_SB"]]
+
+    cut_off_year = find_cut_off_year(newDataFrame)
 
     # 'groupby Song Name and make sum of Royalties round the sum to ^.^^ and reset index'
     newDataFrame = newDataFrame.groupby(
@@ -21,6 +24,12 @@ def SongxIncomexRevxHalf(parquet_file):
 
     # 'column list and rest index and column name'
     Years = list(newDataFrame.keys())#[8:]
+    newYears = []
+    for year in Years:
+        if int(year[0:4]) >= cut_off_year:
+            newYears.append(year)
+    Years = newYears
+
     newDataFrame = newDataFrame[Years].reset_index()
     newDataFrame.columns.name = None
 
@@ -59,6 +68,8 @@ def SimpleExtract(TheColumn, parquet_file):
 
     # 'make Dataframe and take specific columns'
     newDataFrame = parquet_file[["Statement_Period_Half_9LC", TheColumn, "Royalty_Payable_SB"]]
+    cut_off_year = find_cut_off_year(newDataFrame)
+
     # 'groupby Song Name and make sum of Royalties round the sum to ^.^^ and reset index'
     newDataFrame = newDataFrame.groupby([TheColumn, "Statement_Period_Half_9LC"]).sum().round(2)
     newDataFrame = newDataFrame.reset_index()
@@ -70,6 +81,12 @@ def SimpleExtract(TheColumn, parquet_file):
 
     # 'column list and rest index and column name'
     Years = list(newDataFrame.keys())#[8:]
+    newYears = []
+    for year in Years:
+        if int(year[0:4]) >= cut_off_year:
+            newYears.append(year)
+    Years = newYears
+
     newDataFrame = newDataFrame[Years].reset_index()
     newDataFrame.columns.name = None
 
@@ -368,5 +385,5 @@ def defualtDetails(parquet_file):
     return df
 
 
-#parquet_file = pd.read_parquet("databases/6216bab69e34b2a3f1a4f5e9/master.parquet.gzip", engine='pyarrow')
-#print(artistxrevxhalf(parquet_file))
+parquet_file = pd.read_parquet("databases/61f04127fead509ee33d2280/master.parquet.gzip", engine='pyarrow')
+print(SimpleExtract("Song_Name_9LC" ,parquet_file))

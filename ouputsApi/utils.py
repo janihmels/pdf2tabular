@@ -42,4 +42,4 @@ def find_cut_off_year(df: pd.DataFrame):
 
     return year_cut_off
     '''
-    return 0
+    return 2016
