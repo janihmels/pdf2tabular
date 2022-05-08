@@ -84,7 +84,9 @@ def SimpleExtract(TheColumn, parquet_file):
 
     ################################################################################
     # 'add Total title and total value(sum of all row)'##############################
-    Total = sum(df.values()).round(2)
+    Total = sum(df.values())
+    if isinstance(Total, float):
+        Total = Total.round(2)
     # 'add % Of Revenue sum/total *100 and round to 2'
     newDataFrame['% Of Revenue'] = round((newDataFrame["Total"] / Total) * 100, 2)
     # 'add Cumulative % sum/total *100 and round to 2'
