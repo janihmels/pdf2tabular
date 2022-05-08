@@ -20,7 +20,7 @@ def SongxIncomexRevxHalf(parquet_file):
                        values=["Royalty_Payable_SB"])["Royalty_Payable_SB"]
 
     # 'column list and rest index and column name'
-    Years = list(newDataFrame.keys())# [8:]
+    Years = list(newDataFrame.keys())#[8:]
     newDataFrame = newDataFrame[Years].reset_index()
     newDataFrame.columns.name = None
 
@@ -69,7 +69,7 @@ def SimpleExtract(TheColumn, parquet_file):
         "Royalty_Payable_SB"]
 
     # 'column list and rest index and column name'
-    Years = list(newDataFrame.keys())# [8:]
+    Years = list(newDataFrame.keys())#[8:]
     newDataFrame = newDataFrame[Years].reset_index()
     newDataFrame.columns.name = None
 
@@ -369,3 +369,6 @@ def defualtDetails(parquet_file):
     df = df[["Party/Contract","Line Count","Currency","Nominal","Adjusted($)","Adjusted("+currency+")"]]
     return df
 
+
+#parquet_file = pd.read_parquet("databases/6216bab69e34b2a3f1a4f5e9/master.parquet.gzip", engine='pyarrow')
+#print(SimpleExtract("Normalized_Income_Type_9LC", parquet_file))
