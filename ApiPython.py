@@ -8,11 +8,11 @@ from subs.PRSParser import PRSParser
 from subs.CMGParser import CMGParser
 from subs.sql2xlsx import sql2xlsx
 from werkzeug.utils import secure_filename
-#from subs.names_classifier.model import NamesClassifier
-##import torch
-#from transformers import logging
+from subs.names_classifier.model import NamesClassifier
+import torch
+from transformers import logging
 import json
-#from subs.source_classifier.model import SourceClassifier
+from subs.source_classifier.model import SourceClassifier
 import pickle
 import timeit
 import flask
@@ -59,9 +59,9 @@ class Filesfunc:
 
     def Sql2Xlsx(self, filepath):
 
-        # dbname = request.form.get('dbname')
-        # queries = request.form.get('queries')                     =============================here=============================
-        # queries = eval(queries)
+        dbname = request.form.get('dbname')
+        queries = request.form.get('queries')
+        queries = eval(queries)
 
         return sql2xlsx(dbname=dbname, queries=queries, output_filename=filepath)
 
@@ -172,13 +172,13 @@ def PullTable():
 
 
 if __name__ == "__main__":
-#    logging.set_verbosity_error()
-#    title_classifier = NamesClassifier()
-#    title_classifier.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
+    logging.set_verbosity_error()
+    title_classifier = NamesClassifier()
+    title_classifier.load_state_dict(torch.load('./subs/names_classifier/best_model.pth', map_location=torch.device('cpu')))
 
     label_to_source_map = pickle.load(open('subs/source_classifier/label_to_name_mapper.pkl', 'rb'))
-#    source_classifier = SourceClassifier(num_cls=len(label_to_source_map.values()), label_to_name=label_to_source_map)
-#    source_classifier.load_state_dict(torch.load('./subs/source_classifier/best_model.pth', map_location=torch.device('cpu')))
+    source_classifier = SourceClassifier(num_cls=len(label_to_source_map.values()), label_to_name=label_to_source_map)
+    source_classifier.load_state_dict(torch.load('./subs/source_classifier/best_model.pth', map_location=torch.device('cpu')))
 
     app.run(port=5100)
 
